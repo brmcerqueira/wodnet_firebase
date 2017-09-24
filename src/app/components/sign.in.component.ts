@@ -8,12 +8,27 @@ import {Router} from '@angular/router';
   templateUrl: './sign.in.component.html'
 })
 export class SignInComponent {
+
+  public isAnonymous: boolean;
+
   constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
+    this.isAnonymous = false;
+    this.angularFireAuth.authState.subscribe(u => {
+      if (u && !u.isAnonymous) {
+        this.goIn();
+      } else {
+        this.isAnonymous = true;
+      }
+    });
   }
 
   public signInWithGoogle(): void {
     this.angularFireAuth.auth.signInWithPopup(new GoogleAuthProvider()).then(() => {
-      this.router.navigate(['in']);
+      this.goIn();
     });
+  }
+
+  private goIn() {
+    this.router.navigate(['in']);
   }
 }

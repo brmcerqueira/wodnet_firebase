@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {HttpClientModule} from '@angular/common/http';
 import {MasterComponent} from './components/master.component';
 import {InComponent} from './components/in.component';
 import {SignInComponent} from './components/sign.in.component';
@@ -13,16 +12,17 @@ import {RouteModule} from './route.module';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {HttpModule} from '@angular/http';
-
-export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, `${document.getElementsByTagName('base')[0].href}assets/i18n/`);
-}
+import {EnTranslate} from '../environments/i18n/en.translate';
+import {PtTranslate} from '../environments/i18n/pt.translate';
+import {AuthenticationGuard} from "./authentication.guard";
+import {DiceBoardComponent} from "./components/dice.board.component";
 
 @NgModule({
   declarations: [
     MasterComponent,
     InComponent,
-    SignInComponent
+    SignInComponent,
+    DiceBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -32,20 +32,15 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translateHttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthenticationGuard],
   bootstrap: [MasterComponent]
 })
 export class AppModule {
   constructor(private translate: TranslateService) {
-    translate.addLangs(['en', 'pt']);
+    translate.setTranslation('en', EnTranslate);
+    translate.setTranslation('pt', PtTranslate);
     translate.setDefaultLang('pt');
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|pt/) ? browserLang : 'en').subscribe();

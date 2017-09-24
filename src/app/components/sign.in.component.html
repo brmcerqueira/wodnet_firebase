@@ -1,3 +1,5 @@
-<ul>
-  <li><button (click)="signInWithGoogle()">{{ 'sign-in-with-google' | translate }}</button></li>
-</ul>
+<div *ngIf="isAnonymous">
+  <ul>
+    <li><button (click)="signInWithGoogle()">{{ 'sign-in-with-google' | translate }}</button></li>
+  </ul>
+</div>
