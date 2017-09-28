@@ -2,7 +2,7 @@
   <input type="text" formControlName="name"/>
   <div ngxErrors="name">
     <div ngxError="required">{{ 'name-required' | translate }}</div>
-    <div [ngxError]="['minlength', 'maxlength']">{{ 'required-minlength-maxlength' | translate }}</div>
+    <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
   </div>
-  <button [disabled]="!formGroup.valid" type="submit">{{ 'sign-in' | translate }}</button>
+  <button [disabled]="!formGroup.valid" type="submit">{{ 'create' | translate }}</button>
 </form>
