@@ -4,11 +4,13 @@ import {SignInComponent} from './components/sign.in.component';
 import {InComponent} from './components/in.component';
 import {AuthenticationGuard} from './authentication.guard';
 import {DiceBoardComponent} from './components/dice.board.component';
+import {ChronicleComponent} from './components/chronicle.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'in', component: InComponent, canActivate: [AuthenticationGuard], children: [
-    { path: '', component: DiceBoardComponent }
+    { path: '', component: ChronicleComponent },
+    { path: 'dice', component: DiceBoardComponent }
   ]},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

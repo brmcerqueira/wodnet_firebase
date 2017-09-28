@@ -14,14 +14,18 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {HttpModule} from '@angular/http';
 import {EnTranslate} from '../environments/i18n/en.translate';
 import {PtTranslate} from '../environments/i18n/pt.translate';
-import {AuthenticationGuard} from "./authentication.guard";
-import {DiceBoardComponent} from "./components/dice.board.component";
+import {AuthenticationGuard} from './authentication.guard';
+import {DiceBoardComponent} from './components/dice.board.component';
+import {ChronicleComponent} from './components/chronicle.component';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     MasterComponent,
     InComponent,
     SignInComponent,
+    ChronicleComponent,
     DiceBoardComponent
   ],
   imports: [
@@ -29,6 +33,8 @@ import {DiceBoardComponent} from "./components/dice.board.component";
     HttpModule,
     HttpClientModule,
     RouteModule,
+    ReactiveFormsModule,
+    NgxErrorsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
