@@ -16,11 +16,12 @@ import {EnTranslate} from '../environments/i18n/en.translate';
 import {PtTranslate} from '../environments/i18n/pt.translate';
 import {AuthenticationGuard} from './authentication.guard';
 import {DiceBoardComponent} from './components/dice.board.component';
-import {ChronicleComponent} from './components/chronicle.component';
+import {StartGameComponent} from './components/start.game.component';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Blocker} from './blocker';
 import {GlobalBlockerComponent} from './components/global.blocker.component';
+import {ChronicleComponent} from './components/chronicle.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {GlobalBlockerComponent} from './components/global.blocker.component';
     InComponent,
     GlobalBlockerComponent,
     SignInComponent,
+    StartGameComponent,
     ChronicleComponent,
     DiceBoardComponent
   ],
