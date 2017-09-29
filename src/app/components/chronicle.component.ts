@@ -1,9 +1,15 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Blocker} from '../blocker';
+import {Observable} from 'rxjs/Observable';
 import {from} from '../observable.extensions';
+
+interface SelectItem<TKey, TValue> {
+  key: TKey;
+  value: TValue;
+}
 
 interface Character {
   name: string;
@@ -19,20 +25,23 @@ interface Character {
 export class ChronicleComponent {
 
   private key: string;
-  public characters: FirebaseListObservable<Character[]>;
+  public characters: Observable<SelectItem<string, Character>[]>;
   public current: Character;
+  private daoCharacters: AngularFireList<any>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth,
               private blocker: Blocker) {
     this.key = this.activatedRoute.snapshot.params['key'];
-    this.characters = database.list('characters', {
-      query: {
-        orderByChild: 'chronicleId',
-        equalTo: this.key
-      }
-    }).blocker(blocker);
+
+    this.daoCharacters = database.list('characters',
+      r => r.orderByChild('chronicleId').equalTo(this.key));
+    this.characters = this.daoCharacters.snapshotChanges().blocker(blocker).map(array => {
+      return array.map(a => {
+        return { key: a.key, value: a.payload.val()};
+      });
+    });
     this.current = {
       name: '',
       ownerId: this.angularFireAuth.auth.currentUser.uid,
@@ -43,11 +52,11 @@ export class ChronicleComponent {
   }
 
   public characterChange(key: string): void {
-
+    console.log(key);
   }
 
   public save(): void {
-    const promise = this.characters.push(this.current);
+    const promise = this.daoCharacters.push(this.current);
     from(promise).blocker(this.blocker).subscribe(() => console.log(promise.key));
   }
 }
