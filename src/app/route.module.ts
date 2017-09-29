@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'in', component: InComponent, canActivate: [AuthenticationGuard], children: [
     { path: '', component: StartGameComponent },
-    { path: 'chronicle', component: ChronicleComponent },
+    { path: 'chronicle/:key', component: ChronicleComponent },
     { path: 'dice', component: DiceBoardComponent }
   ]},
   { path: '**', redirectTo: '', pathMatch: 'full' }

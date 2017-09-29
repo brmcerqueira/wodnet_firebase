@@ -1,0 +1,6 @@
+<select (change)="characterChange($event.target.value)">
+  <option value="">{{ 'new' | translate }}</option>
+  <option *ngFor="let character of characters | async" [value]="">{{ character.name }}</option>
+</select>
+<div>{{ current | json }}</div>
+<button (click)="save()">save</button>

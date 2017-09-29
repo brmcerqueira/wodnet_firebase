@@ -1,18 +1,13 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false,
     "chronicles": {
       ".read": "auth != null",
-      "$uid": {
-        ".write": "$uid === auth.uid"
-      }
+      ".write": "auth.uid === data.child('ownerId').val() || data.child('ownerId').val() === null"
     },
     "characters": {
-      "$uid": {
-        ".read": "$uid === auth.uid || data.child('chronicle/$uid').val() === auth.uid",
-        ".write": "$uid === auth.uid && !newData.exists()"
-      }
+      ".indexOn": ["chronicleId"],
+      ".read": "auth.uid === data.child('ownerId').val() || auth.uid === data.child('storytellerId').val()",
+      ".write": "auth.uid === data.child('storytellerId').val() || (auth.uid === data.child('ownerId').val() && data.child('isOpen').val() == true) || (data.child('ownerId').val() === null && data.child('storytellerId').val()  === null)"
     }
   }
 }
