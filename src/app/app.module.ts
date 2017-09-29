@@ -22,12 +22,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Blocker} from './blocker';
 import {GlobalBlockerComponent} from './components/global.blocker.component';
 import {ChronicleComponent} from './components/chronicle.component';
+import {LoadingComponent} from "./components/loading.component";
 
 @NgModule({
   declarations: [
     MasterComponent,
     InComponent,
     GlobalBlockerComponent,
+    LoadingComponent,
     SignInComponent,
     StartGameComponent,
     ChronicleComponent,
