@@ -18,12 +18,15 @@ import {AuthenticationGuard} from './authentication.guard';
 import {DiceBoardComponent} from './components/dice.board.component';
 import {ChronicleComponent} from './components/chronicle.component';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
+import {Blocker} from './blocker';
+import {GlobalBlockerComponent} from './components/global.blocker.component';
 
 @NgModule({
   declarations: [
     MasterComponent,
     InComponent,
+    GlobalBlockerComponent,
     SignInComponent,
     ChronicleComponent,
     DiceBoardComponent
@@ -40,7 +43,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     AngularFireModule.initializeApp(environment.firebase),
     TranslateModule.forRoot()
   ],
-  providers: [AuthenticationGuard],
+  providers: [
+    Blocker,
+    AuthenticationGuard
+  ],
   bootstrap: [MasterComponent]
 })
 export class AppModule {
