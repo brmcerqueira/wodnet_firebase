@@ -8,9 +8,15 @@ declare module 'rxjs/Observable' {
   }
 }
 
-export function from<U, T extends Thenable<U>>(thenable: T): Observable<T> {
+export function fromThenable<U, T extends Thenable<U>>(thenable: T): Observable<T> {
   return Observable.create(s => {
     thenable.then(_ => s.next(thenable), e => s.error(e));
+  });
+}
+
+export function fromPromise<U, T extends Promise<U>>(promise: T): Observable<T> {
+  return Observable.create(s => {
+    promise.then(_ => s.next(promise), e => s.error(e));
   });
 }
 

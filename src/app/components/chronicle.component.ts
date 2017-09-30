@@ -3,8 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Blocker} from '../blocker';
 import {Observable} from 'rxjs/Observable';
-import {from} from '../observable.extensions';
-import {Subject} from "rxjs/Subject";
+import {fromPromise, fromThenable} from '../observable.extensions';
+import {Subject} from 'rxjs/Subject';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   templateUrl: './chronicle.component.html'
@@ -14,15 +15,16 @@ export class ChronicleComponent {
   private chronicleId: string;
   public characters: Observable<SnapshotAction[]>;
   private daoCharacters: AngularFireList<any>;
-  private current: SnapshotAction;
+  private characterKey: string;
   public characterSubject: Subject<Character>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private database: AngularFireDatabase,
+              private angularFireAuth: AngularFireAuth,
               private blocker: Blocker) {
     this.chronicleId = this.activatedRoute.snapshot.params['key'];
     this.characterSubject = new Subject();
-    this.current = null;
+    this.characterKey = null;
 
     this.daoCharacters = database.list('characters',
       r => r.orderByChild('chronicleId').equalTo(this.chronicleId));
@@ -30,11 +32,27 @@ export class ChronicleComponent {
   }
 
   public characterChange(snapshotAction: SnapshotAction): void {
-    this.current = snapshotAction;
+    this.characterKey = snapshotAction.key;
     this.characterSubject.next(snapshotAction.payload.val());
   }
 
+  public newCharacter(): void {
+    this.characterKey = null;
+    this.characterSubject.next({
+      name: '',
+      ownerId: this.angularFireAuth.auth.currentUser.uid,
+      storytellerId: this.angularFireAuth.auth.currentUser.uid,
+      chronicleId: this.chronicleId,
+      isOpen: false
+    });
+  }
+
   public save(character: Character): void {
-    from(this.daoCharacters.push(character)).blocker(this.blocker).subscribe(r => console.log(r.key));
+    if (this.characterKey) {
+      fromPromise<void, Promise<void>>(this.daoCharacters.update(this.characterKey, character)).blocker(this.blocker).subscribe();
+    }
+    else {
+      fromThenable(this.daoCharacters.push(character)).blocker(this.blocker).subscribe(r => this.characterKey = r.key);
+    }
   }
 }

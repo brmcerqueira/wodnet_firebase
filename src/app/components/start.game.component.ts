@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Blocker} from '../blocker';
 import {Router} from '@angular/router';
-import {from} from '../observable.extensions';
-import {AngularFireAuth} from "angularfire2/auth";
-import {Observable} from "rxjs/Observable";
+import {fromThenable} from '../observable.extensions';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {Observable} from 'rxjs/Observable';
 
 interface Chronicle {
   name: string;
@@ -35,7 +35,7 @@ export class StartGameComponent {
   }
 
   public createChronicle(): void {
-    from(this.daoChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
+    fromThenable(this.daoChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
       .blocker(this.blocker).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
   }
 }
