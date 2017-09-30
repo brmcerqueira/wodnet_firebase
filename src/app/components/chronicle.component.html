@@ -1,5 +1,4 @@
-<select (change)="characterChange($event.target.value)">
-  <option value="">{{ 'new' | translate }}</option>
-  <option *ngFor="let item of characters | async" [value]="item.key">{{ item.value.name }}</option>
-</select>
-<character [chronicleId]="chronicleId" (save)="save($event)"></character>
+<ul>
+  <li *ngFor="let item of characters | async"><button (click)="characterChange(item)">{{ item.payload.val().name }}</button></li>
+</ul>
+<character [character]="characterSubject" (save)="save($event)"></character>

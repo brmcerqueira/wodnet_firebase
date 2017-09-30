@@ -1,8 +1,12 @@
-<form [formGroup]="formGroup" (submit)="submit()">
-  <input type="text" formControlName="name"/>
-  <div ngxErrors="name">
-    <div ngxError="required">{{ 'name-required' | translate }}</div>
-    <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
-  </div>
-  <button [disabled]="!formGroup.valid" type="submit">{{ 'save' | translate }}</button>
-</form>
+<div *ngIf="formGroup | async; else loading; let group">
+  <form [formGroup]="group" (submit)="submit(group.value)">
+    <input type="text" formControlName="name"/>
+    <div ngxErrors="name">
+      <div ngxError="required">{{ 'name-required' | translate }}</div>
+      <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
+    </div>
+    <button [disabled]="!group.valid" type="submit">{{ 'save' | translate }}</button>
+  </form>
+</div>
+<ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>
+

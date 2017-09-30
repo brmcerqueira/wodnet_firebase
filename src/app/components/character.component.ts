@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AngularFireAuth} from 'angularfire2/auth';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'character',
@@ -8,26 +8,27 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class CharacterComponent implements OnInit {
 
-  public formGroup: FormGroup;
-  @Input() public chronicleId: string;
+  public formGroup: Observable<FormGroup>;
+  @Input() public character: Observable<Character>;
   @Output() public save: EventEmitter<Character>;
 
-  constructor(private angularFireAuth: AngularFireAuth,
-              private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder) {
     this.save = new EventEmitter();
   }
 
   ngOnInit(): void {
-    this.formGroup = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-      ownerId: this.angularFireAuth.auth.currentUser.uid,
-      storytellerId: this.angularFireAuth.auth.currentUser.uid,
-      chronicleId: this.chronicleId,
-      isOpen: false
+    this.formGroup = this.character.map(c => {
+      return this.formBuilder.group({
+        name: [c.name, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+        ownerId: c.ownerId,
+        storytellerId: c.storytellerId,
+        chronicleId: c.chronicleId,
+        isOpen: c.isOpen
+      });
     });
   }
 
-  public submit(): void {
-    this.save.emit(this.formGroup.value);
+  public submit(character: Character): void {
+    this.save.emit(character);
   }
 }
