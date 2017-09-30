@@ -37,7 +37,7 @@ export class ChronicleComponent {
 
     this.daoCharacters = database.list('characters',
       r => r.orderByChild('chronicleId').equalTo(this.key));
-    this.characters = this.daoCharacters.snapshotChanges().blocker(blocker).map(array => {
+    this.characters = this.daoCharacters.snapshotChanges().map(array => {
       return array.map(a => {
         return { key: a.key, value: a.payload.val()};
       });
@@ -56,7 +56,6 @@ export class ChronicleComponent {
   }
 
   public save(): void {
-    const promise = this.daoCharacters.push(this.current);
-    from(promise).blocker(this.blocker).subscribe(() => console.log(promise.key));
+    from(this.daoCharacters.push(this.current)).blocker(this.blocker).subscribe(r => console.log(r.key));
   }
 }

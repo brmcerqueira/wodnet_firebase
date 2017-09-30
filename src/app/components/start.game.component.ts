@@ -29,13 +29,13 @@ export class StartGameComponent {
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]]
     });
     this.daoChronicles = database.list('chronicles');
-    this.chronicles = this.daoChronicles.snapshotChanges().blocker(blocker).map(array => {
+    this.chronicles = this.daoChronicles.snapshotChanges().map(array => {
       return array.map(a => a.payload.val());
     });
   }
 
   public createChronicle(): void {
-    const promise = this.daoChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value));
-    from(promise).blocker(this.blocker).subscribe(() => this.router.navigate(['in/chronicle', promise.key ]));
+    from(this.daoChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
+      .blocker(this.blocker).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
   }
 }
