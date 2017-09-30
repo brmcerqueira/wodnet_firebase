@@ -2,5 +2,4 @@
   <option value="">{{ 'new' | translate }}</option>
   <option *ngFor="let item of characters | async" [value]="item.key">{{ item.value.name }}</option>
 </select>
-<div>{{ current | json }}</div>
-<button (click)="save()">save</button>
+<character [chronicleId]="chronicleId" (save)="save($event)"></character>

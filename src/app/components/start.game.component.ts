@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Blocker} from '../blocker';
 import {Router} from '@angular/router';
 import {from} from '../observable.extensions';

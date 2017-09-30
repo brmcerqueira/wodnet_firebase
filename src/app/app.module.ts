@@ -22,6 +22,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Blocker} from './blocker';
 import {GlobalBlockerComponent} from './components/global.blocker.component';
 import {ChronicleComponent} from './components/chronicle.component';
+import {CharacterComponent} from "./components/character.component";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {ChronicleComponent} from './components/chronicle.component';
     InComponent,
     GlobalBlockerComponent,
     SignInComponent,
+    CharacterComponent,
     StartGameComponent,
     ChronicleComponent,
     DiceBoardComponent
