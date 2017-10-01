@@ -1,5 +1,9 @@
 {
   "rules": {
+    "users": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "chronicles": {
       ".read": "auth != null",
       ".write": "auth.uid === data.child('ownerId').val() || data.child('ownerId').val() === null"

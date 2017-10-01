@@ -5,6 +5,7 @@
       <div ngxError="required">{{ 'name-required' | translate }}</div>
       <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
     </div>
+    <single-select formControlName="ownerId" [source]="users"></single-select>
     <button [disabled]="!group.valid" type="submit">{{ 'save' | translate }}</button>
   </form>
 </div>

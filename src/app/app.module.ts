@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
@@ -18,11 +18,14 @@ import {AuthenticationGuard} from './authentication.guard';
 import {DiceBoardComponent} from './components/dice.board.component';
 import {StartGameComponent} from './components/start.game.component';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Blocker} from './blocker';
 import {GlobalBlockerComponent} from './components/global.blocker.component';
 import {ChronicleComponent} from './components/chronicle.component';
-import {CharacterComponent} from "./components/character.component";
+import {CharacterComponent} from './components/character.component';
+import {SingleSelectComponent} from './components/single.select.component';
+import {CommonModule} from '@angular/common';
+import {PlayerComponent} from './components/player.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +33,16 @@ import {CharacterComponent} from "./components/character.component";
     InComponent,
     GlobalBlockerComponent,
     SignInComponent,
+    SingleSelectComponent,
     CharacterComponent,
     StartGameComponent,
+    PlayerComponent,
     ChronicleComponent,
     DiceBoardComponent
   ],
   imports: [
+    CommonModule,
+    FormsModule,
     BrowserModule,
     HttpModule,
     HttpClientModule,
@@ -45,7 +52,8 @@ import {CharacterComponent} from "./components/character.component";
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    NgbModule.forRoot()
   ],
   providers: [
     Blocker,

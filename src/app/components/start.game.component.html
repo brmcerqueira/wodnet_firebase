@@ -1,4 +1,10 @@
 <ul>
+  <li *ngFor="let item of myCharacters | async">
+    <button (click)="playCharacter(item)">{{ item.payload.val().name }}</button>
+  </li>
+</ul>
+<hr>
+<ul>
   <li *ngFor="let item of myChronicles | async">
     <button (click)="chooseChronicle(item)">{{ item.payload.val().name }}</button>
   </li>

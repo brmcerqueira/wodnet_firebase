@@ -6,11 +6,13 @@ import {AuthenticationGuard} from './authentication.guard';
 import {DiceBoardComponent} from './components/dice.board.component';
 import {StartGameComponent} from './components/start.game.component';
 import {ChronicleComponent} from './components/chronicle.component';
+import {PlayerComponent} from './components/player.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'in', component: InComponent, canActivate: [AuthenticationGuard], children: [
     { path: '', component: StartGameComponent },
+    { path: 'player/:key', component: PlayerComponent },
     { path: 'chronicle/:key', component: ChronicleComponent },
     { path: 'dice', component: DiceBoardComponent }
   ]},

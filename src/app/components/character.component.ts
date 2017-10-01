@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
+import {SelectItem} from '../select.item';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {SelectSource} from '../select.source';
 
 @Component({
   selector: 'character',
@@ -12,7 +15,7 @@ export class CharacterComponent implements OnInit {
   @Input() public character: Observable<Character>;
   @Output() public save: EventEmitter<Character>;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private database: AngularFireDatabase) {
     this.save = new EventEmitter();
   }
 
@@ -26,6 +29,15 @@ export class CharacterComponent implements OnInit {
         isOpen: c.isOpen
       });
     });
+  }
+
+  public get users(): SelectSource {
+    return (data: any, byKey: boolean): Observable<SelectItem[]> => {
+      return this.database.list('users', r => r.orderByChild('name').startAt(data)
+        .endAt(`${data}\uf8ff`)).snapshotChanges().map(array => array.map(u => {
+          return { id: u.payload.key, text: u.payload.val().name };
+        }));
+    };
   }
 
   public submit(character: Character): void {

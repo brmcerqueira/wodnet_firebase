@@ -12,6 +12,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class StartGameComponent {
   public formGroup: FormGroup;
+  public myCharacters: Observable<SnapshotAction[]>;
   public myChronicles: Observable<SnapshotAction[]>;
   private daoMyChronicles: AngularFireList<any>;
 
@@ -25,12 +26,19 @@ export class StartGameComponent {
     });
     this.daoMyChronicles = database.list('chronicles',
       r => r.orderByChild('ownerId').equalTo(this.angularFireAuth.auth.currentUser.uid));
+    this.myCharacters = database.list('characters',
+      r => r.orderByChild('ownerId').equalTo(this.angularFireAuth.auth.currentUser.uid))
+      .snapshotChanges().map(array => array.filter(u => u.payload.val().storytellerId !== this.angularFireAuth.auth.currentUser.uid));
     this.myChronicles = this.daoMyChronicles.snapshotChanges();
   }
 
   public createChronicle(): void {
     fromThenable(this.daoMyChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
       .blocker(this.blocker).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
+  }
+
+  public playCharacter(snapshotAction: SnapshotAction): void {
+    this.router.navigate(['in/player', snapshotAction.key]);
   }
 
   public chooseChronicle(snapshotAction: SnapshotAction): void {
