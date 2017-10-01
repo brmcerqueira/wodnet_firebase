@@ -44,7 +44,49 @@ export class ChronicleComponent {
       ownerId: this.angularFireAuth.auth.currentUser.uid,
       storytellerId: this.angularFireAuth.auth.currentUser.uid,
       chronicleId: this.chronicleId,
-      isOpen: false
+      isOpen: false,
+      strength: 1,
+      dexterity: 1,
+      stamina: 1,
+      charisma: 1,
+      manipulation: 1,
+      appearance: 1,
+      perception: 1,
+      intelligence: 1,
+      wits: 1,
+      physical: {
+        athletics: 0,
+        brawl: 0,
+        crafts: 0,
+        dodge: 0,
+        drive: 0,
+        melee: 0,
+        security: 0,
+        stealth: 0,
+        survival: 0
+      },
+      social: {
+        animalKen: 0,
+        empathy: 0,
+        etiquette: 0,
+        intimidation: 0,
+        leadership: 0,
+        performance: 0,
+        persuasion: 0,
+        streetwise: 0,
+        subterfuge: 0
+      },
+      mental: {
+        academics: 0,
+        awareness: 0,
+        firearms: 0,
+        investigation: 0,
+        linguistics: 0,
+        medicine: 0,
+        occult: 0,
+        science: 0,
+        technology: 0
+      }
     });
   }
 

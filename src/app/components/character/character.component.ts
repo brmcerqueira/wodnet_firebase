@@ -28,7 +28,49 @@ export class CharacterComponent implements OnInit {
         ownerId: c.ownerId,
         storytellerId: c.storytellerId,
         chronicleId: c.chronicleId,
-        isOpen: c.isOpen
+        isOpen: c.isOpen,
+        strength: c.strength,
+        dexterity: c.dexterity,
+        stamina: c.stamina,
+        charisma: c.charisma,
+        manipulation: c.manipulation,
+        appearance: c.appearance,
+        perception: c.perception,
+        intelligence: c.intelligence,
+        wits: c.wits,
+        physical: {
+          athletics: c.physical.athletics,
+          brawl: c.physical.brawl,
+          crafts: c.physical.crafts,
+          dodge: c.physical.dodge,
+          drive: c.physical.drive,
+          melee: c.physical.melee,
+          security: c.physical.security,
+          stealth: c.physical.stealth,
+          survival: c.physical.survival
+        },
+        social: {
+          animalKen: c.social.animalKen,
+          empathy: c.social.empathy,
+          etiquette: c.social.etiquette,
+          intimidation: c.social.intimidation,
+          leadership: c.social.leadership,
+          performance: c.social.performance,
+          persuasion: c.social.persuasion,
+          streetwise: c.social.streetwise,
+          subterfuge: c.social.subterfuge
+        },
+        mental: {
+          academics: c.mental.academics,
+          awareness: c.mental.awareness,
+          firearms: c.mental.firearms,
+          investigation: c.mental.investigation,
+          linguistics: c.mental.linguistics,
+          medicine: c.mental.medicine,
+          occult: c.mental.occult,
+          science: c.mental.science,
+          technology: c.mental.technology
+        }
       });
     });
   }
