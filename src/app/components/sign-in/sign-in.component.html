@@ -1,0 +1,14 @@
+<div class="outer" *ngIf="isAnonymous">
+  <div class="middle">
+    <div class="inner">
+      <ul class="centered-list">
+        <li>
+          <button class="btn-default btn-red" (click)="signInWithGoogle()">
+            <i class="fa fa-google" aria-hidden="true"></i>          
+            {{ 'sign-in-with-google' | translate }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

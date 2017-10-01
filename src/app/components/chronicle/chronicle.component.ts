@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
-import {Blocker} from '../blocker';
+import {Blocker} from '../../blocker';
 import {Observable} from 'rxjs/Observable';
-import {fromPromise, fromThenable} from '../observable.extensions';
+import {fromPromise, fromThenable} from '../../observable.extensions';
 import {Subject} from 'rxjs/Subject';
 import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
-  templateUrl: './chronicle.component.html'
+  templateUrl: './chronicle.component.html',
+  styleUrls: ['./chronicle.component.scss']
 })
 export class ChronicleComponent {
 

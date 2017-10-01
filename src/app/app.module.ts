@@ -5,9 +5,6 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientModule} from '@angular/common/http';
-import {MasterComponent} from './components/master.component';
-import {InComponent} from './components/in.component';
-import {SignInComponent} from './components/sign.in.component';
 import {RouteModule} from './route.module';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
@@ -15,17 +12,20 @@ import {HttpModule} from '@angular/http';
 import {EnTranslate} from '../environments/i18n/en.translate';
 import {PtTranslate} from '../environments/i18n/pt.translate';
 import {AuthenticationGuard} from './authentication.guard';
-import {DiceBoardComponent} from './components/dice.board.component';
-import {StartGameComponent} from './components/start.game.component';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Blocker} from './blocker';
-import {GlobalBlockerComponent} from './components/global.blocker.component';
-import {ChronicleComponent} from './components/chronicle.component';
-import {CharacterComponent} from './components/character.component';
-import {SingleSelectComponent} from './components/single.select.component';
 import {CommonModule} from '@angular/common';
-import {PlayerComponent} from './components/player.component';
+import { MasterComponent } from './components/master/master.component';
+import { InComponent } from './components/in/in.component';
+import { GlobalBlockerComponent } from './components/global-blocker/global-blocker.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SingleSelectComponent } from './components/single-select/single-select.component';
+import { CharacterComponent } from './components/character/character.component';
+import { StartGameComponent } from './components/start-game/start-game.component';
+import { PlayerComponent } from './components/player/player.component';
+import { ChronicleComponent } from './components/chronicle/chronicle.component';
+import { DiceBoardComponent } from './components/dice-board/dice-board.component';
 
 @NgModule({
   declarations: [

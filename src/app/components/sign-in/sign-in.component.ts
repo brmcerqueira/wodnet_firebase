@@ -4,10 +4,11 @@ import {Router} from '@angular/router';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
-import {Blocker} from "../blocker";
+import {Blocker} from "../../blocker";
 
 @Component({
-  templateUrl: './sign.in.component.html'
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
 

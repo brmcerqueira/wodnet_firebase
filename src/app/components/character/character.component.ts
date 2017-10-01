@@ -1,13 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {SelectItem} from '../select.item';
+import {SelectItem} from '../../select.item';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {SelectSource} from '../select.source';
+import {SelectSource} from '../../select.source';
 
 @Component({
   selector: 'character',
-  templateUrl: './character.component.html'
+  templateUrl: './character.component.html',
+  styleUrls: ['./character.component.scss']
 })
 export class CharacterComponent implements OnInit {
 

@@ -3,11 +3,12 @@ import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {SelectItem} from '../select.item';
+import {SelectItem} from '../../select.item';
 
 @Component({
   selector: 'single-select',
-  templateUrl: './single.select.component.html',
+  templateUrl: './single-select.component.html',
+  styleUrls: ['./single-select.component.scss'],
   providers: [{
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => SingleSelectComponent),

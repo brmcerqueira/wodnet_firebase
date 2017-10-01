@@ -1,0 +1,14 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format    
+    "taskName": "run ng server",
+    "version": "0.1.0",
+    "command": "ng",
+    "isShellCommand": true,
+    "args": ["server"],
+    "showOutput": "always",
+    "group": {
+        "kind": "build",
+        "isDefault": true
+    }
+}

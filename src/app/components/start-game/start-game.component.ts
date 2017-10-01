@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
-import {Blocker} from '../blocker';
+import {Blocker} from '../../blocker';
 import {Router} from '@angular/router';
-import {fromThenable} from '../observable.extensions';
+import {fromThenable} from '../../observable.extensions';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
-  templateUrl: './start.game.component.html'
+  templateUrl: './start-game.component.html',
+  styleUrls: ['./start-game.component.scss'],
 })
 export class StartGameComponent {
   public formGroup: FormGroup;
