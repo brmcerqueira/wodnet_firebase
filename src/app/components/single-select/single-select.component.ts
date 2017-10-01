@@ -18,6 +18,7 @@ import {SelectItem} from '../../select.item';
 export class SingleSelectComponent implements ControlValueAccessor {
 
   @Input() public source: (data: any, byKey: boolean) => Observable<SelectItem[]>;
+  public text: string;
   public item: SelectItem;
   @Output() public selected: EventEmitter<NgbTypeaheadSelectItemEvent>;
   public isDisabled: boolean;
@@ -25,6 +26,7 @@ export class SingleSelectComponent implements ControlValueAccessor {
   private onTouched: () => void;
 
   constructor() {
+    this.text = null;
     this.item = null;
     this.selected = new EventEmitter();
     this.isDisabled = false;
@@ -33,12 +35,13 @@ export class SingleSelectComponent implements ControlValueAccessor {
   public get typeaheadSource(): (text: Observable<string>) => Observable<SelectItem[]> {
     return (text: Observable<string>): Observable<SelectItem[]> => {
       return text.debounceTime(200).distinctUntilChanged().flatMap(val => {
-        return this.source(val, false);
+        return this.source(val.toLowerCase(), false);
       });
     };
   }
 
   public selectItem(event: NgbTypeaheadSelectItemEvent): void {
+    this.text = null;
     this.item = event.item;
 
     if (this.onChange) {
@@ -53,10 +56,19 @@ export class SingleSelectComponent implements ControlValueAccessor {
   }
 
   public inputFormatter(value: SelectItem): string {
+    return null;
+  }
+
+  public resultFormatter(value: SelectItem): string {
     return value.text;
   }
 
+  public clear(): void {
+    this.item = null;
+  }
+
   public writeValue(id: any): void {
+    this.text = null;
     if (id) {
       this.source(id, true).subscribe(data => {
         if (data.length === 1) {

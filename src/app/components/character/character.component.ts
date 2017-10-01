@@ -34,8 +34,10 @@ export class CharacterComponent implements OnInit {
 
   public get users(): SelectSource {
     return (data: any, byKey: boolean): Observable<SelectItem[]> => {
-      return this.database.list('users', r => r.orderByChild('name').startAt(data)
-        .endAt(`${data}\uf8ff`)).snapshotChanges().map(array => array.map(u => {
+      return this.database.list('users', r => byKey
+        ? r.orderByKey().equalTo(data)
+        : r.orderByChild('name').startAt(data).endAt(`${data}\uf8ff`))
+        .snapshotChanges().map(array => array.map(u => {
           return { id: u.payload.key, text: u.payload.val().name };
         }));
     };

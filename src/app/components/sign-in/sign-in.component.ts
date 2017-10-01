@@ -34,7 +34,7 @@ export class SignInComponent {
     this.blocker.subject.next(true);
     this.angularFireAuth.auth.signInWithPopup(new GoogleAuthProvider()).then(() => {
       this.daoUsers.update(this.angularFireAuth.auth.currentUser.uid, {
-        name: this.angularFireAuth.auth.currentUser.displayName,
+        name: this.angularFireAuth.auth.currentUser.displayName.toLowerCase(),
         photo: this.angularFireAuth.auth.currentUser.photoURL
       }).then(() => {
         this.blocker.subject.next(false);

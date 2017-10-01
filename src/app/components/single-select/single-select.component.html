@@ -1,5 +1,5 @@
-<input type="text" [(ngModel)]="item" [disabled]="isDisabled"
+<button *ngIf="item" (click)="clear()">{{ item.text }}</button><input type="text" [(ngModel)]="text" [disabled]="isDisabled"
        (selectItem)="selectItem($event)"
        [ngbTypeahead]="typeaheadSource"
        [inputFormatter]="inputFormatter"
-       [resultFormatter]="inputFormatter"/>
+       [resultFormatter]="resultFormatter"/>
