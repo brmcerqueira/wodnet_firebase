@@ -13,6 +13,7 @@ import {SelectSource} from '../../select.source';
 export class CharacterComponent implements OnInit {
 
   public formGroup: Observable<FormGroup>;
+  @Input() public canChangePlayer: boolean;
   @Input() public character: Observable<Character>;
   @Output() public save: EventEmitter<Character>;
 
