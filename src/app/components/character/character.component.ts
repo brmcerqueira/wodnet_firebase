@@ -12,6 +12,8 @@ import {SelectSource} from '../../select.source';
 })
 export class CharacterComponent implements OnInit {
 
+  public attributeMin: number;
+  public max: number;
   public formGroup: Observable<FormGroup>;
   @Input() public canChangePlayer: boolean;
   @Input() public character: Observable<Character>;
@@ -19,6 +21,8 @@ export class CharacterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private database: AngularFireDatabase) {
     this.save = new EventEmitter();
+    this.attributeMin = 1;
+    this.max = 5;
   }
 
   ngOnInit(): void {

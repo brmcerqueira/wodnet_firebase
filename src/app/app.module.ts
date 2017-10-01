@@ -26,6 +26,7 @@ import { StartGameComponent } from './components/start-game/start-game.component
 import { PlayerComponent } from './components/player/player.component';
 import { ChronicleComponent } from './components/chronicle/chronicle.component';
 import { DiceBoardComponent } from './components/dice-board/dice-board.component';
+import {SpinnerComponent} from "./components/spinner/spinner.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DiceBoardComponent } from './components/dice-board/dice-board.component
     GlobalBlockerComponent,
     SignInComponent,
     SingleSelectComponent,
+    SpinnerComponent,
     CharacterComponent,
     StartGameComponent,
     PlayerComponent,
