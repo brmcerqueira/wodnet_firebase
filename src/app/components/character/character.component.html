@@ -1,4 +1,4 @@
-<div *ngIf="formGroup | async; else loading; let group">
+<div *ngIf="formGroup | async; else none; let group">
   <form [formGroup]="group" (submit)="submit(group.value)">
     <button [disabled]="!group.valid" type="submit">{{ 'save' | translate }}</button>
     <table>
@@ -66,7 +66,25 @@
         <tr>
       </tbody>
     </table>
+    <ul [formGroup]="group.controls.physical">
+      <li *ngFor="let item of skillGroup(group.controls.physical)">
+        <span>{{ item.label }}</span>
+        <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
+      </li>
+    </ul>
+    <ul [formGroup]="group.controls.social">
+      <li *ngFor="let item of skillGroup(group.controls.social)">
+        <span>{{ item.label }}</span>
+        <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
+      </li>
+    </ul>
+    <ul [formGroup]="group.controls.mental">
+      <li *ngFor="let item of skillGroup(group.controls.mental)">
+        <span>{{ item.label }}</span>
+        <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
+      </li>
+    </ul>
   </form>
 </div>
-<ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>
+<ng-template #none><p>{{ 'none' | translate }}</p></ng-template>
 

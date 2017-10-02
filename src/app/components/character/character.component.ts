@@ -18,6 +18,7 @@ import {Vice} from '../../vice';
 export class CharacterComponent implements OnInit {
 
   public attributeMin: number;
+  public skillMin: number;
   public max: number;
   public formGroup: Observable<FormGroup>;
   @Input() public canChangePlayer: boolean;
@@ -29,6 +30,7 @@ export class CharacterComponent implements OnInit {
               private database: AngularFireDatabase) {
     this.save = new EventEmitter();
     this.attributeMin = 1;
+    this.skillMin = 0;
     this.max = 5;
   }
 
@@ -52,7 +54,7 @@ export class CharacterComponent implements OnInit {
         perception: c.perception,
         intelligence: c.intelligence,
         wits: c.wits,
-        physical: {
+        physical: this.formBuilder.group({
           athletics: c.physical.athletics,
           brawl: c.physical.brawl,
           crafts: c.physical.crafts,
@@ -62,8 +64,8 @@ export class CharacterComponent implements OnInit {
           security: c.physical.security,
           stealth: c.physical.stealth,
           survival: c.physical.survival
-        },
-        social: {
+        }),
+        social: this.formBuilder.group({
           animalKen: c.social.animalKen,
           empathy: c.social.empathy,
           etiquette: c.social.etiquette,
@@ -73,8 +75,8 @@ export class CharacterComponent implements OnInit {
           persuasion: c.social.persuasion,
           streetwise: c.social.streetwise,
           subterfuge: c.social.subterfuge
-        },
-        mental: {
+        }),
+        mental: this.formBuilder.group({
           academics: c.mental.academics,
           awareness: c.mental.awareness,
           firearms: c.mental.firearms,
@@ -84,7 +86,7 @@ export class CharacterComponent implements OnInit {
           occult: c.mental.occult,
           science: c.mental.science,
           technology: c.mental.technology
-        },
+        }),
         disciplines: c.disciplines
       });
     });
@@ -127,6 +129,12 @@ export class CharacterComponent implements OnInit {
           return { id: u.payload.key, text: u.payload.val().name };
         }));
     };
+  }
+
+  public skillGroup(form: FormGroup): { key: string, label: string }[] {
+    return Object.keys(form.controls).map(k => {
+      return { key: k, label: this.translate.instant(k) };
+    }).sort((l, r) => (l.label > r.label) ? 1 : ((r.label > l.label) ? -1 : 0));
   }
 
   public submit(character: Character): void {
