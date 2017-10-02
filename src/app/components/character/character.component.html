@@ -1,18 +1,71 @@
 <div *ngIf="formGroup | async; else loading; let group">
   <form [formGroup]="group" (submit)="submit(group.value)">
-    <input type="text" formControlName="name"/>
-    <div ngxErrors="name">
-      <div ngxError="required">{{ 'name-required' | translate }}</div>
-      <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
-    </div>
-    <single-select formControlName="virtue" [source]="virtues"></single-select>
-    <single-select formControlName="vice" [source]="vices"></single-select>
-    <single-select formControlName="clan" [source]="clans"></single-select>
-    <spinner formControlName="strength" [min]="attributeMin" [max]="max"></spinner>
-    <div *ngIf="canChangePlayer">
-      <single-select formControlName="ownerId" [source]="users"></single-select>
-    </div>
     <button [disabled]="!group.valid" type="submit">{{ 'save' | translate }}</button>
+    <table>
+      <tbody>
+        <tr>
+          <td>{{ 'name' | translate }}</td>
+          <td>
+            <input type="text" formControlName="name"/>
+            <div ngxErrors="name">
+              <div ngxError="required">{{ 'name-required' | translate }}</div>
+              <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
+            </div>
+          </td>
+          <td>{{ 'virtue' | translate }}</td>
+          <td><single-select formControlName="virtue" [source]="virtues"></single-select></td>
+          <td>{{ 'clan' | translate }}</td>
+          <td><single-select formControlName="clan" [source]="clans"></single-select></td>
+        </tr>
+        <tr>
+          <td>{{ 'player' | translate }}</td>
+          <td>
+            <div *ngIf="canChangePlayer">
+              <single-select formControlName="ownerId" [disabled]="!canChangePlayer" [source]="users"></single-select>
+            </div>
+          </td>
+          <td>{{ 'vice' | translate }}</td>
+          <td><single-select formControlName="vice" [source]="vices"></single-select></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">{{ 'physical' | translate }}</th>
+          <th colspan="2">{{ 'social' | translate }}</th>
+          <th colspan="2">{{ 'mental' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ 'strength' | translate }}</td>
+          <td><spinner formControlName="strength" [min]="attributeMin" [max]="max"></spinner></td>
+          <td>{{ 'charisma' | translate }}</td>
+          <td><spinner formControlName="charisma" [min]="attributeMin" [max]="max"></spinner></td>
+          <td>{{ 'perception' | translate }}</td>
+          <td><spinner formControlName="perception" [min]="attributeMin" [max]="max"></spinner></td>
+        <tr>
+        <tr>
+          <td>{{ 'dexterity' | translate }}</td>
+          <td><spinner formControlName="dexterity" [min]="attributeMin" [max]="max"></spinner></td>
+          <td>{{ 'manipulation' | translate }}</td>
+          <td><spinner formControlName="manipulation" [min]="attributeMin" [max]="max"></spinner></td>
+          <td>{{ 'intelligence' | translate }}</td>
+          <td><spinner formControlName="intelligence" [min]="attributeMin" [max]="max"></spinner></td>
+        <tr>
+        <tr>
+          <td>{{ 'stamina' | translate }}</td>
+          <td><spinner formControlName="stamina" [min]="attributeMin" [max]="max"></spinner></td>
+          <td>{{ 'appearance' | translate }}</td>
+          <td><spinner formControlName="appearance" [min]="attributeMin" [max]="max"></spinner></td>
+          <td>{{ 'wits' | translate }}</td>
+          <td><spinner formControlName="wits" [min]="attributeMin" [max]="max"></spinner></td>
+        <tr>
+      </tbody>
+    </table>
   </form>
 </div>
 <ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>
