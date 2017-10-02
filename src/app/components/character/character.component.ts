@@ -4,6 +4,11 @@ import {Observable} from 'rxjs/Observable';
 import {SelectItem} from '../../select.item';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {SelectSource} from '../../select.source';
+import {Character} from '../../character';
+import {Clan} from '../../clan';
+import {TranslateService} from '@ngx-translate/core';
+import {Virtue} from '../../virtue';
+import {Vice} from '../../vice';
 
 @Component({
   selector: 'character',
@@ -19,7 +24,9 @@ export class CharacterComponent implements OnInit {
   @Input() public character: Observable<Character>;
   @Output() public save: EventEmitter<Character>;
 
-  constructor(private formBuilder: FormBuilder, private database: AngularFireDatabase) {
+  constructor(private formBuilder: FormBuilder,
+              private translate: TranslateService,
+              private database: AngularFireDatabase) {
     this.save = new EventEmitter();
     this.attributeMin = 1;
     this.max = 5;
@@ -33,6 +40,9 @@ export class CharacterComponent implements OnInit {
         storytellerId: c.storytellerId,
         chronicleId: c.chronicleId,
         isOpen: c.isOpen,
+        virtue: c.virtue,
+        vice: c.vice,
+        clan: c.clan,
         strength: c.strength,
         dexterity: c.dexterity,
         stamina: c.stamina,
@@ -74,9 +84,38 @@ export class CharacterComponent implements OnInit {
           occult: c.mental.occult,
           science: c.mental.science,
           technology: c.mental.technology
-        }
+        },
+        disciplines: c.disciplines
       });
     });
+  }
+
+
+  private enumSelectSource(enumObject: any): SelectSource {
+    return (data: any, byKey: boolean): Observable<SelectItem[]> => {
+      return Observable.create(s => {
+        s.next(byKey ? [{ id: data, text: this.translate.instant(enumObject[data]) }]
+          : Object.keys(enumObject).filter(key => {
+            const item = enumObject[key];
+            if (!isNaN(Number(item))) return false;
+            return (<string>this.translate.instant(item)).toLowerCase().indexOf(data) > -1;
+          }).map(key => {
+            return { id: Number(key), text: this.translate.instant(enumObject[key]) };
+          }));
+      });
+    };
+  }
+
+  public get virtues(): SelectSource {
+    return this.enumSelectSource(Virtue);
+  }
+
+  public get vices(): SelectSource {
+    return this.enumSelectSource(Vice);
+  }
+
+  public get clans(): SelectSource {
+    return this.enumSelectSource(Clan);
   }
 
   public get users(): SelectSource {

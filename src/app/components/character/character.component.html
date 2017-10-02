@@ -5,6 +5,9 @@
       <div ngxError="required">{{ 'name-required' | translate }}</div>
       <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
     </div>
+    <single-select formControlName="virtue" [source]="virtues"></single-select>
+    <single-select formControlName="vice" [source]="vices"></single-select>
+    <single-select formControlName="clan" [source]="clans"></single-select>
     <spinner formControlName="strength" [min]="attributeMin" [max]="max"></spinner>
     <div *ngIf="canChangePlayer">
       <single-select formControlName="ownerId" [source]="users"></single-select>

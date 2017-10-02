@@ -2,10 +2,14 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Blocker} from '../../blocker';
+import {Character} from '../../character';
 import {Observable} from 'rxjs/Observable';
 import {fromPromise, fromThenable} from '../../observable.extensions';
 import {Subject} from 'rxjs/Subject';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {Virtue} from '../../virtue';
+import {Vice} from '../../vice';
+import {Clan} from '../../clan';
 
 @Component({
   templateUrl: './chronicle.component.html',
@@ -45,6 +49,9 @@ export class ChronicleComponent {
       storytellerId: this.angularFireAuth.auth.currentUser.uid,
       chronicleId: this.chronicleId,
       isOpen: false,
+      virtue: Virtue.Ambitious,
+      vice: Vice.Addictive,
+      clan: Clan.Brujah,
       strength: 1,
       dexterity: 1,
       stamina: 1,
@@ -86,7 +93,8 @@ export class ChronicleComponent {
         occult: 0,
         science: 0,
         technology: 0
-      }
+      },
+      disciplines: {}
     });
   }
 

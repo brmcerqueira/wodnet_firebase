@@ -4,6 +4,7 @@ import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {fromPromise} from '../../observable.extensions';
+import {Character} from "../../character";
 
 @Component({
   templateUrl: './player.component.html',

@@ -1,9 +1,16 @@
-interface Character {
+import {Clan} from './clan';
+import {Virtue} from './virtue';
+import {Vice} from './vice';
+
+export interface Character {
   name: string;
   ownerId: string;
   storytellerId: string;
   chronicleId: string;
   isOpen: boolean;
+  virtue: Virtue;
+  vice: Vice;
+  clan: Clan;
   strength: number;
   dexterity: number;
   stamina: number;
@@ -45,5 +52,8 @@ interface Character {
     occult: number;
     science: number;
     technology: number;
+  };
+  disciplines: {
+    [discipline: number]: number
   };
 }
