@@ -55,6 +55,7 @@ export class CharacterComponent implements OnInit {
         perception: c.perception,
         intelligence: c.intelligence,
         wits: c.wits,
+        hunger: c.hunger,
         physical: this.formBuilder.group({
           athletics: c.physical.athletics,
           brawl: c.physical.brawl,
@@ -88,7 +89,7 @@ export class CharacterComponent implements OnInit {
           science: c.mental.science,
           technology: c.mental.technology
         }),
-        disciplines: this.formBuilder.group(c.disciplines)
+        disciplines: this.formBuilder.group(c.disciplines ? c.disciplines : {})
       });
     });
   }

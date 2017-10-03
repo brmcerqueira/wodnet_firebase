@@ -1,17 +1,7 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Input, OnInit} from '@angular/core';
+import {ControlValueAccessor} from '@angular/forms';
 
-@Component({
-  selector: 'spinner',
-  templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SpinnerComponent),
-    multi: true
-  }]
-})
-export class SpinnerComponent implements ControlValueAccessor, OnInit {
+export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
 
   private value: number;
   @Input() public min: number;
@@ -28,15 +18,20 @@ export class SpinnerComponent implements ControlValueAccessor, OnInit {
 
   public ngOnInit(): void {
     this.value = this.min;
+    this.updateText();
   }
+
+  public abstract get fillMark(): string;
+
+  public abstract get emptyMark(): string;
 
   public updateText(): void {
       this.text = '';
       for (let i = 0; i < this.value; i++) {
-        this.text += '&#x25cf;';
+        this.text += this.fillMark;
       }
       for (let i = 0; i < this.max - this.value; i++) {
-        this.text += '&#x25cb;';
+        this.text += this.emptyMark;
       }
   }
 

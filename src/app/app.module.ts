@@ -26,10 +26,11 @@ import { StartGameComponent } from './components/start-game/start-game.component
 import { PlayerComponent } from './components/player/player.component';
 import { ChronicleComponent } from './components/chronicle/chronicle.component';
 import { DiceBoardComponent } from './components/dice-board/dice-board.component';
-import {SpinnerComponent} from "./components/spinner/spinner.component";
 import {DynamicFormGroupComponent} from "./components/dynamic-form-group/dynamic-form-group.component";
 import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
+import {CircleSpinnerComponent} from "./components/spinner/circle-spinner.component";
+import {SquareSpinnerComponent} from "./components/spinner/square-spinner.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {WrapperDirective} from "./wrapper.directive";
     GlobalBlockerComponent,
     SignInComponent,
     SingleSelectComponent,
-    SpinnerComponent,
+    CircleSpinnerComponent,
+    SquareSpinnerComponent,
     CharacterComponent,
     StartGameComponent,
     PlayerComponent,

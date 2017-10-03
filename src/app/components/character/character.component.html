@@ -42,51 +42,52 @@
       <tbody>
         <tr>
           <td>{{ 'strength' | translate }}</td>
-          <td><spinner formControlName="strength" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="strength" [min]="attributeMin" [max]="max"></circle-spinner></td>
           <td>{{ 'charisma' | translate }}</td>
-          <td><spinner formControlName="charisma" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="charisma" [min]="attributeMin" [max]="max"></circle-spinner></td>
           <td>{{ 'perception' | translate }}</td>
-          <td><spinner formControlName="perception" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="perception" [min]="attributeMin" [max]="max"></circle-spinner></td>
         <tr>
         <tr>
           <td>{{ 'dexterity' | translate }}</td>
-          <td><spinner formControlName="dexterity" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="dexterity" [min]="attributeMin" [max]="max"></circle-spinner></td>
           <td>{{ 'manipulation' | translate }}</td>
-          <td><spinner formControlName="manipulation" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="manipulation" [min]="attributeMin" [max]="max"></circle-spinner></td>
           <td>{{ 'intelligence' | translate }}</td>
-          <td><spinner formControlName="intelligence" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max"></circle-spinner></td>
         <tr>
         <tr>
           <td>{{ 'stamina' | translate }}</td>
-          <td><spinner formControlName="stamina" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="stamina" [min]="attributeMin" [max]="max"></circle-spinner></td>
           <td>{{ 'appearance' | translate }}</td>
-          <td><spinner formControlName="appearance" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="appearance" [min]="attributeMin" [max]="max"></circle-spinner></td>
           <td>{{ 'wits' | translate }}</td>
-          <td><spinner formControlName="wits" [min]="attributeMin" [max]="max"></spinner></td>
+          <td><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max"></circle-spinner></td>
         <tr>
       </tbody>
     </table>
     <ul [formGroup]="group.controls.physical">
       <li *ngFor="let item of group.controls.physical | formGroupParse">
         <span>{{ item.label }}</span>
-        <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
+        <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></circle-spinner></span>
       </li>
     </ul>
     <ul [formGroup]="group.controls.social">
       <li *ngFor="let item of group.controls.social | formGroupParse">
         <span>{{ item.label }}</span>
-        <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
+        <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></circle-spinner></span>
       </li>
     </ul>
     <ul [formGroup]="group.controls.mental">
       <li *ngFor="let item of group.controls.mental | formGroupParse">
         <span>{{ item.label }}</span>
-        <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
+        <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></circle-spinner></span>
       </li>
     </ul>
+    <square-spinner formControlName="hunger" min="0" max="5"></square-spinner>
     <dynamic-form-group [formGroup]="group.controls.disciplines" [source]="disciplines" [createControl]="createDisciplineControl">
       <ng-template let-item="item">
-        <spinner [formControlName]="item.key" [min]="attributeMin" [max]="max"></spinner>
+        <circle-spinner [formControlName]="item.key" [min]="attributeMin" [max]="max"></circle-spinner>
       </ng-template>
     </dynamic-form-group>
   </form>

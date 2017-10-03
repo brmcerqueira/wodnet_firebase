@@ -61,6 +61,7 @@ export class ChronicleComponent {
       perception: 1,
       intelligence: 1,
       wits: 1,
+      hunger: 1,
       physical: {
         athletics: 0,
         brawl: 0,

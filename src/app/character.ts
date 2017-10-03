@@ -20,6 +20,7 @@ export interface Character {
   perception: number;
   intelligence: number;
   wits: number;
+  hunger: number;
   physical: {
     athletics: number;
     brawl: number;
