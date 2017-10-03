@@ -22,7 +22,7 @@ export class SingleSelectComponent implements ControlValueAccessor {
   public text: string;
   public item: SelectItem;
   @Output() public selected: EventEmitter<NgbTypeaheadSelectItemEvent>;
-  public isDisabled: boolean;
+  @Input() public disabled: boolean;
   private onChange: (id: any) => void;
   private onTouched: () => void;
 
@@ -30,7 +30,7 @@ export class SingleSelectComponent implements ControlValueAccessor {
     this.text = null;
     this.item = null;
     this.selected = new EventEmitter();
-    this.isDisabled = false;
+    this.disabled = false;
   }
 
   public get typeaheadSource(): (text: Observable<string>) => Observable<SelectItem[]> {
@@ -87,9 +87,5 @@ export class SingleSelectComponent implements ControlValueAccessor {
 
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
   }
 }

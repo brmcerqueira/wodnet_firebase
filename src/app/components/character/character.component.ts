@@ -22,7 +22,7 @@ export class CharacterComponent implements OnInit {
   public skillMin: number;
   public max: number;
   public formGroup: Observable<FormGroup>;
-  @Input() public canChangePlayer: boolean;
+  @Input() public isStoryteller: boolean;
   @Input() public character: Observable<Character>;
   @Output() public save: EventEmitter<Character>;
 
@@ -33,6 +33,10 @@ export class CharacterComponent implements OnInit {
     this.attributeMin = 1;
     this.skillMin = 0;
     this.max = 5;
+  }
+
+  public isOpen(formGroup: FormGroup): boolean {
+    return formGroup.controls.isOpen.value || this.isStoryteller;
   }
 
   ngOnInit(): void {

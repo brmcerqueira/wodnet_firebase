@@ -8,7 +8,7 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
   @Input() public max?: number;
   @Input() public maxByControl?: string;
   public text: string;
-  public isDisabled: boolean;
+  @Input() public disabled: boolean;
   private onChange: (value: number) => void;
   private onTouched: () => void;
 
@@ -17,25 +17,23 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
     this.text = null;
   }
 
+  private get currentMax(): number {
+    return this.maxByControl ? this.parent.form.controls[this.maxByControl].value : this.max;
+  }
+
   public ngOnInit(): void {
     this.value = this.min;
 
     if (this.maxByControl) {
-      const formControl = this.parent.form.controls[this.maxByControl];
-      this.max = formControl.value;
-      formControl.valueChanges.subscribe(m => {
-        this.max = m;
-        if (this.value > this.max) {
-          this.value = this.max;
+      this.parent.form.controls[this.maxByControl].valueChanges.subscribe(m => {
+        if (this.value > this.currentMax) {
+          this.value = this.currentMax;
         }
-        this.updateText();
+        this.updateValue();
       });
     }
-    else if (!this.max) {
-      this.max = 1;
-    }
 
-    this.updateText();
+    this.updateValue();
   }
 
   public abstract get fillMark(): string;
@@ -47,38 +45,34 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
       for (let i = 0; i < this.value; i++) {
         this.text += this.fillMark;
       }
-      for (let i = 0; i < this.max - this.value; i++) {
+      for (let i = 0; i < this.currentMax - this.value; i++) {
         this.text += this.emptyMark;
       }
   }
 
   public add(): void {
-    if (this.value < this.max) {
+    if (this.value < this.currentMax) {
       this.value++;
-      this.updateText();
+      this.updateValue();
+    }
+  }
 
-      if (this.onChange) {
-        this.onChange(this.value);
-      }
+  private updateValue() {
+    this.updateText();
 
-      if (this.onTouched) {
-        this.onTouched();
-      }
+    if (this.onChange) {
+      this.onChange(this.value);
+    }
+
+    if (this.onTouched) {
+      this.onTouched();
     }
   }
 
   public less(): void {
     if (this.value > this.min) {
       this.value--;
-      this.updateText();
-
-      if (this.onChange) {
-        this.onChange(this.value);
-      }
-
-      if (this.onTouched) {
-        this.onTouched();
-      }
+      this.updateValue();
     }
   }
 
@@ -93,9 +87,5 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
 
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
   }
 }
