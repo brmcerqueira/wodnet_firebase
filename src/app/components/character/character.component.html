@@ -84,7 +84,23 @@
         <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></circle-spinner></span>
       </li>
     </ul>
-    <square-spinner formControlName="hunger" min="0" max="5"></square-spinner>
+    <span>{{ 'humanity' | translate }}</span>
+    <span><circle-spinner formControlName="humanity" min="1" max="10"></circle-spinner></span>
+    <span>{{ 'touchstones' | translate }}</span>
+    <input type="text" formControlName="touchstones"/>
+    <span>{{ 'backgroundsAndMerits' | translate }}</span>
+    <input type="text" formControlName="backgroundsAndMerits"/>
+    <span>{{ 'health' | translate }}</span>
+    <span><circle-spinner formControlName="consolidatedHealth" min="0" max="10"></circle-spinner></span>
+    <span><square-spinner formControlName="health" min="0" max="10"></square-spinner></span>
+    <span>{{ 'willpower' | translate }}</span>
+    <span><circle-spinner formControlName="consolidateWillpower" min="0" max="5"></circle-spinner></span>
+    <span><square-spinner formControlName="willpower" min="0" max="5"></square-spinner></span>
+    <span>{{ 'composure' | translate }}</span>
+    <span><circle-spinner formControlName="consolidateComposure" min="0" max="5"></circle-spinner></span>
+    <span><square-spinner formControlName="composure" min="0" max="5"></square-spinner></span>
+    <span>{{ 'hunger' | translate }}</span>
+    <span><square-spinner formControlName="hunger" min="0" max="5"></square-spinner></span>
     <dynamic-form-group [formGroup]="group.controls.disciplines" [source]="disciplines" [createControl]="createDisciplineControl">
       <ng-template let-item="item">
         <circle-spinner [formControlName]="item.key" [min]="attributeMin" [max]="max"></circle-spinner>

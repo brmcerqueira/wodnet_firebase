@@ -20,6 +20,15 @@ export interface Character {
   perception: number;
   intelligence: number;
   wits: number;
+  humanity: number;
+  touchstones: string;
+  backgroundsAndMerits: string;
+  consolidatedHealth: number;
+  health: number;
+  consolidateWillpower: number;
+  willpower: number;
+  consolidateComposure: number;
+  composure: number;
   hunger: number;
   physical: {
     athletics: number;
