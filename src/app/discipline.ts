@@ -1,5 +1,5 @@
 export enum Discipline {
-  Animalism,
+  Animalism = 1,
   Auspex,
   Celerity,
   Dominate,

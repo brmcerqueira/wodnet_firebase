@@ -1,5 +1,5 @@
 export enum Vice {
-  Arrogant,
+  Arrogant = 1,
   Competitive,
   Greedy,
   Addictive,

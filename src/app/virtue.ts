@@ -1,5 +1,5 @@
 export enum Virtue {
-  Generous,
+  Generous = 1,
   Just,
   Loyal,
   Ambitious,

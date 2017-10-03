@@ -1,4 +1,4 @@
-<button *ngIf="item" (click)="clear()" [disabled]="isDisabled">{{ item.text }}</button>
+<button type="button" *ngIf="item" (click)="clear()" [disabled]="isDisabled">{{ item.text }}</button>
 <input type="text" [(ngModel)]="text" [disabled]="isDisabled" (selectItem)="selectItem($event)"
        [ngbTypeahead]="typeaheadSource"
        [inputFormatter]="inputFormatter"

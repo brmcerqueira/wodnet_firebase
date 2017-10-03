@@ -1,0 +1,11 @@
+<input type="text" (selectItem)="selectItem($event)"
+       [ngbTypeahead]="typeaheadSource"
+       [inputFormatter]="inputFormatter"
+       [resultFormatter]="resultFormatter"/>
+<ul [formGroup]="formGroup">
+  <li *ngFor="let item of formGroup | formGroupParse">
+    <span>{{ item.label }}</span>
+    <span><ng-template [wrapper]="itemTemplate" [item]="item"></ng-template></span>
+    <span><button  type="button" (click)="remove(item.key)">X</button></span>
+  </li>
+</ul>

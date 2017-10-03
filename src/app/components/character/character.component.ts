@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {SelectItem} from '../../select.item';
 import {AngularFireDatabase} from 'angularfire2/database';
@@ -9,6 +9,7 @@ import {Clan} from '../../clan';
 import {TranslateService} from '@ngx-translate/core';
 import {Virtue} from '../../virtue';
 import {Vice} from '../../vice';
+import {Discipline} from "../../discipline";
 
 @Component({
   selector: 'character',
@@ -87,37 +88,45 @@ export class CharacterComponent implements OnInit {
           science: c.mental.science,
           technology: c.mental.technology
         }),
-        disciplines: c.disciplines
+        disciplines: this.formBuilder.group(c.disciplines)
       });
     });
   }
 
-
-  private enumSelectSource(enumObject: any): SelectSource {
+  private enumSelectSource(enumObject: any, useIndex: boolean): SelectSource {
     return (data: any, byKey: boolean): Observable<SelectItem[]> => {
       return Observable.create(s => {
         s.next(byKey ? [{ id: data, text: this.translate.instant(enumObject[data]) }]
-          : Object.keys(enumObject).filter(key => {
-            const item = enumObject[key];
-            if (!isNaN(Number(item))) return false;
-            return (<string>this.translate.instant(item)).toLowerCase().indexOf(data) > -1;
-          }).map(key => {
-            return { id: Number(key), text: this.translate.instant(enumObject[key]) };
+          : Object.keys(enumObject).map(index => {
+            const key: string = enumObject[index];
+            if (!isNaN(Number(key))) {
+              return null;
+            }
+            return {
+              id: useIndex ? Number(index) : key.toLowerCase(),
+              text: <string> this.translate.instant(key)
+            };
+          }).filter(item => {
+            return item && item.text.toLowerCase().indexOf(data) > -1;
           }));
       });
     };
   }
 
   public get virtues(): SelectSource {
-    return this.enumSelectSource(Virtue);
+    return this.enumSelectSource(Virtue, true);
   }
 
   public get vices(): SelectSource {
-    return this.enumSelectSource(Vice);
+    return this.enumSelectSource(Vice, true);
   }
 
   public get clans(): SelectSource {
-    return this.enumSelectSource(Clan);
+    return this.enumSelectSource(Clan, true);
+  }
+
+  public get disciplines(): SelectSource {
+    return this.enumSelectSource(Discipline, false);
   }
 
   public get users(): SelectSource {
@@ -131,10 +140,8 @@ export class CharacterComponent implements OnInit {
     };
   }
 
-  public skillGroup(form: FormGroup): { key: string, label: string }[] {
-    return Object.keys(form.controls).map(k => {
-      return { key: k, label: this.translate.instant(k) };
-    }).sort((l, r) => (l.label > r.label) ? 1 : ((r.label > l.label) ? -1 : 0));
+  public createDisciplineControl(): AbstractControl {
+    return new FormControl(1);
   }
 
   public submit(character: Character): void {

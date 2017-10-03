@@ -27,6 +27,9 @@ import { PlayerComponent } from './components/player/player.component';
 import { ChronicleComponent } from './components/chronicle/chronicle.component';
 import { DiceBoardComponent } from './components/dice-board/dice-board.component';
 import {SpinnerComponent} from "./components/spinner/spinner.component";
+import {DynamicFormGroupComponent} from "./components/dynamic-form-group/dynamic-form-group.component";
+import {FormGroupParsePipe} from "./form.group.parse.pipe";
+import {WrapperDirective} from "./wrapper.directive";
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import {SpinnerComponent} from "./components/spinner/spinner.component";
     StartGameComponent,
     PlayerComponent,
     ChronicleComponent,
-    DiceBoardComponent
+    DiceBoardComponent,
+    DynamicFormGroupComponent,
+    FormGroupParsePipe,
+    WrapperDirective
   ],
   imports: [
     CommonModule,
@@ -59,7 +65,8 @@ import {SpinnerComponent} from "./components/spinner/spinner.component";
   ],
   providers: [
     Blocker,
-    AuthenticationGuard
+    AuthenticationGuard,
+    WrapperDirective
   ],
   bootstrap: [MasterComponent]
 })

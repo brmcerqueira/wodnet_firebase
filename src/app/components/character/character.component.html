@@ -67,23 +67,28 @@
       </tbody>
     </table>
     <ul [formGroup]="group.controls.physical">
-      <li *ngFor="let item of skillGroup(group.controls.physical)">
+      <li *ngFor="let item of group.controls.physical | formGroupParse">
         <span>{{ item.label }}</span>
         <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
       </li>
     </ul>
     <ul [formGroup]="group.controls.social">
-      <li *ngFor="let item of skillGroup(group.controls.social)">
+      <li *ngFor="let item of group.controls.social | formGroupParse">
         <span>{{ item.label }}</span>
         <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
       </li>
     </ul>
     <ul [formGroup]="group.controls.mental">
-      <li *ngFor="let item of skillGroup(group.controls.mental)">
+      <li *ngFor="let item of group.controls.mental | formGroupParse">
         <span>{{ item.label }}</span>
         <span><spinner [formControlName]="item.key" [min]="skillMin" [max]="max"></spinner></span>
       </li>
     </ul>
+    <dynamic-form-group [formGroup]="group.controls.disciplines" [source]="disciplines" [createControl]="createDisciplineControl">
+      <ng-template let-item="item">
+        <spinner [formControlName]="item.key" [min]="attributeMin" [max]="max"></spinner>
+      </ng-template>
+    </dynamic-form-group>
   </form>
 </div>
 <ng-template #none><p>{{ 'none' | translate }}</p></ng-template>

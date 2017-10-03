@@ -1,5 +1,5 @@
 export enum Clan {
-  Brujah,
+  Brujah = 1,
   Gangrel,
   Nosferatu,
   Toreador,

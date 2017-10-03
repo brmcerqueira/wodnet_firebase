@@ -4,6 +4,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 import {SelectItem} from '../../select.item';
+import {SelectSource} from "../../select.source";
 
 @Component({
   selector: 'single-select',
@@ -17,7 +18,7 @@ import {SelectItem} from '../../select.item';
 })
 export class SingleSelectComponent implements ControlValueAccessor {
 
-  @Input() public source: (data: any, byKey: boolean) => Observable<SelectItem[]>;
+  @Input() public source: SelectSource;
   public text: string;
   public item: SelectItem;
   @Output() public selected: EventEmitter<NgbTypeaheadSelectItemEvent>;
