@@ -1,6 +1,6 @@
 import {SpinnerComponent} from './spinner.component';
-import {Component, forwardRef} from '@angular/core';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component, forwardRef, Host, SkipSelf} from '@angular/core';
+import {FormGroupDirective, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'circle-spinner',
@@ -15,4 +15,8 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
 export class CircleSpinnerComponent extends SpinnerComponent {
   public fillMark = '&#x25cf;';
   public emptyMark = '&#x25cb;';
+
+  constructor(@Host() @SkipSelf() parent: FormGroupDirective) {
+    super(parent);
+  }
 }

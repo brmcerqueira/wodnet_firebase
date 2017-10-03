@@ -92,13 +92,13 @@
     <input type="text" formControlName="backgroundsAndMerits"/>
     <span>{{ 'health' | translate }}</span>
     <span><circle-spinner formControlName="consolidatedHealth" min="0" max="10"></circle-spinner></span>
-    <span><square-spinner formControlName="health" min="0" max="10"></square-spinner></span>
+    <span><square-spinner formControlName="health" min="0" maxByControl="consolidatedHealth"></square-spinner></span>
     <span>{{ 'willpower' | translate }}</span>
     <span><circle-spinner formControlName="consolidateWillpower" min="0" max="5"></circle-spinner></span>
-    <span><square-spinner formControlName="willpower" min="0" max="5"></square-spinner></span>
+    <span><square-spinner formControlName="willpower" min="0" maxByControl="consolidateWillpower"></square-spinner></span>
     <span>{{ 'composure' | translate }}</span>
     <span><circle-spinner formControlName="consolidateComposure" min="0" max="5"></circle-spinner></span>
-    <span><square-spinner formControlName="composure" min="0" max="5"></square-spinner></span>
+    <span><square-spinner formControlName="composure" min="0" maxByControl="consolidateComposure"></square-spinner></span>
     <span>{{ 'hunger' | translate }}</span>
     <span><square-spinner formControlName="hunger" min="0" max="5"></square-spinner></span>
     <dynamic-form-group [formGroup]="group.controls.disciplines" [source]="disciplines" [createControl]="createDisciplineControl">
