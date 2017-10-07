@@ -91,8 +91,7 @@
     <span>{{ 'backgroundsAndMerits' | translate }}</span>
     <input type="text" formControlName="backgroundsAndMerits" [readonly]="!isOpen(group)"/>
     <span>{{ 'health' | translate }}</span>
-    <span><circle-spinner formControlName="consolidatedHealth" min="0" max="10" [disabled]="!isOpen(group)"></circle-spinner></span>
-    <span><square-spinner formControlName="health" min="0" maxByControl="consolidatedHealth" [disabled]="!isOpen(group)"></square-spinner></span>
+    <health [disabled]="!isOpen(group)"></health>
     <span>{{ 'willpower' | translate }}</span>
     <span><circle-spinner formControlName="consolidateWillpower" min="0" max="5" [disabled]="!isOpen(group)"></circle-spinner></span>
     <span><square-spinner formControlName="willpower" min="0" maxByControl="consolidateWillpower" [disabled]="!isOpen(group)"></square-spinner></span>

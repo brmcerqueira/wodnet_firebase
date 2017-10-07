@@ -23,8 +23,8 @@ export interface Character {
   humanity: number;
   touchstones: string;
   backgroundsAndMerits: string;
-  consolidatedHealth: number;
-  health: number;
+  superficialDamage: number;
+  aggravatedDamage: number;
   consolidateWillpower: number;
   willpower: number;
   consolidateComposure: number;
@@ -64,6 +64,6 @@ export interface Character {
     technology: number;
   };
   disciplines: {
-    [discipline: number]: number
+    [discipline: string]: number
   };
 }

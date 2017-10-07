@@ -31,6 +31,7 @@ import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
 import {CircleSpinnerComponent} from "./components/spinner/circle-spinner.component";
 import {SquareSpinnerComponent} from "./components/spinner/square-spinner.component";
+import {HealthComponent} from "./components/health/health.component";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {SquareSpinnerComponent} from "./components/spinner/square-spinner.compon
     ChronicleComponent,
     DiceBoardComponent,
     DynamicFormGroupComponent,
+    HealthComponent,
     FormGroupParsePipe,
     WrapperDirective
   ],
