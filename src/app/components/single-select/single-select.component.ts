@@ -44,16 +44,18 @@ export class SingleSelectComponent implements ControlValueAccessor {
   public selectItem(event: NgbTypeaheadSelectItemEvent): void {
     this.text = null;
     this.item = event.item;
+    this.dataUpdate();
+    this.selected.emit(event);
+  }
 
+  private dataUpdate() {
     if (this.onChange) {
-      this.onChange(this.item.id);
+      this.onChange(this.item ? this.item.id : null);
     }
 
     if (this.onTouched) {
       this.onTouched();
     }
-
-    this.selected.emit(event);
   }
 
   public inputFormatter(value: SelectItem): string {
@@ -66,6 +68,7 @@ export class SingleSelectComponent implements ControlValueAccessor {
 
   public clear(): void {
     this.item = null;
+    this.dataUpdate();
   }
 
   public writeValue(id: any): void {
