@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {Character} from '../../character';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {Subject} from 'rxjs/Subject';
+import {Subscription} from 'rxjs/Subscription';
 
 enum RollState {
   Failure,
@@ -41,8 +43,10 @@ export class DiceBoardComponent {
   public rolls: Observable<Roll[]>;
   public formGroup: FormGroup;
   private daoRolls: AngularFireList<any>;
-  private characterObservable?: Observable<Character>;
-  private characterKey?: string;
+  public characters: Observable<SnapshotAction[]>;
+  public readSubject: Subject<boolean>;
+  private subscription: Subscription;
+  public character: Character;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -57,15 +61,42 @@ export class DiceBoardComponent {
       hunger: 0
     });
 
-    this.characterKey = this.activatedRoute.snapshot.params['characterKey'];
+    if (this.isStoryteller) {
+      this.characters = database.list('characters',
+        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges();
+    }
 
-    if (this.characterKey) {
-      this.characterObservable = database.object(`characters/${this.characterKey}`).valueChanges();
+    this.character = null;
+    this.readSubject = new Subject();
+
+    const characterKey = this.activatedRoute.snapshot.params['characterKey'];
+
+    if (characterKey) {
+      this.observeCharacter(characterKey);
     }
 
     this.daoRolls = database.list('rolls',
       r => r.orderByChild('chronicleId').equalTo(this.chronicleId).limitToLast(10));
     this.rolls = this.daoRolls.valueChanges().map(array => array.reverse());
+  }
+
+  private observeCharacter(characterKey: string) {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
+
+    if (characterKey) {
+      this.subscription = this.database.object(`characters/${characterKey}`)
+        .valueChanges<Character>().subscribe(c => {
+        this.formGroup.controls.hunger.setValue(c.hunger);
+        this.character = c;
+        this.readSubject.next(true);
+      });
+    }
+    else {
+      this.readSubject.next(true);
+    }
   }
 
   public roll(): void {
@@ -74,7 +105,6 @@ export class DiceBoardComponent {
   }
 
   public roll2(amount: number, hunger: number): void {
-
     const roll: Roll = {
       chronicleId: this.chronicleId,
       player: this.angularFireAuth.auth.currentUser.displayName,
@@ -149,7 +179,7 @@ export class DiceBoardComponent {
   public goSetup(): void {
     this.router.navigate(this.isStoryteller
       ? ['in/chronicle', this.chronicleId]
-      : ['in/player', this.characterKey]);
+      : ['in/player', this.activatedRoute.snapshot.params['characterKey']]);
   }
 
   private sortDices(l: number, r: number): number {

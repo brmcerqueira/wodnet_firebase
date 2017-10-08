@@ -21,7 +21,7 @@ export class SingleSelectComponent implements ControlValueAccessor {
   @Input() public source: SelectSource;
   public text: string;
   public item: SelectItem;
-  @Output() public selected: EventEmitter<NgbTypeaheadSelectItemEvent>;
+  @Output() public selected: EventEmitter<SelectItem>;
   @Input() public disabled: boolean;
   private onChange: (id: any) => void;
   private onTouched: () => void;
@@ -45,7 +45,6 @@ export class SingleSelectComponent implements ControlValueAccessor {
     this.text = null;
     this.item = event.item;
     this.dataUpdate();
-    this.selected.emit(event);
   }
 
   private dataUpdate() {
@@ -56,6 +55,8 @@ export class SingleSelectComponent implements ControlValueAccessor {
     if (this.onTouched) {
       this.onTouched();
     }
+
+    this.selected.emit(this.item);
   }
 
   public inputFormatter(value: SelectItem): string {

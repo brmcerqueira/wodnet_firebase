@@ -6,8 +6,15 @@
   </li>
 </ul>
 <hr>
+<ul *ngIf="isStoryteller">
+  <li><button (click)="observeCharacter(null)">{{ 'none' | translate }}</button></li>
+  <li *ngFor="let item of characters | async"><button (click)="observeCharacter(item.payload.key)">{{ item.payload.val().name }}</button></li>
+</ul>
+<div *ngIf="readSubject | async; else loading">
 <form [formGroup]="formGroup" (submit)="roll()">
   <button [disabled]="!formGroup.valid" type="submit">{{ 'roll' | translate }}</button>
   <input type="number" formControlName="amount"/>
-  <input type="number" formControlName="hunger"/>
+  <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
 </form>
+</div>
+<ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>
