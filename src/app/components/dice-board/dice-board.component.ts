@@ -38,10 +38,11 @@ export interface Roll {
 })
 export class DiceBoardComponent {
 
+
   private chronicleId: string;
   public isStoryteller: boolean;
   public rolls: Observable<Roll[]>;
-  public formGroup: FormGroup;
+  public customRollFormGroup: FormGroup;
   private daoRolls: AngularFireList<any>;
   public characters: Observable<SnapshotAction[]>;
   public readSubject: Subject<boolean>;
@@ -56,14 +57,17 @@ export class DiceBoardComponent {
     this.isStoryteller = activatedRoute.snapshot.data.isStoryteller;
     this.chronicleId = this.activatedRoute.snapshot.params['key'];
 
-    this.formGroup = this.formBuilder.group({
-      amount: 0,
-      hunger: 0
+    this.customRollFormGroup = this.formBuilder.group({
+      amount: 1,
+      hunger: 1
     });
 
     if (this.isStoryteller) {
       this.characters = database.list('characters',
-        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges();
+        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges().map(c => {
+          this.readSubject.next(true);
+          return c;
+      });
     }
 
     this.character = null;
@@ -89,22 +93,23 @@ export class DiceBoardComponent {
     if (characterKey) {
       this.subscription = this.database.object(`characters/${characterKey}`)
         .valueChanges<Character>().subscribe(c => {
-        this.formGroup.controls.hunger.setValue(c.hunger);
+        this.customRollFormGroup.controls.hunger.setValue(c.hunger);
         this.character = c;
         this.readSubject.next(true);
       });
     }
     else {
+      this.customRollFormGroup.controls.hunger.setValue(1);
       this.readSubject.next(true);
     }
   }
 
-  public roll(): void {
-    const data = this.formGroup.value;
-    this.roll2(data.amount, data.hunger);
+  public customRoll(): void {
+    const data = this.customRollFormGroup.value;
+    this.roll(data.amount, data.hunger);
   }
 
-  public roll2(amount: number, hunger: number): void {
+  private roll(amount: number, hunger: number): void {
     const roll: Roll = {
       chronicleId: this.chronicleId,
       player: this.angularFireAuth.auth.currentUser.displayName,

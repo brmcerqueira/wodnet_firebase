@@ -11,8 +11,8 @@
   <li *ngFor="let item of characters | async"><button (click)="observeCharacter(item.payload.key)">{{ item.payload.val().name }}</button></li>
 </ul>
 <div *ngIf="readSubject | async; else loading">
-<form [formGroup]="formGroup" (submit)="roll()">
-  <button [disabled]="!formGroup.valid" type="submit">{{ 'roll' | translate }}</button>
+<form [formGroup]="customRollFormGroup" (submit)="customRoll()">
+  <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
   <input type="number" formControlName="amount"/>
   <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
 </form>
