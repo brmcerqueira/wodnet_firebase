@@ -39,10 +39,10 @@ export class StartGameComponent {
   }
 
   public playCharacter(snapshotAction: SnapshotAction): void {
-    this.router.navigate(['in/player', snapshotAction.key]);
+    this.router.navigate(['in/dice/player', snapshotAction.payload.val().chronicleId, snapshotAction.key]);
   }
 
-  public chooseChronicle(snapshotAction: SnapshotAction): void {
-    this.router.navigate(['in/chronicle', snapshotAction.key]);
+  public playChronicle(snapshotAction: SnapshotAction): void {
+    this.router.navigate(['in/dice/storyteller', snapshotAction.key]);
   }
 }

@@ -1,5 +1,9 @@
 {
   "rules": {
+    "rolls": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "users": {
       ".read": "auth != null",
       ".write": "auth != null"

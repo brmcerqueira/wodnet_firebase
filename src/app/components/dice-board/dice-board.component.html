@@ -1,1 +1,12 @@
 <p>{{ isStoryteller }}</p>
+<ul>
+  <li *ngFor="let item of rolls | async">
+    {{ item | json }}
+  </li>
+</ul>
+<hr>
+<form [formGroup]="formGroup" (submit)="roll()">
+  <button [disabled]="!formGroup.valid" type="submit">{{ 'roll' | translate }}</button>
+  <input type="number" formControlName="amount"/>
+  <input type="number" formControlName="hunger"/>
+</form>

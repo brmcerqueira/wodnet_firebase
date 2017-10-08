@@ -6,7 +6,7 @@
 <hr>
 <ul>
   <li *ngFor="let item of myChronicles | async">
-    <button (click)="chooseChronicle(item)">{{ item.payload.val().name }}</button>
+    <button (click)="playChronicle(item)">{{ item.payload.val().name }}</button>
   </li>
 </ul>
 <form [formGroup]="formGroup" (submit)="createChronicle()">
