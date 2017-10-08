@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
-import {Character} from "../../character";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {AngularFireAuth} from "angularfire2/auth";
+import {Character} from '../../character';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 enum RollState {
   Failure,
@@ -21,7 +21,8 @@ enum HungerState {
 
 export interface Roll {
   chronicleId: string;
-  ownerId: string;
+  player: string;
+  playerPhoto: string;
   successes: number;
   dices: number[];
   hungerDices: number[];
@@ -41,8 +42,10 @@ export class DiceBoardComponent {
   public formGroup: FormGroup;
   private daoRolls: AngularFireList<any>;
   private characterObservable?: Observable<Character>;
+  private characterKey?: string;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private router: Router,
+              private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth) {
@@ -54,10 +57,10 @@ export class DiceBoardComponent {
       hunger: 0
     });
 
-    const characterKey = this.activatedRoute.snapshot.params['characterKey'];
+    this.characterKey = this.activatedRoute.snapshot.params['characterKey'];
 
-    if (characterKey) {
-      this.characterObservable = database.object(`characters/${characterKey}`).valueChanges();
+    if (this.characterKey) {
+      this.characterObservable = database.object(`characters/${this.characterKey}`).valueChanges();
     }
 
     this.daoRolls = database.list('rolls',
@@ -74,7 +77,8 @@ export class DiceBoardComponent {
 
     const roll: Roll = {
       chronicleId: this.chronicleId,
-      ownerId: this.angularFireAuth.auth.currentUser.uid,
+      player: this.angularFireAuth.auth.currentUser.displayName,
+      playerPhoto: this.angularFireAuth.auth.currentUser.photoURL,
       successes: 0,
       dices: [],
       hungerDices: [],
@@ -136,7 +140,20 @@ export class DiceBoardComponent {
       roll.hungerState = HungerState.Distracted;
     }
 
+    roll.hungerDices.sort(this.sortDices);
+    roll.dices.sort(this.sortDices);
+
     this.daoRolls.push(roll);
+  }
+
+  public goSetup(): void {
+    this.router.navigate(this.isStoryteller
+      ? ['in/chronicle', this.chronicleId]
+      : ['in/player', this.characterKey]);
+  }
+
+  private sortDices(l: number, r: number): number {
+    return l > r ? -1 : (r > l ? 1 : 0);
   }
 
   private get dice(): number {

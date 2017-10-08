@@ -10,6 +10,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {Virtue} from '../../virtue';
 import {Vice} from '../../vice';
 import {Clan} from '../../clan';
+import {Location} from '@angular/common';
 
 @Component({
   templateUrl: './chronicle.component.html',
@@ -24,6 +25,7 @@ export class ChronicleComponent {
   public characterSubject: Subject<Character>;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private location: Location,
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth,
               private blocker: Blocker) {
@@ -115,5 +117,8 @@ export class ChronicleComponent {
     else {
       fromThenable(this.daoCharacters.push(character)).blocker(this.blocker).subscribe(r => this.characterKey = r.key);
     }
+  }
+  public goBack(): void {
+    this.location.back();
   }
 }

@@ -4,7 +4,8 @@ import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {fromPromise} from '../../observable.extensions';
-import {Character} from "../../character";
+import {Character} from '../../character';
+import {Location} from '@angular/common';
 
 @Component({
   templateUrl: './player.component.html',
@@ -16,6 +17,7 @@ export class PlayerComponent {
   private daoCharacter: AngularFireObject<any>;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private location: Location,
               private database: AngularFireDatabase,
               private blocker: Blocker) {
     this.daoCharacter = database.object(`characters/${this.activatedRoute.snapshot.params['key']}`);
@@ -24,5 +26,9 @@ export class PlayerComponent {
 
   public save(character: Character): void {
     fromPromise(this.daoCharacter.update(character)).blocker(this.blocker).subscribe();
+  }
+
+  public goBack(): void {
+    this.location.back();
   }
 }
