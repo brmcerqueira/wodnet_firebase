@@ -122,7 +122,7 @@ export class CharacterComponent implements OnInit {
             };
           }).filter(item => {
             return item && item.text.toLowerCase().indexOf(data) > -1;
-          }));
+          }).sort((l, r) => l.text > r.text ? 1 : (r.text > l.text ? -1 : 0)));
       });
     };
   }

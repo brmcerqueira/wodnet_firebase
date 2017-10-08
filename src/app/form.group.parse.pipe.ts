@@ -10,6 +10,6 @@ export class FormGroupParsePipe implements PipeTransform {
   public transform(form: FormGroup): { key: string, label: string }[] {
     return Object.keys(form.controls).map(k => {
       return { key: k, label: this.translate.instant(k) };
-    }).sort((l, r) => (l.label > r.label) ? 1 : ((r.label > l.label) ? -1 : 0));
+    }).sort((l, r) => l.label > r.label ? 1 : (r.label > l.label ? -1 : 0));
   }
 }
