@@ -1,9 +1,12 @@
 <div class="outer" *ngIf="isAnonymous">
   <div class="middle">
     <div class="inner">
+
+      <h1 class='title'>Wodnet<span class='version'>v2.0</span></h1>
+
       <ul class="centered-list">
         <li>
-          <button class="btn-default btn-red" (click)="signInWithGoogle()">
+          <button class="btn-default btn-red btn-expanded" (click)="signInWithGoogle()">
             <i class="fa fa-google" aria-hidden="true"></i>          
             {{ 'sign-in-with-google' | translate }}
           </button>

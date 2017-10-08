@@ -1,9 +1,12 @@
 @import 'colors';
+@import 'typography';
 
 body{
     background-color: $background-color;
     margin: 0;
     padding: 0;
+    font-family: 'Open Sans';
+    font-size: 12px;
 }
 
 ul{
@@ -21,4 +24,8 @@ ul{
 
 .btn-red{
     background-color: $red-button;
+}
+
+.btn-expanded{
+    width: 100%;
 }

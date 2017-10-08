@@ -3,23 +3,38 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    // background-image: '../../assets/images/background_login.jpg' ;
+    .middle{
+        display: table-cell;
+        vertical-align: middle;
+        .inner{
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 364px;
+            min-width: 320px;
+            max-width: 412px;
+            width: calc(100% - 40px);
+            // background-color: #fff;
+
+            .title{
+                font-family: 'HardGrunge';
+                font-size: 5em;
+                color: #fff;
+                text-align: center;
+                .version{
+                    font-size: .3em;
+                    font-family: 'Open Sans';
+                }
+            }
+
+            .centered-list{
+                margin: auto;
+                width: 250px;
+            }
+        }
+    }
 }
 
-.middle{
-    display: table-cell;
-    vertical-align: middle;
-}
 
-.inner{
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 364px;
-    min-width: 320px;
-    max-width: 412px;
-    width: calc(100% - 40px);
-    background-color: #fff;
-}
 
-.centered-list{
-    margin: auto;
-}
+
