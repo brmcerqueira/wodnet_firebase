@@ -1,22 +1,27 @@
 
 <div class="container">
-  <h4>{{'my-characters' | translate}}</h4>
-  <ul>
-    <li *ngFor="let item of myCharacters | async">
-      <button (click)="playCharacter(item)">{{ item.payload.val().name }}</button>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>{{'my-characters' | translate}}</h4>
+      <ul>
+        <li *ngFor="let item of myCharacters | async">
+          <a class="item" (click)="playCharacter(item)">{{ item.payload.val().name }}</a>
+        </li>
+      </ul>    
+    </div>
+    
+    <div class="col-md-6">
+      <h4>{{'my-chronicles' | translate}}</h4>
+      <ul>
+        <li *ngFor="let item of myChronicles | async">
+          <a (click)="playChronicle(item)">{{ item.payload.val().name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
   
-  <hr>
-  
-  <h4>{{'my-chronicles' | translate}}</h4>
-  <ul>
-    <li *ngFor="let item of myChronicles | async">
-      <button (click)="playChronicle(item)">{{ item.payload.val().name }}</button>
-    </li>
-  </ul>
-  
-  <h4>{{'create-chronicle' | translate}}</h4>
+  <!-- Botão com um + que chama uma popup com isso -->
+  <!-- <h4>{{'create-chronicle' | translate}}</h4>
   <form [formGroup]="formGroup" (submit)="createChronicle()">
     <input type="text" formControlName="name"/>
     <div ngxErrors="name">
@@ -24,6 +29,6 @@
       <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
     </div>
     <button [disabled]="!formGroup.valid" type="submit">{{ 'create' | translate }}</button>
-  </form>    
+  </form>     -->
 </div>
   

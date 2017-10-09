@@ -1,0 +1,22 @@
+.player-photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    float: left;
+    margin-right: 20px;
+}
+
+.dice-play{
+    width: 100%;
+    float: left;
+    margin-bottom: 20px; 
+}
+
+.list-plays{
+    margin-top: 60px;
+    max-height: 600px;
+    overflow: scroll;    
+    overflow-x: hidden;
+    overflow-y: visible;
+    
+}

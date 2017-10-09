@@ -1,38 +1,54 @@
 <button (click)="goSetup()">{{ 'setup' | translate }}</button>
-<p>{{ isStoryteller }}</p>
-<ul>
-  <li *ngFor="let item of rolls | async">
-    {{ item | json }}
-  </li>
-</ul>
-<hr>
-<ul *ngIf="isStoryteller">
-  <li><button (click)="observeCharacter(null)">{{ 'none' | translate }}</button></li>
-  <li *ngFor="let item of characters | async"><button (click)="observeCharacter(item.payload.key)">{{ item.payload.val().name }}</button></li>
-</ul>
-<div *ngIf="readSubject | async; else loading">
-<ngb-tabset>
-  <ngb-tab>
-    <ng-template ngbTabTitle>{{ 'custom-roll' | translate }}</ng-template>
-    <ng-template ngbTabContent>
-      <form [formGroup]="customRollFormGroup" (submit)="customRoll()">
-        <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
-        <input type="number" formControlName="amount"/>
-        <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
-      </form>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab [disabled]="!character">
-    <ng-template ngbTabTitle>{{ 'dice-poll-roll' | translate }}</ng-template>
-    <ng-template ngbTabContent>
-      <form [formGroup]="dicePollRollFormGroup" (submit)="dicePollRoll()">
-        <button [disabled]="!dicePollRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
-        {{ character.hunger }}
-        <single-select formControlName="dicePoll" [source]="dicePolls"></single-select>
-        <input type="number" formControlName="modifier"/>
-      </form>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
+<!-- <p>{{ isStoryteller }}</p> -->
+
+<div class="container">
+  <div class="row">
+
+    <div *ngIf="readSubject | async; else loading">
+      <ngb-tabset>
+        <ngb-tab>
+          <ng-template ngbTabTitle>{{ 'custom-roll' | translate }}</ng-template>
+          <ng-template ngbTabContent>
+            <form [formGroup]="customRollFormGroup" (submit)="customRoll()">
+              <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
+              <input type="number" formControlName="amount"/>
+              <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
+            </form>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab [disabled]="!character">
+          <ng-template ngbTabTitle>{{ 'dice-poll-roll' | translate }}</ng-template>
+          <ng-template ngbTabContent>
+            <form [formGroup]="dicePollRollFormGroup" (submit)="dicePollRoll()">
+              <button [disabled]="!dicePollRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
+              {{ character.hunger }}
+              <single-select formControlName="dicePoll" [source]="dicePolls"></single-select>
+              <input type="number" formControlName="modifier"/>
+            </form>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+
+
+
+    <ul class="list-plays">
+      <li class="dice-play" *ngFor="let item of rolls | async">
+        <img [src]="item.playerPhoto" class="player-photo"/>
+        <h3>{{item.characterName}} ({{item.player}})</h3>
+        <h6> Dices: {{item.dices || "No dices"}} </h6>
+        <h6> State: {{item.state}} </h6>
+        <h6> Hunger Dices: {{item.hungerDices}} </h6>
+        <h6> Hunger Status: {{item.hungerState}} </h6>
+        <h6> Successes: {{ item.successes }}</h6>
+      </li>
+    </ul>
+    <hr>
+    <ul *ngIf="isStoryteller">
+      <li><button (click)="observeCharacter(null)">{{ 'none' | translate }}</button></li>
+      <li *ngFor="let item of characters | async"><button (click)="observeCharacter(item.payload.key)">{{ item.payload.val().name }}</button></li>
+    </ul>
+    <ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>
+
+  </div>
 </div>
-<ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>

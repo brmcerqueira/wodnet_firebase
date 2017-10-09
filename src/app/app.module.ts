@@ -18,7 +18,6 @@ import {Blocker} from './blocker';
 import {CommonModule} from '@angular/common';
 import { MasterComponent } from './views/master/master.component';
 import { InComponent } from './views/in/in.component';
-import { GlobalBlockerComponent } from './views/global-blocker/global-blocker.component';
 import { SignInComponent } from './views/sign-in/sign-in.component';
 import { SingleSelectComponent } from './views/single-select/single-select.component';
 import { CharacterComponent } from './views/character/character.component';
@@ -38,7 +37,6 @@ import { ComponentsModule } from './components/components.module';
   declarations: [
     MasterComponent,
     InComponent,
-    GlobalBlockerComponent,
     SignInComponent,
     SingleSelectComponent,
     CircleSpinnerComponent,
