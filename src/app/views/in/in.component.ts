@@ -7,10 +7,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./in.component.scss']
 })
 export class InComponent {
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
+  constructor() {
   }
 
-  public signOut(): void {
-    this.angularFireAuth.auth.signOut().then(() => this.router.navigate(['']));
-  }
+
 }

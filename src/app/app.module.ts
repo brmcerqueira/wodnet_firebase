@@ -16,22 +16,23 @@ import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Blocker} from './blocker';
 import {CommonModule} from '@angular/common';
-import { MasterComponent } from './components/master/master.component';
-import { InComponent } from './components/in/in.component';
-import { GlobalBlockerComponent } from './components/global-blocker/global-blocker.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { SingleSelectComponent } from './components/single-select/single-select.component';
-import { CharacterComponent } from './components/character/character.component';
-import { StartGameComponent } from './components/start-game/start-game.component';
-import { PlayerComponent } from './components/player/player.component';
-import { ChronicleComponent } from './components/chronicle/chronicle.component';
-import { DiceBoardComponent } from './components/dice-board/dice-board.component';
-import {DynamicFormGroupComponent} from "./components/dynamic-form-group/dynamic-form-group.component";
+import { MasterComponent } from './views/master/master.component';
+import { InComponent } from './views/in/in.component';
+import { GlobalBlockerComponent } from './views/global-blocker/global-blocker.component';
+import { SignInComponent } from './views/sign-in/sign-in.component';
+import { SingleSelectComponent } from './views/single-select/single-select.component';
+import { CharacterComponent } from './views/character/character.component';
+import { StartGameComponent } from './views/start-game/start-game.component';
+import { PlayerComponent } from './views/player/player.component';
+import { ChronicleComponent } from './views/chronicle/chronicle.component';
+import { DiceBoardComponent } from './views/dice-board/dice-board.component';
+import {DynamicFormGroupComponent} from "./views/dynamic-form-group/dynamic-form-group.component";
 import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
-import {CircleSpinnerComponent} from "./components/spinner/circle-spinner.component";
-import {SquareSpinnerComponent} from "./components/spinner/square-spinner.component";
-import {HealthComponent} from "./components/health/health.component";
+import {CircleSpinnerComponent} from "./views/spinner/circle-spinner.component";
+import {SquareSpinnerComponent} from "./views/spinner/square-spinner.component";
+import {HealthComponent} from "./views/health/health.component";
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {HealthComponent} from "./components/health/health.component";
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     TranslateModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ComponentsModule
   ],
   providers: [
     Blocker,

@@ -1,12 +1,12 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { InComponent } from './components/in/in.component';
+import { SignInComponent } from './views/sign-in/sign-in.component';
+import { InComponent } from './views/in/in.component';
 import { AuthenticationGuard } from './authentication.guard';
-import { StartGameComponent } from './components/start-game/start-game.component';
-import { PlayerComponent } from './components/player/player.component';
-import { ChronicleComponent } from './components/chronicle/chronicle.component';
-import { DiceBoardComponent } from './components/dice-board/dice-board.component';
+import { StartGameComponent } from './views/start-game/start-game.component';
+import { PlayerComponent } from './views/player/player.component';
+import { ChronicleComponent } from './views/chronicle/chronicle.component';
+import { DiceBoardComponent } from './views/dice-board/dice-board.component';
 
 
 const routes: Routes = [
