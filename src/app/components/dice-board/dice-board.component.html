@@ -11,10 +11,28 @@
   <li *ngFor="let item of characters | async"><button (click)="observeCharacter(item.payload.key)">{{ item.payload.val().name }}</button></li>
 </ul>
 <div *ngIf="readSubject | async; else loading">
-<form [formGroup]="customRollFormGroup" (submit)="customRoll()">
-  <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
-  <input type="number" formControlName="amount"/>
-  <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
-</form>
+<ngb-tabset>
+  <ngb-tab>
+    <ng-template ngbTabTitle>{{ 'custom-roll' | translate }}</ng-template>
+    <ng-template ngbTabContent>
+      <form [formGroup]="customRollFormGroup" (submit)="customRoll()">
+        <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
+        <input type="number" formControlName="amount"/>
+        <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
+      </form>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab [disabled]="!character">
+    <ng-template ngbTabTitle>{{ 'dice-poll-roll' | translate }}</ng-template>
+    <ng-template ngbTabContent>
+      <form [formGroup]="dicePollRollFormGroup" (submit)="dicePollRoll()">
+        <button [disabled]="!dicePollRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
+        {{ character.hunger }}
+        <single-select formControlName="dicePoll" [source]="dicePolls"></single-select>
+        <input type="number" formControlName="modifier"/>
+      </form>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
 </div>
 <ng-template #loading><p>{{ 'none' | translate }}</p></ng-template>

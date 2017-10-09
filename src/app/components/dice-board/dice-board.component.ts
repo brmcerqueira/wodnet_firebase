@@ -3,10 +3,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {Character} from '../../character';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
+import {SelectSource} from '../../select.source';
+import {SelectItem} from '../../select.item';
+import {dicePolls} from '../../dice.polls';
+import {TranslateService} from '@ngx-translate/core';
 
 enum RollState {
   Failure,
@@ -30,6 +34,7 @@ export interface Roll {
   hungerDices: number[];
   state: RollState;
   hungerState: HungerState;
+  description?: string;
 }
 
 @Component({
@@ -43,6 +48,7 @@ export class DiceBoardComponent {
   public isStoryteller: boolean;
   public rolls: Observable<Roll[]>;
   public customRollFormGroup: FormGroup;
+  public dicePollRollFormGroup: FormGroup;
   private daoRolls: AngularFireList<any>;
   public characters: Observable<SnapshotAction[]>;
   public readSubject: Subject<boolean>;
@@ -52,14 +58,20 @@ export class DiceBoardComponent {
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
+              private translate: TranslateService,
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth) {
     this.isStoryteller = activatedRoute.snapshot.data.isStoryteller;
     this.chronicleId = this.activatedRoute.snapshot.params['key'];
 
     this.customRollFormGroup = this.formBuilder.group({
-      amount: 1,
-      hunger: 1
+      amount: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
+      hunger: [1, [Validators.required, Validators.min(0), Validators.max(5)]]
+    });
+
+    this.dicePollRollFormGroup = this.formBuilder.group({
+      dicePoll: [null, Validators.required],
+      modifier: [0, [Validators.required, Validators.min(-10), Validators.max(10)]]
     });
 
     if (this.isStoryteller) {
@@ -109,7 +121,12 @@ export class DiceBoardComponent {
     this.roll(data.amount, data.hunger);
   }
 
-  private roll(amount: number, hunger: number): void {
+  public dicePollRoll(): void {
+    const data = this.dicePollRollFormGroup.value;
+    this.roll(data.dicePoll.get(this.character) + data.modifier, this.character.hunger, data.dicePoll.name);
+  }
+
+  private roll(amount: number, hunger: number, description?: string): void {
     const roll: Roll = {
       chronicleId: this.chronicleId,
       player: this.angularFireAuth.auth.currentUser.displayName,
@@ -120,6 +137,10 @@ export class DiceBoardComponent {
       state: RollState.Failure,
       hungerState: HungerState.None
     };
+
+    if (description) {
+      roll.description = description;
+    }
 
     let criticals = 0;
     let hungerCriticals = 0;
@@ -185,6 +206,21 @@ export class DiceBoardComponent {
     this.router.navigate(this.isStoryteller
       ? ['in/chronicle', this.chronicleId]
       : ['in/player', this.activatedRoute.snapshot.params['characterKey']]);
+  }
+
+  public get dicePolls(): SelectSource {
+    return (data: any, byKey: boolean): Observable<SelectItem[]> => {
+      return Observable.create(s => {
+        s.next(Object.keys(dicePolls).map(name => {
+            return {
+              id: { name: name, get: dicePolls[name] },
+              text: <string> this.translate.instant(name)
+            };
+          }).filter(item => {
+            return item.text.toLowerCase().indexOf(data) > -1;
+          }).sort((l, r) => l.text > r.text ? 1 : (r.text > l.text ? -1 : 0)));
+      });
+    };
   }
 
   private sortDices(l: number, r: number): number {
