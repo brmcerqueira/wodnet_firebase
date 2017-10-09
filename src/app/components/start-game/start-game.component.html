@@ -1,14 +1,22 @@
+
+
+<h4>{{'my-characters' | translate}}</h4>
 <ul>
   <li *ngFor="let item of myCharacters | async">
     <button (click)="playCharacter(item)">{{ item.payload.val().name }}</button>
   </li>
 </ul>
+
 <hr>
+
+<h4>{{'my-chronicles' | translate}}</h4>
 <ul>
   <li *ngFor="let item of myChronicles | async">
     <button (click)="playChronicle(item)">{{ item.payload.val().name }}</button>
   </li>
 </ul>
+
+<h4>{{'create-chronicle' | translate}}</h4>
 <form [formGroup]="formGroup" (submit)="createChronicle()">
   <input type="text" formControlName="name"/>
   <div ngxErrors="name">
