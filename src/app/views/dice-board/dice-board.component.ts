@@ -27,6 +27,7 @@ enum HungerState {
 
 export interface Roll {
   chronicleId: string;
+  characterName: string;
   player: string;
   playerPhoto: string;
   successes: number;
@@ -129,6 +130,7 @@ export class DiceBoardComponent {
   private roll(amount: number, hunger: number, description?: string): void {
     const roll: Roll = {
       chronicleId: this.chronicleId,
+      characterName: this.character ? this.character.name : null,
       player: this.angularFireAuth.auth.currentUser.displayName,
       playerPhoto: this.angularFireAuth.auth.currentUser.photoURL,
       successes: 0,
