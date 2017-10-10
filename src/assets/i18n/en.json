@@ -12,5 +12,10 @@
   "close-combat-brawl": "Close Combat [Brawl]",
   "close-combat-melee": "Close Combat [Melee]",
   "composure": "Composure",
-  "willpower": "Willpower"
+  "willpower": "Willpower",
+  "grappling": "Grappling",
+  "ranged-combat-wits": "Ranged Combat [Wits]",
+  "ranged-combat-perception": "Ranged Combat [Perception]",
+  "thrown-weapons": "Thrown Weapons",
+  "hunger": "Hunger"
 }

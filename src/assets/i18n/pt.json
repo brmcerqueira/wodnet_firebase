@@ -12,5 +12,10 @@
   "close-combat-brawl": "Luta corpo-a-corpo [Briga]",
   "close-combat-melee": "Luta corpo-a-corpo [Armas brancas]",
   "composure": "Autocontrole",
-  "willpower": "Força de vontade"
+  "willpower": "Força de vontade",
+  "grappling": "Agarrar",
+  "ranged-combat-wits": "Combate a distância [Raciocínio]",
+  "ranged-combat-perception": "Combate a distância [Percepção]",
+  "thrown-weapons": "Arremessar",
+  "hunger": "Fome"
 }

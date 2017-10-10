@@ -14,5 +14,10 @@ export const dicePolls: { [name: string]: DicePoll } = {
   'close-combat-brawl': { withHunger: true, get: c => c.dexterity + c.physical.brawl },
   'close-combat-melee': { withHunger: true, get: c => c.dexterity + c.physical.melee },
   'composure': { withHunger: false, get: c => c.consolidateComposure - c.composure },
-  'willpower': { withHunger: false, get: c => c.consolidateWillpower - c.willpower }
+  'willpower': { withHunger: false, get: c => c.consolidateWillpower - c.willpower },
+  'grappling': { withHunger: true, get: c => c.strength + c.physical.brawl },
+  'ranged-combat-wits': { withHunger: true, get: c => c.wits + c.mental.firearms },
+  'ranged-combat-perception': { withHunger: true, get: c => c.perception + c.mental.firearms },
+  'thrown-weapons': { withHunger: true, get: c => c.dexterity + c.physical.athletics },
+  'hunger': { withHunger: false, get: c => 1 }
 };
