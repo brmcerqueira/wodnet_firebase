@@ -10,5 +10,7 @@
   "surprise-attack": "Ataque surpresa",
   "resistance-surprise-attack": "Ataque surpresa (Resistência)",
   "close-combat-brawl": "Luta corpo-a-corpo [Briga]",
-  "close-combat-melee": "Luta corpo-a-corpo [Armas brancas]"
+  "close-combat-melee": "Luta corpo-a-corpo [Armas brancas]",
+  "composure": "Autocontrole",
+  "willpower": "Força de vontade"
 }

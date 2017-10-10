@@ -124,7 +124,10 @@ export class DiceBoardComponent {
 
   public dicePollRoll(): void {
     const data = this.dicePollRollFormGroup.value;
-    this.roll(data.dicePoll.get(this.character) + data.modifier, this.character.hunger, data.dicePoll.name);
+    const dicePoll = dicePolls[data.dicePoll];
+    this.roll(dicePoll.get(this.character) + data.modifier,
+      dicePoll.withHunger ? this.character.hunger : 0,
+      data.dicePoll);
   }
 
   private roll(amount: number, hunger: number, description?: string): void {
@@ -215,7 +218,7 @@ export class DiceBoardComponent {
       return Observable.create(s => {
         s.next(Object.keys(dicePolls).map(name => {
             return {
-              id: { name: name, get: dicePolls[name] },
+              id: name,
               text: <string> this.translate.instant(name)
             };
           }).filter(item => {

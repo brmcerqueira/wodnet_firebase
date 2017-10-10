@@ -10,5 +10,7 @@
   "surprise-attack": "Surprise Attack",
   "resistance-surprise-attack": "Surprise Attack (Resistance)",
   "close-combat-brawl": "Close Combat [Brawl]",
-  "close-combat-melee": "Close Combat [Melee]"
+  "close-combat-melee": "Close Combat [Melee]",
+  "composure": "Composure",
+  "willpower": "Willpower"
 }
