@@ -3,5 +3,12 @@
   "sign-out": "Sair",
   "drive": "Condução",
   "my-characters": "Meus Personagens",
-  "my-chronicles": "Minhas Crônicas"
+  "my-chronicles": "Minhas Crônicas",
+  "dodging": "Esquiva",
+  "flee-strength": "Fugir [Força]",
+  "flee-dexterity": "Fugir [Destreza]",
+  "surprise-attack": "Ataque surpresa",
+  "resistance-surprise-attack": "Ataque surpresa (Resistência)",
+  "close-combat-brawl": "Luta corpo-a-corpo [Briga]",
+  "close-combat-melee": "Luta corpo-a-corpo [Armas brancas]"
 }

@@ -3,5 +3,12 @@
   "sign-out": "Sign Out",
   "drive": "Drive",
   "my-characters": "My Characters",
-  "my-chronicles": "My Chronicles"
+  "my-chronicles": "My Chronicles",
+  "dodging": "Dodging",
+  "flee-strength": "Flee [Strength]",
+  "flee-dexterity": "Flee [Dexterity]",
+  "surprise-attack": "Surprise Attack",
+  "resistance-surprise-attack": "Surprise Attack (Resistance)",
+  "close-combat-brawl": "Close Combat [Brawl]",
+  "close-combat-melee": "Close Combat [Melee]"
 }
