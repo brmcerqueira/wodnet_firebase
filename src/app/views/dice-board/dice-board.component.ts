@@ -9,7 +9,7 @@ import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {SelectSource} from '../../select.source';
 import {SelectItem} from '../../select.item';
-import {dicePolls} from '../../dice.polls';
+import {dicePolls} from '../../dice.poll';
 import {TranslateService} from '@ngx-translate/core';
 
 enum RollState {

@@ -100,6 +100,7 @@
     <span><square-spinner formControlName="composure" min="0" maxByControl="consolidateComposure" [disabled]="!isOpen(group)"></square-spinner></span>
     <span>{{ 'hunger' | translate }}</span>
     <span><square-spinner formControlName="hunger" min="0" max="5" [disabled]="!isOpen(group)"></square-spinner></span>
+    <multi-select formControlName="specializations" [disabled]="!isOpen(group)" [source]="specializationsSource"></multi-select>
     <dynamic-form-group [formGroup]="group.controls.disciplines" [source]="disciplines" [createControl]="createDisciplineControl" [disabled]="!isOpen(group)">
       <ng-template let-item="item">
         <circle-spinner [formControlName]="item.key" [min]="attributeMin" [max]="max" [disabled]="!isOpen(group)"></circle-spinner>

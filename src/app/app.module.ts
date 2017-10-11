@@ -17,7 +17,7 @@ import {CommonModule} from '@angular/common';
 import { MasterComponent } from './views/master/master.component';
 import { InComponent } from './views/in/in.component';
 import { SignInComponent } from './views/sign-in/sign-in.component';
-import { SingleSelectComponent } from './views/single-select/single-select.component';
+import { SingleSelectComponent } from './views/select/single-select.component';
 import { CharacterComponent } from './views/character/character.component';
 import { StartGameComponent } from './views/start-game/start-game.component';
 import { PlayerComponent } from './views/player/player.component';
@@ -31,6 +31,7 @@ import {SquareSpinnerComponent} from './views/spinner/square-spinner.component';
 import {HealthComponent} from './views/health/health.component';
 import { ComponentsModule } from './components/components.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MultiSelectComponent} from "./views/select/multi-select.component";
 
 export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, `${document.getElementsByTagName('base')[0].href}assets/i18n/`);
@@ -42,6 +43,7 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
     InComponent,
     SignInComponent,
     SingleSelectComponent,
+    MultiSelectComponent,
     CircleSpinnerComponent,
     SquareSpinnerComponent,
     CharacterComponent,

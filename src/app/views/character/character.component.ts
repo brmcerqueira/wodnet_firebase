@@ -9,7 +9,9 @@ import {Clan} from '../../clan';
 import {TranslateService} from '@ngx-translate/core';
 import {Virtue} from '../../virtue';
 import {Vice} from '../../vice';
-import {Discipline} from "../../discipline";
+import {Discipline} from '../../discipline';
+import {specializations} from '../../specialization';
+import {Skill} from "../../skill";
 
 @Component({
   selector: 'character',
@@ -102,6 +104,7 @@ export class CharacterComponent implements OnInit {
           science: c.mental.science,
           technology: c.mental.technology
         }),
+        specializations: new FormControl(c.specializations ? c.specializations : null),
         disciplines: this.formBuilder.group(c.disciplines ? c.disciplines : {})
       });
     });
@@ -141,6 +144,25 @@ export class CharacterComponent implements OnInit {
 
   public get disciplines(): SelectSource {
     return this.enumSelectSource(Discipline, false);
+  }
+
+  public get specializationsSource(): SelectSource {
+    const transform = id => {
+      return {
+        id: id,
+        text: `${this.translate.instant(Skill[specializations[id]].toLowerCase())} - ${this.translate.instant(id)}`
+      };
+    };
+
+    return (data: any, byKey: boolean): Observable<SelectItem[]> => {
+      return Observable.create(s => {
+        s.next(byKey
+          ? (<string[]>data).map(transform)
+          : Object.keys(specializations).map(transform).filter(item => {
+            return item.text.toLowerCase().indexOf(data) > -1;
+          }));
+      });
+    };
   }
 
   public get users(): SelectSource {

@@ -106,6 +106,7 @@ export class ChronicleComponent {
         science: 0,
         technology: 0
       },
+      specializations: [],
       disciplines: {}
     });
   }
