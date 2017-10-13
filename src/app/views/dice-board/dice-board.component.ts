@@ -11,6 +11,8 @@ import {SelectSource} from '../../select.source';
 import {SelectItem} from '../../select.item';
 import {dicePolls} from '../../dice.poll';
 import {TranslateService} from '@ngx-translate/core';
+import {adjuncts} from '../../adjunct';
+import {specializations} from '../../specialization';
 
 enum RollState {
   Failure,
@@ -72,6 +74,7 @@ export class DiceBoardComponent {
 
     this.dicePollRollFormGroup = this.formBuilder.group({
       dicePoll: [null, Validators.required],
+      adjuncts: null,
       modifier: [0, [Validators.required, Validators.min(-10), Validators.max(10)]]
     });
 
@@ -117,6 +120,10 @@ export class DiceBoardComponent {
     }
   }
 
+  public chooseDicePoll(): void {
+    this.dicePollRollFormGroup.controls.adjuncts.setValue(null);
+  }
+
   public customRoll(): void {
     const data = this.customRollFormGroup.value;
     this.roll(data.amount, data.hunger);
@@ -125,7 +132,12 @@ export class DiceBoardComponent {
   public dicePollRoll(): void {
     const data = this.dicePollRollFormGroup.value;
     const dicePoll = dicePolls[data.dicePoll];
-    this.roll(dicePoll.get(this.character) + data.modifier,
+    let amount = 0;
+    const adjuncts = (<any[]>data.adjuncts).map(i => {
+      amount += adjuncts[i] ? adjuncts[i].get(this.character) : 1;
+      return i;
+    });
+    this.roll(dicePoll.get(this.character) + data.modifier + amount,
       dicePoll.withHunger ? this.character.hunger : 0,
       data.dicePoll);
   }
@@ -225,6 +237,35 @@ export class DiceBoardComponent {
             const has = dicePolls[item.id].has;
             return ((has && has(this.character)) || !has) && item.text.toLowerCase().indexOf(data) > -1;
           }).sort((l, r) => l.text > r.text ? 1 : (r.text > l.text ? -1 : 0)));
+      });
+    };
+  }
+
+  public get adjunctsSource(): SelectSource {
+    return (data: any, byKey: boolean): Observable<SelectItem[]> => {
+      return Observable.create(s => {
+        if (this.dicePollRollFormGroup.controls.dicePoll.value) {
+          const tags = dicePolls[this.dicePollRollFormGroup.controls.dicePoll.value].tags;
+          s.next(Object.keys(specializations).map(name => {
+            return {
+              id: name,
+              text: <string> this.translate.instant(name)
+            };
+          }).filter(item => {
+            return tags.indexOf(specializations[item.id]) > -1 && item.text.toLowerCase().indexOf(data) > -1;
+          }).concat(Object.keys(adjuncts).map(name => {
+            return {
+              id: name,
+              text: <string> this.translate.instant(name)
+            };
+          }).filter(item => {
+            const has = adjuncts[item.id].has;
+            return ((has && has(this.character, tags)) || !has) && item.text.toLowerCase().indexOf(data) > -1;
+          })).sort((l, r) => l.text > r.text ? 1 : (r.text > l.text ? -1 : 0)));
+        }
+        else {
+          s.next([]);
+        }
       });
     };
   }

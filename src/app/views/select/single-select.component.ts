@@ -42,6 +42,7 @@ export class SingleSelectComponent extends SelectComponent implements ControlVal
 
   public clear(): void {
     this.item = null;
+    this.selected.emit(this.item);
     this.updateData();
   }
 

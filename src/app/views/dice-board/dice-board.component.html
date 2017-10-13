@@ -22,7 +22,8 @@
             <form [formGroup]="dicePollRollFormGroup" (submit)="dicePollRoll()">
               <button [disabled]="!dicePollRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
               {{ character.hunger }}
-              <single-select formControlName="dicePoll" [source]="dicePolls"></single-select>
+              <single-select formControlName="dicePoll" [source]="dicePolls" (selected)="chooseDicePoll($event)"></single-select>
+              <multi-select formControlName="adjuncts" [source]="adjunctsSource"></multi-select>
               <input type="number" formControlName="modifier"/>
             </form>
           </ng-template>
