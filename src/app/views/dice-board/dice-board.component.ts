@@ -133,10 +133,14 @@ export class DiceBoardComponent {
     const data = this.dicePollRollFormGroup.value;
     const dicePoll = dicePolls[data.dicePoll];
     let amount = 0;
-    const adjuncts = (<any[]>data.adjuncts).map(i => {
-      amount += adjuncts[i] ? adjuncts[i].get(this.character) : 1;
-      return i;
-    });
+
+    if (data.adjuncts) {
+      const adjun = (<any[]>data.adjuncts).map(i => {
+        amount += adjuncts[i] ? adjuncts[i].get(this.character) : 1;
+        return i;
+      });
+    }
+
     this.roll(dicePoll.get(this.character) + data.modifier + amount,
       dicePoll.withHunger ? this.character.hunger : 0,
       data.dicePoll);
