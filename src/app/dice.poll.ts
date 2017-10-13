@@ -99,6 +99,12 @@ export const dicePolls: { [name: string]: DicePoll } = {
     get: c => c.charisma + c.willpower,
     tags: [Tag.Charisma]
   },
+  'auspex-seeing-the-invisible': {
+    withHunger: true,
+    get: c => c.perception + c.mental.investigation,
+    tags: [Tag.Perception, Tag.Investigation],
+    has: c => c.disciplines ? c.disciplines.auspex >= 1 : false
+  },
   'auspex-heighten-senses': {
     withHunger: true,
     get: c => c.perception + c.mental.investigation,
@@ -155,6 +161,12 @@ export const dicePolls: { [name: string]: DicePoll } = {
     get: c => c.intelligence + c.willpower,
     tags: [Tag.Intelligence]
   },
+  'resistance-obfuscate-seeing-the-invisible': {
+    withHunger: true,
+    get: c => c.manipulation + c.physical.stealth,
+    tags: [Tag.Manipulation, Tag.Stealth],
+    has: c => c.disciplines ? c.disciplines.obfuscate >= 1 : false
+  },
   'obfuscate-unseen-presence': {
     withHunger: true,
     get: c => c.wits + c.physical.stealth,
@@ -173,4 +185,37 @@ export const dicePolls: { [name: string]: DicePoll } = {
     tags: [Tag.Strength, Tag.Athletics],
     has: c => c.disciplines ? c.disciplines.potence >= 2 : false
   },
+  'presence-awe': {
+    withHunger: true,
+    get: c => c.charisma + c.social.persuasion,
+    tags: [Tag.Charisma, Tag.Persuasion],
+    has: c => c.disciplines ? c.disciplines.presence >= 1 : false
+  },
+  'resistance-presence-awe': {
+    withHunger: true,
+    get: c => c.perception + c.willpower,
+    tags: [Tag.Perception]
+  },
+  'presence-dread-gaze': {
+    withHunger: true,
+    get: c => c.charisma + c.social.intimidation,
+    tags: [Tag.Charisma, Tag.Intimidation],
+    has: c => c.disciplines ? c.disciplines.presence >= 2 : false
+  },
+  'resistance-presence-dread-gaze': {
+    withHunger: true,
+    get: c => c.charisma + c.willpower,
+    tags: [Tag.Charisma]
+  },
+  'presence-entrancement': {
+    withHunger: true,
+    get: c => c.charisma + c.social.empathy,
+    tags: [Tag.Charisma, Tag.Empathy],
+    has: c => c.disciplines ? c.disciplines.presence >= 3 : false
+  },
+  'resistance-presence-entrancement': {
+    withHunger: true,
+    get: c => c.intelligence + c.willpower,
+    tags: [Tag.Intelligence]
+  }
 };

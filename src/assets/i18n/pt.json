@@ -24,6 +24,7 @@
   "animalism-subsume-the-spirit": "[Animalismo] Subordinar o Espírito",
   "animalism-quell-the-beast": "[Animalismo] Manipulando a Besta",
   "resistance-animalism-quell-the-beast": "[Animalismo] Manipulando a Besta (Resistência)",
+  "auspex-seeing-the-invisible": "[Auspício] Vendo o Invisível",
   "auspex-heighten-senses": "[Auspício] Sentidos Aguçados",
   "auspex-aura-perception": "[Auspício] Percepção de Aura",
   "resistance-auspex-aura-perception": "[Auspício] Percepção de Aura (Resistência)",
@@ -34,7 +35,14 @@
   "resistance-dominate-mesmerism": "[Dominação] Mesmerizar (Resistência)",
   "dominate-forgetful-mind": "[Dominação] Ordenar Esquecimento",
   "resistance-dominate-forgetful-mind": "[Dominação] Ordenar Esquecimento (Resistência)",
+  "resistance-obfuscate-seeing-the-invisible": "[Ofuscação] Vendo o Invisível (Resistência)",
   "obfuscate-unseen-presence": "[Ofuscação] Presença Invisível",
   "obfuscate-mask-of-1000-faces": "[Ofuscação] Máscara das 1000 Faces",
-  "potence-soaring-leap": "[Potência] Salto Alto"
+  "potence-soaring-leap": "[Potência] Salto Alto",
+  "presence-awe": "[Presença] Fascínio",
+  "resistance-presence-awe": "[Presença] Fascínio (Resistência)",
+  "presence-dread-gaze": "[Presença] Olhar Aterrorizante",
+  "resistance-presence-dread-gaze": "[Presença] Olhar Aterrorizante (Resistência)",
+  "presence-entrancement": "[Presença] Transe",
+  "resistance-presence-entrancement": "[Presença] Transe (Resistência)"
 }

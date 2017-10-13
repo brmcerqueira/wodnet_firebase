@@ -24,6 +24,7 @@
   "animalism-subsume-the-spirit": "[Animalism] Subsume the Spirit",
   "animalism-quell-the-beast": "[Animalism] Quell the Beast",
   "resistance-animalism-quell-the-beast": "[Animalism] Quell the Beast (Resistance)",
+  "auspex-seeing-the-invisible": "[Auspex] Seeing the Invisible",
   "auspex-heighten-senses": "[Auspex] Heighten Senses",
   "auspex-aura-perception": "[Auspex] Aura Perception",
   "resistance-auspex-aura-perception": "[Auspex] Aura Perception (Resistance)",
@@ -34,7 +35,14 @@
   "resistance-dominate-mesmerism": "[Dominate] Mesmerism (Resistance)",
   "dominate-forgetful-mind": "[Dominate] Forgetful Mind",
   "resistance-dominate-forgetful-mind": "[Dominate] Forgetful Mind (Resistance)",
+  "resistance-obfuscate-seeing-the-invisible": "[Obfuscate] Seeing the Invisible (Resistance)",
   "obfuscate-unseen-presence": "[Obfuscate] Unseen Presence",
   "obfuscate-mask-of-1000-faces": "[Obfuscate] Mask of 1000 Faces",
-  "potence-soaring-leap": "[Potence] Soaring Leap"
+  "potence-soaring-leap": "[Potence] Soaring Leap",
+  "presence-awe": "[Presence] Awe",
+  "resistance-presence-awe": "[Presence] Awe (Resistance)",
+  "presence-dread-gaze": "[Presence] Dread Gaze",
+  "resistance-presence-dread-gaze": "[Presence] Dread Gaze (Resistance)",
+  "presence-entrancement": "[Presence] Entrancement",
+  "resistance-presence-entrancement": "[Presence] Entrancement (Resistance)"
 }
