@@ -17,5 +17,9 @@
   "ranged-combat-wits": "Combate a distância [Raciocínio]",
   "ranged-combat-perception": "Combate a distância [Percepção]",
   "thrown-weapons": "Arremessar",
-  "hunger": "Fome"
+  "hunger": "Fome",
+  "animalism-feral-whispers": "[Animalismo] Sussurros Selvagens",
+  "animalism-subsume-the-spirit": "[Animalismo] Subordinar o Espírito",
+  "animalism-quell-the-beast": "[Animalismo] Manipulando a Besta",
+  "resistance-animalism-quell-the-beast": "[Animalismo] Manipulando a Besta (Resistência)"
 }

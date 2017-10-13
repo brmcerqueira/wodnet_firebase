@@ -222,7 +222,8 @@ export class DiceBoardComponent {
               text: <string> this.translate.instant(name)
             };
           }).filter(item => {
-            return item.text.toLowerCase().indexOf(data) > -1;
+            const has = dicePolls[item.id].has;
+            return ((has && has(this.character)) || !has) && item.text.toLowerCase().indexOf(data) > -1;
           }).sort((l, r) => l.text > r.text ? 1 : (r.text > l.text ? -1 : 0)));
       });
     };

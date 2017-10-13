@@ -11,7 +11,7 @@ import {Virtue} from '../../virtue';
 import {Vice} from '../../vice';
 import {Discipline} from '../../discipline';
 import {specializations} from '../../specialization';
-import {Skill} from "../../skill";
+import {Tag} from "../../tag";
 
 @Component({
   selector: 'character',
@@ -150,7 +150,7 @@ export class CharacterComponent implements OnInit {
     const transform = id => {
       return {
         id: id,
-        text: `${this.translate.instant(Skill[specializations[id]].toLowerCase())} - ${this.translate.instant(id)}`
+        text: `${this.translate.instant(Tag[specializations[id]].toLowerCase())} - ${this.translate.instant(id)}`
       };
     };
 

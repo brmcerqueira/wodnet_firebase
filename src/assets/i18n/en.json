@@ -17,5 +17,9 @@
   "ranged-combat-wits": "Ranged Combat [Wits]",
   "ranged-combat-perception": "Ranged Combat [Perception]",
   "thrown-weapons": "Thrown Weapons",
-  "hunger": "Hunger"
+  "hunger": "Hunger",
+  "animalism-feral-whispers": "[Animalism] Feral Whispers",
+  "animalism-subsume-the-spirit": "[Animalism] Subsume the Spirit",
+  "animalism-quell-the-beast": "[Animalism] Quell the Beast",
+  "resistance-animalism-quell-the-beast": "[Animalism] Quell the Beast (Resistance)"
 }

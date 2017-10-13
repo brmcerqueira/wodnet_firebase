@@ -1,4 +1,13 @@
-export enum Skill {
+export enum Tag {
+  Strength,
+  Dexterity,
+  Stamina,
+  Charisma,
+  Manipulation,
+  Appearance,
+  Perception,
+  Intelligence,
+  Wits,
   Athletics,
   Brawl,
   Crafts,
