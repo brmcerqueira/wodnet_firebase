@@ -13,4 +13,10 @@ export const adjuncts: { [name: string]: Adjunct } = {
     && (t.indexOf(Tag.Athletics) + t.indexOf(Tag.Dodge) + t.indexOf(Tag.Firearms) > -3)
     && (c.disciplines ? c.disciplines.celerity >= 3 : false)
   },
+  'prowess': {
+    //Colocar para fazer sucessos automaticos...
+    get: c => c.disciplines.potence,
+    has: (c, t) => t.indexOf(Tag.Strength) > -1
+      && (c.disciplines ? c.disciplines.potence >= 1 : false)
+  },
 };

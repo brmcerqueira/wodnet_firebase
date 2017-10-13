@@ -98,5 +98,79 @@ export const dicePolls: { [name: string]: DicePoll } = {
     withHunger: true,
     get: c => c.charisma + c.willpower,
     tags: [Tag.Charisma]
-  }
+  },
+  'auspex-heighten-senses': {
+    withHunger: true,
+    get: c => c.perception + c.mental.investigation,
+    tags: [Tag.Perception, Tag.Investigation],
+    has: c => c.disciplines ? c.disciplines.auspex >= 1 : false
+  },
+  'auspex-aura-perception': {
+    withHunger: true,
+    get: c => c.perception + c.social.empathy,
+    tags: [Tag.Perception, Tag.Empathy],
+    has: c => c.disciplines ? c.disciplines.auspex >= 2 : false
+  },
+  'resistance-auspex-aura-perception': {
+    withHunger: true,
+    get: c => c.manipulation + c.willpower,
+    tags: [Tag.Manipulation]
+  },
+  'auspex-spirits-touch': {
+    withHunger: true,
+    get: c => c.perception + c.social.empathy,
+    tags: [Tag.Perception, Tag.Empathy],
+    has: c => c.disciplines ? c.disciplines.auspex >= 3 : false
+  },
+  'dominate-command': {
+    withHunger: true,
+    get: c => c.charisma + c.social.intimidation,
+    tags: [Tag.Charisma, Tag.Intimidation],
+    has: c => c.disciplines ? c.disciplines.dominate >= 1 : false
+  },
+  'resistance-dominate-command': {
+    withHunger: true,
+    get: c => c.wits + c.willpower,
+    tags: [Tag.Wits]
+  },
+  'dominate-mesmerism': {
+    withHunger: true,
+    get: c => c.manipulation + c.social.leadership,
+    tags: [Tag.Manipulation, Tag.Leadership],
+    has: c => c.disciplines ? c.disciplines.dominate >= 2 : false
+  },
+  'resistance-dominate-mesmerism': {
+    withHunger: true,
+    get: c => c.intelligence + c.willpower,
+    tags: [Tag.Intelligence]
+  },
+  'dominate-forgetful-mind': {
+    withHunger: true,
+    get: c => c.wits + c.social.subterfuge,
+    tags: [Tag.Wits, Tag.Subterfuge],
+    has: c => c.disciplines ? c.disciplines.dominate >= 3 : false
+  },
+  'resistance-dominate-forgetful-mind': {
+    withHunger: true,
+    get: c => c.intelligence + c.willpower,
+    tags: [Tag.Intelligence]
+  },
+  'obfuscate-unseen-presence': {
+    withHunger: true,
+    get: c => c.wits + c.physical.stealth,
+    tags: [Tag.Wits, Tag.Stealth],
+    has: c => c.disciplines ? c.disciplines.obfuscate >= 2 : false
+  },
+  'obfuscate-mask-of-1000-faces': {
+    withHunger: true,
+    get: c => c.wits + c.physical.stealth,
+    tags: [Tag.Wits, Tag.Stealth],
+    has: c => c.disciplines ? c.disciplines.obfuscate >= 3 : false
+  },
+  'potence-soaring-leap': {
+    withHunger: true,
+    get: c => c.strength + c.physical.athletics,
+    tags: [Tag.Strength, Tag.Athletics],
+    has: c => c.disciplines ? c.disciplines.potence >= 2 : false
+  },
 };
