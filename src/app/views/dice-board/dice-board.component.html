@@ -12,6 +12,7 @@
             <form [formGroup]="customRollFormGroup" (submit)="customRoll()">
               <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
               <input type="number" formControlName="amount"/>
+              <button *ngIf="!isStoryteller" type="button" (click)="noHunger()">{{ 'no-hunger' | translate }}</button>
               <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
             </form>
           </ng-template>
@@ -30,18 +31,16 @@
         </ngb-tab>
       </ngb-tabset>
     </div>
-
-
-
     <ul class="list-plays">
       <li class="dice-play" *ngFor="let item of rolls | async">
         <img [src]="item.playerPhoto" class="player-photo"/>
-        <h3>{{item.characterName}} ({{item.player}})</h3>
-        <h6> Dices: {{item.dices || "No dices"}} </h6>
-        <h6> State: {{item.state}} </h6>
-        <h6> Hunger Dices: {{item.hungerDices}} </h6>
-        <h6> Hunger Status: {{item.hungerState}} </h6>
-        <h6> Successes: {{ item.successes }}</h6>
+        <h3>{{ item.characterName }} ({{item.player}})</h3>
+        <h6><strong>{{ item.detail.hungerDices }}</strong> - {{ item.detail.dices }}</h6>
+        <h6>{{ stateDescription(item.detail.state) }}</h6>
+        <h6>{{ hungerStateDescription(item.detail.hungerState) }}</h6>
+        <h6>{{ item.detail.successes }}</h6>
+        <h6>{{ item.dicePoll | translate }}</h6>
+        <h6>{{ adjunctsDescription(item.adjuncts) }}</h6>
       </li>
     </ul>
     <hr>

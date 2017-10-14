@@ -32,12 +32,17 @@ export interface Roll {
   characterName: string;
   player: string;
   playerPhoto: string;
+  detail: RollDetail;
+  dicePoll?: string;
+  adjuncts?: string[];
+}
+
+export interface RollDetail {
   successes: number;
   dices: number[];
   hungerDices: number[];
   state: RollState;
   hungerState: HungerState;
-  description?: string;
 }
 
 @Component({
@@ -126,42 +131,68 @@ export class DiceBoardComponent {
 
   public customRoll(): void {
     const data = this.customRollFormGroup.value;
-    this.roll(data.amount, data.hunger);
+    this.daoRolls.push(this.createRoll(this.roll(data.amount, data.hunger)));
   }
 
   public dicePollRoll(): void {
     const data = this.dicePollRollFormGroup.value;
     const dicePoll = dicePolls[data.dicePoll];
     let amount = 0;
+    let automatic = 0;
+
+    let adjunctsResult: string[] = null;
 
     if (data.adjuncts) {
-      const adjun = (<any[]>data.adjuncts).map(i => {
-        amount += adjuncts[i] ? adjuncts[i].get(this.character) : 1;
+      adjunctsResult = (<any[]>data.adjuncts).map(i => {
+        if (adjuncts[i]) {
+          if (adjuncts[i].automatic) {
+            automatic += adjuncts[i].get(this.character);
+          }
+          else {
+            amount += adjuncts[i].get(this.character);
+          }
+        }
+        else {
+          amount += 1;
+        }
         return i;
       });
     }
 
-    this.roll(dicePoll.get(this.character) + data.modifier + amount,
-      dicePoll.withHunger ? this.character.hunger : 0,
-      data.dicePoll);
+    const roll = this.createRoll(this.roll(dicePoll.get(this.character) + data.modifier + amount,
+      dicePoll.withHunger ? this.character.hunger : 0));
+
+    if (data.dicePoll) {
+      roll.dicePoll = data.dicePoll;
+    }
+
+    if (adjunctsResult) {
+      roll.adjuncts = adjunctsResult;
+    }
+
+    roll.detail.successes += automatic;
+
+    this.daoRolls.push(roll);
   }
 
-  private roll(amount: number, hunger: number, description?: string): void {
-    const roll: Roll = {
+  private createRoll(detail: RollDetail): Roll {
+    return {
       chronicleId: this.chronicleId,
       characterName: this.character ? this.character.name : null,
       player: this.angularFireAuth.auth.currentUser.displayName,
       playerPhoto: this.angularFireAuth.auth.currentUser.photoURL,
+      detail: detail
+    };
+  }
+
+  private roll(amount: number, hunger: number): RollDetail {
+    const detail: RollDetail = {
       successes: 0,
       dices: [],
       hungerDices: [],
       state: RollState.Failure,
       hungerState: HungerState.None
     };
-
-    if (description) {
-      roll.description = description;
-    }
 
     let criticals = 0;
     let hungerCriticals = 0;
@@ -176,7 +207,7 @@ export class DiceBoardComponent {
     for (let i = 0; i < totalHungerDices; i++) {
       const dice = this.dice;
       if (dice >= 6) {
-        roll.successes++;
+        detail.successes++;
         if (dice === 10) {
           hungerCriticals++;
         }
@@ -184,7 +215,7 @@ export class DiceBoardComponent {
       else if (dice === 1) {
         hungerArise++;
       }
-      roll.hungerDices.push(dice);
+      detail.hungerDices.push(dice);
     }
 
     const totalDices = amount - hunger;
@@ -192,35 +223,35 @@ export class DiceBoardComponent {
     for (let i = 0; i < totalDices; i++) {
       const dice = this.dice;
       if (dice >= 6) {
-        roll.successes++;
+        detail.successes++;
         if (dice === 10) {
           criticals++;
         }
       }
-      roll.dices.push(dice);
+      detail.dices.push(dice);
     }
 
     if (criticals >= 2) {
-      roll.state = RollState.CriticalSuccess;
+      detail.state = RollState.CriticalSuccess;
     }
     else if (hungerCriticals >= 2) {
-      roll.state = RollState.MessyCritical;
+      detail.state = RollState.MessyCritical;
     }
-    else if (roll.successes >= 1) {
-      roll.state = RollState.Success;
+    else if (detail.successes >= 1) {
+      detail.state = RollState.Success;
     }
 
     if (hungerArise >= 2) {
-      roll.hungerState = HungerState.Compulsion;
+      detail.hungerState = HungerState.Compulsion;
     }
     else if (hungerArise === 1) {
-      roll.hungerState = HungerState.Distracted;
+      detail.hungerState = HungerState.Distracted;
     }
 
-    roll.hungerDices.sort(this.sortDices);
-    roll.dices.sort(this.sortDices);
+    detail.hungerDices.sort(this.sortDices);
+    detail.dices.sort(this.sortDices);
 
-    this.daoRolls.push(roll);
+    return detail;
   }
 
   public goSetup(): void {
@@ -272,6 +303,28 @@ export class DiceBoardComponent {
         }
       });
     };
+  }
+
+  public noHunger(): void {
+    const hunger = this.customRollFormGroup.controls.hunger;
+    if (hunger.value > 0) {
+      hunger.setValue(0);
+    }
+    else {
+      hunger.setValue(this.character.hunger);
+    }
+  }
+
+  public stateDescription(state: RollState): string {
+    return this.translate.instant(RollState[state].toLowerCase());
+  }
+
+  public hungerStateDescription(hungerState: HungerState): string {
+    return hungerState === HungerState.None ? '' : this.translate.instant(HungerState[hungerState].toLowerCase());
+  }
+
+  public adjunctsDescription(data: string[]): string {
+    return data ? data.map(a => this.translate.instant(a)).join(',') : '';
   }
 
   private sortDices(l: number, r: number): number {

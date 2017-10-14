@@ -44,5 +44,11 @@
   "presence-dread-gaze": "[Presença] Olhar Aterrorizante",
   "resistance-presence-dread-gaze": "[Presença] Olhar Aterrorizante (Resistência)",
   "presence-entrancement": "[Presença] Transe",
-  "resistance-presence-entrancement": "[Presença] Transe (Resistência)"
+  "resistance-presence-entrancement": "[Presença] Transe (Resistência)",
+  "failure": "Falha",
+  "success": "Successo",
+  "messycritical": "Confusão Crítica",
+  "criticalsuccess": "Sucesso Crítico",
+  "distracted": "Distraído - Perca o próximo turno",
+  "compulsion": "Compulsão - Escolha uma compulsão junto com o narrador"
 }

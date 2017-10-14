@@ -45,4 +45,10 @@
   "resistance-presence-dread-gaze": "[Presence] Dread Gaze (Resistance)",
   "presence-entrancement": "[Presence] Entrancement",
   "resistance-presence-entrancement": "[Presence] Entrancement (Resistance)"
+  "failure": "Failure",
+  "success": "Success",
+  "messycritical": "Messy Critical",
+  "criticalsuccess": "Critical Success",
+  "distracted": "Distracted - Lose the next turn",
+  "compulsion": "Compulsion - Choose a compulsion along with the storyteller"
 }
