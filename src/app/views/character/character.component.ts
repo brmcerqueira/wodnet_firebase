@@ -11,7 +11,7 @@ import {Virtue} from '../../virtue';
 import {Vice} from '../../vice';
 import {Discipline} from '../../discipline';
 import {specializations} from '../../specialization';
-import {Tag} from "../../tag";
+import {Tag} from '../../tag';
 
 @Component({
   selector: 'character',

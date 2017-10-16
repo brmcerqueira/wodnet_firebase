@@ -31,8 +31,7 @@ import {SquareSpinnerComponent} from './views/spinner/square-spinner.component';
 import {HealthComponent} from './views/health/health.component';
 import { ComponentsModule } from './components/components.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MultiSelectComponent} from "./views/select/multi-select.component";
-import {AudioConferenceService} from "./audio.conference.service";
+import {MultiSelectComponent} from './views/select/multi-select.component';
 
 export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, `${document.getElementsByTagName('base')[0].href}assets/i18n/`);
@@ -82,8 +81,7 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
   providers: [
     Blocker,
     AuthenticationGuard,
-    WrapperDirective,
-    AudioConferenceService
+    WrapperDirective
   ],
   bootstrap: [MasterComponent]
 })
