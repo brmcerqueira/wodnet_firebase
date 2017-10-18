@@ -113,15 +113,16 @@ export class CharacterComponent implements OnInit {
   private enumSelectSource(enumObject: any, useIndex: boolean): SelectSource {
     return (data: any, byKey: boolean): Observable<SelectItem[]> => {
       return Observable.create(s => {
-        s.next(byKey ? [{ id: data, text: this.translate.instant(enumObject[data]) }]
+        s.next(byKey ? [{ id: data, text: this.translate.instant(enumObject[data].toLowerCase()) }]
           : Object.keys(enumObject).map(index => {
             const key: string = enumObject[index];
             if (!isNaN(Number(key))) {
               return null;
             }
+            const lowerKey = key.toLowerCase();
             return {
-              id: useIndex ? Number(index) : key.toLowerCase(),
-              text: <string> this.translate.instant(key)
+              id: useIndex ? Number(index) : lowerKey,
+              text: <string> this.translate.instant(lowerKey)
             };
           }).filter(item => {
             return item && item.text.toLowerCase().indexOf(data) > -1;

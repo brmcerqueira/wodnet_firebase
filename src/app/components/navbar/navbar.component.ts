@@ -8,8 +8,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  private chronicleKey: string;
-  private characterKey: string;
+  public chronicleKey: string;
+  public characterKey: string;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
