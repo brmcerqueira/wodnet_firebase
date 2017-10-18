@@ -274,10 +274,11 @@ export class DiceBoardComponent {
       return Observable.create(s => {
         if (this.dicePollRollFormGroup.controls.dicePoll.value) {
           const tags = dicePolls[this.dicePollRollFormGroup.controls.dicePoll.value].tags;
-          s.next(Object.keys(specializations).map(name => {
+          s.next(Object.keys(this.character.specializations).map(index => {
+            const key = this.character.specializations[index];
             return {
-              id: name,
-              text: <string> this.translate.instant(name)
+              id: key,
+              text: <string> this.translate.instant(key)
             };
           }).filter(item => {
             return tags.indexOf(specializations[item.id]) > -1 && item.text.toLowerCase().indexOf(data) > -1;
