@@ -25,11 +25,10 @@ export class ChronicleComponent {
   public characterSubject: Subject<Character>;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private location: Location,
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth,
               private blocker: Blocker) {
-    this.chronicleId = this.activatedRoute.snapshot.params['key'];
+    this.chronicleId = this.activatedRoute.snapshot.params['chronicleKey'];
     this.characterSubject = new Subject();
     this.characterKey = null;
 
@@ -118,8 +117,5 @@ export class ChronicleComponent {
     else {
       fromThenable(this.daoCharacters.push(character)).blocker(this.blocker).subscribe(r => this.characterKey = r.key);
     }
-  }
-  public goBack(): void {
-    this.location.back();
   }
 }

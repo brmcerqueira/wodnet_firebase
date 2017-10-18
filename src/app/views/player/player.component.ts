@@ -17,18 +17,13 @@ export class PlayerComponent {
   private daoCharacter: AngularFireObject<any>;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private location: Location,
               private database: AngularFireDatabase,
               private blocker: Blocker) {
-    this.daoCharacter = database.object(`characters/${this.activatedRoute.snapshot.params['key']}`);
+    this.daoCharacter = database.object(`characters/${this.activatedRoute.snapshot.params['characterKey']}`);
     this.characterObservable = this.daoCharacter.valueChanges();
   }
 
   public save(character: Character): void {
     fromPromise(this.daoCharacter.update(character)).blocker(this.blocker).subscribe();
-  }
-
-  public goBack(): void {
-    this.location.back();
   }
 }

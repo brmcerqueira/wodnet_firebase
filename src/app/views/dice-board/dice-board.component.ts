@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {Character} from '../../character';
@@ -63,14 +63,13 @@ export class DiceBoardComponent {
   private subscription: Subscription;
   public character: Character;
 
-  constructor(private router: Router,
-              private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private translate: TranslateService,
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth) {
     this.isStoryteller = activatedRoute.snapshot.data.isStoryteller;
-    this.chronicleId = this.activatedRoute.snapshot.params['key'];
+    this.chronicleId = this.activatedRoute.snapshot.params.chronicleKey;
 
     this.customRollFormGroup = this.formBuilder.group({
       amount: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
@@ -252,12 +251,6 @@ export class DiceBoardComponent {
     detail.dices.sort(this.sortDices);
 
     return detail;
-  }
-
-  public goSetup(): void {
-    this.router.navigate(this.isStoryteller
-      ? ['in/chronicle', this.chronicleId]
-      : ['in/player', this.activatedRoute.snapshot.params['characterKey']]);
   }
 
   public get dicePolls(): SelectSource {

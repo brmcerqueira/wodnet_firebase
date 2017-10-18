@@ -2,9 +2,10 @@
   <div class="inner">
     <h3 class="masthead-brand">Wodnet</h3>
     <nav class="nav nav-masthead">
-      <!-- <a class="nav-link active" href="#">Home</a> -->
-      <a class="nav-link" routerLink='/in'>Início</a>
-      <a class="nav-link" (click)="signOut()">Sair</a>
+      <a class="nav-link" routerLink='/in'>{{ 'start' | translate }}</a>
+      <a class="nav-link" *ngIf="diceBoard" [routerLink]="diceBoard">{{ 'dice-board' | translate }}</a>
+      <a class="nav-link" *ngIf="character" [routerLink]="character">{{ 'character' | translate }}</a>
+      <a class="nav-link" (click)="signOut()">{{ 'exit' | translate }}</a>
     </nav>
   </div>
 </div>

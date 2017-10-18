@@ -13,10 +13,10 @@ const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'in', component: InComponent, canActivate: [AuthenticationGuard], children: [
     { path: '', component: StartGameComponent },
-    { path: 'player/:key', component: PlayerComponent },
-    { path: 'chronicle/:key', component: ChronicleComponent },
-    { path: 'dice/player/:key/:characterKey', data: { isStoryteller: false }, component: DiceBoardComponent },
-    { path: 'dice/storyteller/:key', data: { isStoryteller: true }, component: DiceBoardComponent }
+    { path: 'player/:chronicleKey/:characterKey', component: PlayerComponent },
+    { path: 'chronicle/:chronicleKey', component: ChronicleComponent },
+    { path: 'dice/player/:chronicleKey/:characterKey', data: { isStoryteller: false }, component: DiceBoardComponent },
+    { path: 'dice/storyteller/:chronicleKey', data: { isStoryteller: true }, component: DiceBoardComponent }
   ]},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

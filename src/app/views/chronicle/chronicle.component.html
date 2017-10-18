@@ -1,4 +1,3 @@
-<button (click)="goBack()">{{ 'back' | translate }}</button>
 <ul>
   <li><button (click)="newCharacter()">{{ 'new' | translate }}</button></li>
   <li *ngFor="let item of characters | async"><button (click)="characterChange(item)">{{ item.payload.val().name }}</button></li>
