@@ -1,4 +1,4 @@
-<input *ngIf="!disabled" type="text" (selectItem)="selectItem($event)"
+<input *ngIf="!isDisabled" type="text" (selectItem)="selectItem($event)"
        [ngbTypeahead]="typeaheadSource"
        [inputFormatter]="inputFormatter"
        [resultFormatter]="resultFormatter"/>
@@ -6,6 +6,6 @@
   <li *ngFor="let item of formGroup | formGroupParse">
     <span>{{ item.label }}</span>
     <span><ng-template [wrapper]="itemTemplate" [item]="item"></ng-template></span>
-    <span *ngIf="!disabled"><button type="button" (click)="remove(item.key)">X</button></span>
+    <span *ngIf="!isDisabled"><button type="button" (click)="remove(item.key)">X</button></span>
   </li>
 </ul>

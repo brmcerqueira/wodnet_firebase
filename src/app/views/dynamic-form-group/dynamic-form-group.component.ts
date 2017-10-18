@@ -15,7 +15,7 @@ export class DynamicFormGroupComponent {
   @Input() public source: SelectSource;
   @Input() public formGroup: FormGroup;
   @Input() public createControl: () => AbstractControl;
-  @Input() public disabled: boolean;
+  @Input() public isDisabled: boolean;
   @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
   public get typeaheadSource(): (text: Observable<string>) => Observable<SelectItem[]> {

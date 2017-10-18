@@ -274,7 +274,7 @@ export class DiceBoardComponent {
       return Observable.create(s => {
         if (this.dicePollRollFormGroup.controls.dicePoll.value) {
           const tags = dicePolls[this.dicePollRollFormGroup.controls.dicePoll.value].tags;
-          s.next(Object.keys(this.character.specializations).map(index => {
+          s.next(Object.keys(this.character.specializations || []).map(index => {
             const key = this.character.specializations[index];
             return {
               id: key,

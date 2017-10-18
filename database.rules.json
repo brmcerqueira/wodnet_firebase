@@ -1,10 +1,9 @@
 {
   "rules": {
-    "connections": {
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
     "rolls": {
+      ".indexOn": [
+        "chronicleId"
+      ],
       ".read": "auth != null",
       ".write": "auth != null"
     },
@@ -13,42 +12,19 @@
       ".write": "auth != null"
     },
     "chronicles": {
+      ".indexOn": [
+        "ownerId"
+      ],
       ".read": "auth != null",
       ".write": "auth.uid === data.child('ownerId').val() || data.child('ownerId').val() === null"
     },
     "characters": {
       ".indexOn": [
-        "chronicleId"
+        "chronicleId",
+        "ownerId"
       ],
-      ".read": true,
+      ".read": "auth != null",
       ".write": "auth.uid === data.child('storytellerId').val() || (auth.uid === data.child('ownerId').val() && data.child('isOpen').val() == true) || (data.child('ownerId').val() === null && data.child('storytellerId').val()  === null)"
     }
   }
 }
-/*
-{
-  "rules": {
-    "connections": {
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
-    "rolls": {
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
-    "users": {
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
-    "chronicles": {
-      ".read": "auth != null",
-      ".write": "auth.uid === data.child('ownerId').val() || data.child('ownerId').val() === null"
-    },
-    "characters": {
-      ".indexOn": ["chronicleId"],
-      ".read": "auth.uid === data.child('ownerId').val() || auth.uid === data.child('storytellerId').val()",
-      ".write": "auth.uid === data.child('storytellerId').val() || (auth.uid === data.child('ownerId').val() && data.child('isOpen').val() == true) || (data.child('ownerId').val() === null && data.child('storytellerId').val()  === null)"
-    }
-  }
-}
-*/

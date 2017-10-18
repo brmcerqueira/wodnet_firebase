@@ -1,5 +1,5 @@
-<div *ngIf="disabled">{{ item?.text }}</div>
-<div *ngIf="!disabled">
+<div *ngIf="isDisabled">{{ item?.text }}</div>
+<div *ngIf="!isDisabled">
   <button type="button" *ngIf="item" (click)="clear()">{{ item.text }}</button>
   <input type="text" [(ngModel)]="text" (selectItem)="selectItem($event)"
          [ngbTypeahead]="typeaheadSource"

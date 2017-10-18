@@ -11,12 +11,12 @@ export abstract class SelectComponent {
   @Input() public source: SelectSource;
   public text: string;
   @Output() public selected: EventEmitter<SelectItem>;
-  @Input() public disabled: boolean;
+  @Input() public isDisabled: boolean;
 
   constructor() {
     this.text = null;
     this.selected = new EventEmitter();
-    this.disabled = false;
+    this.isDisabled = false;
   }
 
   public get typeaheadSource(): (text: Observable<string>) => Observable<SelectItem[]> {

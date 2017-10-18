@@ -1,5 +1,5 @@
-<div *ngIf="disabled"><span *ngFor="let item of items">{{ item?.text }}</span></div>
-<div *ngIf="!disabled">
+<div *ngIf="isDisabled"><span *ngFor="let item of items">{{ item?.text }}</span></div>
+<div *ngIf="!isDisabled">
   <button type="button" *ngFor="let item of items; let i = index" (click)="clear(i)">{{ item.text }}</button>
   <input type="text" [(ngModel)]="text" (selectItem)="selectItem($event)"
          [ngbTypeahead]="typeaheadSource"

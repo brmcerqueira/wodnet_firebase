@@ -15,7 +15,7 @@ export class HealthComponent implements OnInit {
 
   public health: string;
   public damage: string;
-  @Input() public disabled: boolean;
+  @Input() public isDisabled: boolean;
 
   constructor(@Host() @SkipSelf() private parent: FormGroupDirective) {
     this.health = null;

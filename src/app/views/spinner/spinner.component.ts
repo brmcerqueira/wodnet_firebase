@@ -8,7 +8,7 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
   @Input() public max?: number;
   @Input() public maxByControl?: string;
   public text: string;
-  @Input() public disabled: boolean;
+  @Input() public isDisabled: boolean;
   private onChange: (value: number) => void;
   private onTouched: () => void;
 

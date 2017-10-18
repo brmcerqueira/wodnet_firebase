@@ -1,6 +1,6 @@
 <span [innerHTML]="health"></span>
-<button *ngIf="!disabled" type="button" (click)="lessAggravated()">-&#x26de;</button>
-<button *ngIf="!disabled" type="button" (click)="lessSuperficial()">-&#x26dd;</button>
+<button *ngIf="!isDisabled" type="button" (click)="lessAggravated()">-&#x26de;</button>
+<button *ngIf="!isDisabled" type="button" (click)="lessSuperficial()">-&#x26dd;</button>
 <span [innerHTML]="damage"></span>
-<button *ngIf="!disabled" type="button" (click)="addSuperficial()">&#x26de;+</button>
-<button *ngIf="!disabled" type="button" (click)="addAggravated()">&#x26dd;+</button>
+<button *ngIf="!isDisabled" type="button" (click)="addSuperficial()">&#x26de;+</button>
+<button *ngIf="!isDisabled" type="button" (click)="addAggravated()">&#x26dd;+</button>
