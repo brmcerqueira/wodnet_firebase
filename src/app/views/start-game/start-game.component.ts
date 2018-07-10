@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Blocker} from '../../blocker';
 import {Router} from '@angular/router';
-import {fromThenable} from '../../observable.extensions';
+import {blocker, fromPromise} from '../../observable.extensions';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs/Observable';
 
@@ -34,8 +34,8 @@ export class StartGameComponent {
   }
 
   public createChronicle(): void {
-    fromThenable(this.daoMyChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
-      .blocker(this.blocker).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
+    fromPromise(this.daoMyChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
+      .pipe(blocker(this.blocker)).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
   }
 
   public playCharacter(snapshotAction: SnapshotAction): void {

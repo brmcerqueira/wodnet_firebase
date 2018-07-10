@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AngularFireModule} from 'angularfire2';
+import {AngularFireModule, FirebaseOptionsToken} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {RouteModule} from './route.module';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
-import {HttpModule} from '@angular/http';
 import {AuthenticationGuard} from './authentication.guard';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -60,14 +59,13 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
     CommonModule,
     FormsModule,
     BrowserModule,
-    HttpModule,
     HttpClientModule,
     RouteModule,
     ReactiveFormsModule,
     NgxErrorsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -81,7 +79,8 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
   providers: [
     Blocker,
     AuthenticationGuard,
-    WrapperDirective
+    WrapperDirective,
+    { provide: FirebaseOptionsToken, useValue: environment.firebase }
   ],
   bootstrap: [MasterComponent]
 })

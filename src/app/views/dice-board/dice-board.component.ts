@@ -111,8 +111,8 @@ export class DiceBoardComponent {
     }
 
     if (characterKey) {
-      this.subscription = this.database.object(`characters/${characterKey}`)
-        .valueChanges<Character>().subscribe(c => {
+      this.subscription = this.database.object<Character>(`characters/${characterKey}`)
+        .valueChanges().subscribe(c => {
         this.customRollFormGroup.controls.hunger.setValue(c.hunger);
         this.character = c;
         this.readSubject.next(true);

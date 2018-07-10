@@ -4,13 +4,12 @@ import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2
 import {Blocker} from '../../blocker';
 import {Character} from '../../character';
 import {Observable} from 'rxjs/Observable';
-import {fromPromise, fromThenable} from '../../observable.extensions';
+import {blocker, fromPromise} from '../../observable.extensions';
 import {Subject} from 'rxjs/Subject';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Virtue} from '../../virtue';
 import {Vice} from '../../vice';
 import {Clan} from '../../clan';
-import {Location} from '@angular/common';
 
 @Component({
   templateUrl: './chronicle.component.html',
@@ -112,10 +111,10 @@ export class ChronicleComponent {
 
   public save(character: Character): void {
     if (this.characterKey) {
-      fromPromise<void, Promise<void>>(this.daoCharacters.update(this.characterKey, character)).blocker(this.blocker).subscribe();
+      fromPromise(this.daoCharacters.update(this.characterKey, character)).pipe(blocker(this.blocker)).subscribe();
     }
     else {
-      fromThenable(this.daoCharacters.push(character)).blocker(this.blocker).subscribe(r => this.characterKey = r.key);
+      fromPromise(this.daoCharacters.push(character)).pipe(blocker(this.blocker)).subscribe(r => this.characterKey = r.key);
     }
   }
 }

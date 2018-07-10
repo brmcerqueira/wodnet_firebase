@@ -1,29 +1,20 @@
 import { Observable } from 'rxjs/Observable';
 import {Blocker} from './blocker';
-import {Thenable} from 'firebase/app';
+import {OperatorFunction} from "rxjs/interfaces";
+import {MapOperator} from "rxjs/internal/operators/map";
 
-declare module 'rxjs/Observable' {
-  interface Observable<T> {
-    blocker(value: Blocker): this;
-  }
-}
-
-export function fromThenable<U, T extends Thenable<U>>(thenable: T): Observable<T> {
+export function fromPromise<U>(promise: PromiseLike<U>): Observable<U> {
   return Observable.create(s => {
-    thenable.then(_ => s.next(thenable), e => s.error(e));
+    promise.then(i => s.next(i), e => s.error(e));
   });
 }
 
-export function fromPromise<U, T extends Promise<U>>(promise: T): Observable<T> {
-  return Observable.create(s => {
-    promise.then(_ => s.next(promise), e => s.error(e));
-  });
+export function blocker<T>(value: Blocker, thisArg?: any): OperatorFunction<T, T> {
+  return function (source: Observable<T>): Observable<T> {
+    value.subject.next(true);
+    return source.lift<T>(new MapOperator(item => {
+      value.subject.next(false);
+      return item;
+    }, thisArg));
+  };
 }
-
-Observable.prototype.blocker = function <T>(value: Blocker): Observable<T> {
-  value.subject.next(true);
-  return (<Observable<T>>this).map(item => {
-    value.subject.next(false);
-    return item;
-  });
-};

@@ -3,9 +3,8 @@ import {Blocker} from '../../blocker';
 import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {fromPromise} from '../../observable.extensions';
 import {Character} from '../../character';
-import {Location} from '@angular/common';
+import {blocker, fromPromise} from "../../observable.extensions";
 
 @Component({
   templateUrl: './player.component.html',
@@ -24,6 +23,6 @@ export class PlayerComponent {
   }
 
   public save(character: Character): void {
-    fromPromise(this.daoCharacter.update(character)).blocker(this.blocker).subscribe();
+    fromPromise(this.daoCharacter.update(character)).pipe(blocker(this.blocker)).subscribe();
   }
 }

@@ -1,30 +1,6 @@
 {
   "rules": {
-    "rolls": {
-      ".indexOn": [
-        "chronicleId"
-      ],
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
-    "users": {
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
-    "chronicles": {
-      ".indexOn": [
-        "ownerId"
-      ],
-      ".read": "auth != null",
-      ".write": "auth.uid === data.child('ownerId').val() || data.child('ownerId').val() === null"
-    },
-    "characters": {
-      ".indexOn": [
-        "chronicleId",
-        "ownerId"
-      ],
-      ".read": "auth != null",
-      ".write": "auth.uid === data.child('storytellerId').val() || (auth.uid === data.child('ownerId').val() && data.child('isOpen').val() == true) || (data.child('ownerId').val() === null && data.child('storytellerId').val()  === null)"
-    }
+    ".read": "auth != null",
+    ".write": "auth != null"
   }
 }
