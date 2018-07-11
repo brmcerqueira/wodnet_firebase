@@ -13,6 +13,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
+import {ChronicleNamePipe} from "./chronicle.name.pipe";
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import {WrapperDirective} from "./wrapper.directive";
     DynamicFormGroupComponent,
     HealthComponent,
     FormGroupParsePipe,
+    ChronicleNamePipe,
     WrapperDirective
   ],
   exports: [
@@ -43,6 +45,7 @@ import {WrapperDirective} from "./wrapper.directive";
     DynamicFormGroupComponent,
     HealthComponent,
     FormGroupParsePipe,
+    ChronicleNamePipe,
     WrapperDirective
   ],
   providers: [
