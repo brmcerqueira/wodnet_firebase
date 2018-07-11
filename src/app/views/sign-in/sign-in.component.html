@@ -1,17 +1,10 @@
-<div class="outer" *ngIf="isAnonymous">
-  <div class="middle">
-    <div class="inner">
-
-      <h1 class='title'>Wodnet<span class='version'>v2.0</span></h1>
-
-      <ul class="centered-list">
-        <li>
-          <button class="btn-default btn-red btn-expanded" (click)="signInWithGoogle()">
-            <i class="fa fa-google" aria-hidden="true"></i>          
-            {{ 'sign-in-with-google' | translate }}
-          </button>
-        </li>
-      </ul>
+<div class="container" *ngIf="isAnonymous">
+  <div class="row">
+    <div class="col text-center">
+      <h1>Wodnet</h1>
+      <button class="btn btn-secondary btn-lg" (click)="signInWithGoogle()">
+        <i class="fa fa-google" aria-hidden="true"></i> {{ 'sign-in-with-google' | translate }}
+      </button>
     </div>
   </div>
 </div>

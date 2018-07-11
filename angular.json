@@ -22,9 +22,8 @@
             ],
             "styles": [
               "node_modules/font-awesome/scss/font-awesome.scss",
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/assets/stylesheet/_colors.scss",
-              "src/assets/stylesheet/_global.scss"
+              "src/stylesheet/bootstrap.css",
+              "src/stylesheet/global.scss"
             ],
             "scripts": []
           },
@@ -75,9 +74,7 @@
             "scripts": [],
             "styles": [
               "node_modules/font-awesome/scss/font-awesome.scss",
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/assets/stylesheet/_colors.scss",
-              "src/assets/stylesheet/_global.scss"
+              "src/stylesheet/bootstrap.css"
             ],
             "assets": [
               "src/assets",

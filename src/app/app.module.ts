@@ -16,21 +16,13 @@ import {CommonModule} from '@angular/common';
 import { MasterComponent } from './views/master/master.component';
 import { InComponent } from './views/in/in.component';
 import { SignInComponent } from './views/sign-in/sign-in.component';
-import { SingleSelectComponent } from './views/select/single-select.component';
 import { CharacterComponent } from './views/character/character.component';
 import { StartGameComponent } from './views/start-game/start-game.component';
 import { PlayerComponent } from './views/player/player.component';
 import { ChronicleComponent } from './views/chronicle/chronicle.component';
 import { DiceBoardComponent } from './views/dice-board/dice-board.component';
-import {DynamicFormGroupComponent} from './views/dynamic-form-group/dynamic-form-group.component';
-import {FormGroupParsePipe} from './form.group.parse.pipe';
-import {WrapperDirective} from './wrapper.directive';
-import {CircleSpinnerComponent} from './views/spinner/circle-spinner.component';
-import {SquareSpinnerComponent} from './views/spinner/square-spinner.component';
-import {HealthComponent} from './views/health/health.component';
-import { ComponentsModule } from './components/components.module';
+import { WidgetsModule } from './widgets/widgets.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MultiSelectComponent} from './views/select/multi-select.component';
 
 export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, `${document.getElementsByTagName('base')[0].href}assets/i18n/`);
@@ -41,19 +33,11 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
     MasterComponent,
     InComponent,
     SignInComponent,
-    SingleSelectComponent,
-    MultiSelectComponent,
-    CircleSpinnerComponent,
-    SquareSpinnerComponent,
     CharacterComponent,
     StartGameComponent,
     PlayerComponent,
     ChronicleComponent,
-    DiceBoardComponent,
-    DynamicFormGroupComponent,
-    HealthComponent,
-    FormGroupParsePipe,
-    WrapperDirective
+    DiceBoardComponent
   ],
   imports: [
     CommonModule,
@@ -74,12 +58,11 @@ export function translateHttpLoaderFactory(http: HttpClient): TranslateHttpLoade
       }
     }),
     NgbModule.forRoot(),
-    ComponentsModule
+    WidgetsModule
   ],
   providers: [
     Blocker,
     AuthenticationGuard,
-    WrapperDirective,
     { provide: FirebaseOptionsToken, useValue: environment.firebase }
   ],
   bootstrap: [MasterComponent]
