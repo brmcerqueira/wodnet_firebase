@@ -78,7 +78,6 @@ export class DiceBoardComponent {
     this.dicePollRollFormGroup = this.formBuilder.group({
       dicePoll: [null, Validators.required],
       adjuncts: null,
-      modifier: [0, [Validators.required, Validators.min(-10), Validators.max(10)]],
       modifier: [0, [Validators.required, Validators.min(-10), Validators.max(10)]]
     });
 
