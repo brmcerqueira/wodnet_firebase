@@ -1,6 +1,6 @@
 <div class="container-fluid pt-3">
-  <div class="row">
-    <div class="col-md-8">
+  <div class="clearfix">
+    <div class="float-left w-75">
       <ul class="list-unstyled list-plays">
         <li class="media mb-3" *ngFor="let item of rolls | async">
           <img class="mr-3 player-photo" [src]="item.playerPhoto" alt="Generic placeholder image">
@@ -16,8 +16,9 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-4">
-      <ngb-accordion [closeOthers]="true" [activeIds]="isStoryteller ? 'choose-character-panel' : 'custom-roll-panel'">
+    <div class="float-left ml-3">
+      <button type="button" class="btn btn-outline-warning btn-sm show-play-accordion"><i class="fa fa-arrow-right"></i></button>
+      <ngb-accordion class="play-accordion" [closeOthers]="true" [activeIds]="isStoryteller ? 'choose-character-panel' : 'custom-roll-panel'">
         <ngb-panel id="choose-character-panel" *ngIf="isStoryteller">
           <ng-template ngbPanelTitle>{{ 'choose-character' | translate }}</ng-template>
           <ng-template ngbPanelContent>
