@@ -13,6 +13,7 @@ import {dicePolls} from '../../dice.poll';
 import {TranslateService} from '@ngx-translate/core';
 import {adjuncts} from '../../adjunct';
 import {specializations} from '../../specialization';
+import {map} from "rxjs/operators";
 
 enum RollState {
   Failure,
@@ -51,15 +52,13 @@ export interface RollDetail {
 })
 export class DiceBoardComponent {
 
-
-  private chronicleId: string;
+  private readonly chronicleId: string;
   public isStoryteller: boolean;
   public rolls: Observable<Roll[]>;
   public customRollFormGroup: FormGroup;
   public dicePollRollFormGroup: FormGroup;
   private daoRolls: AngularFireList<any>;
   public characters: Observable<SnapshotAction[]>;
-  public readSubject: Subject<boolean>;
   private subscription: Subscription;
   public character: Character;
 
@@ -79,19 +78,16 @@ export class DiceBoardComponent {
     this.dicePollRollFormGroup = this.formBuilder.group({
       dicePoll: [null, Validators.required],
       adjuncts: null,
+      modifier: [0, [Validators.required, Validators.min(-10), Validators.max(10)]],
       modifier: [0, [Validators.required, Validators.min(-10), Validators.max(10)]]
     });
 
     if (this.isStoryteller) {
       this.characters = database.list('characters',
-        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges().map(c => {
-          this.readSubject.next(true);
-          return c;
-      });
+        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges();
     }
 
     this.character = null;
-    this.readSubject = new Subject();
 
     const characterKey = this.activatedRoute.snapshot.params['characterKey'];
 
@@ -101,7 +97,7 @@ export class DiceBoardComponent {
 
     this.daoRolls = database.list('rolls',
       r => r.orderByChild('chronicleId').equalTo(this.chronicleId).limitToLast(10));
-    this.rolls = this.daoRolls.valueChanges().map(array => array.reverse());
+    this.rolls = this.daoRolls.valueChanges().pipe(map(array => array.reverse()));
   }
 
   private observeCharacter(characterKey: string) {
@@ -115,12 +111,10 @@ export class DiceBoardComponent {
         .valueChanges().subscribe(c => {
         this.customRollFormGroup.controls.hunger.setValue(c.hunger);
         this.character = c;
-        this.readSubject.next(true);
       });
     }
     else {
       this.customRollFormGroup.controls.hunger.setValue(1);
-      this.readSubject.next(true);
     }
   }
 
