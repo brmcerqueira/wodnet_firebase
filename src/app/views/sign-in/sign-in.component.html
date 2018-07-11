@@ -1,7 +1,8 @@
-<div class="container" *ngIf="isAnonymous">
+<div class="container-fluid pt-3" *ngIf="isAnonymous">
   <div class="row">
     <div class="col text-center">
       <h1>Wodnet</h1>
+      <p class="lead">{{ 'wodnet-description' | translate }}</p>
       <button class="btn btn-secondary btn-lg" (click)="signInWithGoogle()">
         <i class="fa fa-google" aria-hidden="true"></i> {{ 'sign-in-with-google' | translate }}
       </button>

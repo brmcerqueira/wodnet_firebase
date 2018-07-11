@@ -7,12 +7,14 @@ import {AngularFireAuth} from "angularfire2/auth";
   styleUrls: ['./in.component.scss']
 })
 export class InComponent {
+  public isShowMobileMenu: boolean;
   public chronicleKey: string;
   public characterKey: string;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private angularFireAuth: AngularFireAuth) {
+    this.isShowMobileMenu = false;
     activatedRoute.url.subscribe(() => {
       const params = activatedRoute.snapshot.firstChild.params;
       this.chronicleKey = params.chronicleKey;
@@ -34,5 +36,9 @@ export class InComponent {
 
   public signOut(): void {
     this.angularFireAuth.auth.signOut().then(() => this.router.navigate(['']));
+  }
+
+  public showMobileMenu(): void {
+    this.isShowMobileMenu = !this.isShowMobileMenu;
   }
 }

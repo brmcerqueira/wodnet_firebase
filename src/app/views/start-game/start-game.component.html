@@ -1,55 +1,49 @@
-<div class="container">
+<div class="container-fluid pt-3">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="card border-primary mb-3 start-game-card">
         <div class="card-header">{{'my-characters' | translate}}</div>
         <div class="card-body">
           <p class="card-text">{{'my-characters-description' | translate}}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of myCharacters | async">
-            <div class="row">
-              <div class="col-md-10">{{ item.payload.val().name }} - {{ item.payload.val().chronicleId | chronicleName | async }}</div>
-              <div class="col-md-2"><button type="button" class="btn btn-outline-primary btn-sm" (click)="playCharacter(item)"><i class="fa fa-arrow-right"></i></button></div>
-            </div>
+          <li class="list-group-item clearfix" *ngFor="let item of myCharacters | async">
+            <div class="float-left">{{ item.payload.val().name }} - {{ item.payload.val().chronicleId | chronicleName | async }}</div>
+            <div class="float-right"><button type="button" class="btn btn-outline-primary btn-sm" (click)="playCharacter(item)"><i class="fa fa-arrow-right"></i></button></div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="row">
-        <div class="card border-warning mb-3 start-game-card">
-          <div class="card-header">{{'my-chronicles' | translate}}</div>
-          <div class="card-body">
-            <p class="card-text">{{'my-chronicles-description' | translate}}</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" *ngFor="let item of myChronicles | async">
-              <div class="row">
-                <div class="col-md-10">{{ item.payload.val().name }}</div>
-                <div class="col-md-2"><button type="button" class="btn btn-outline-warning btn-sm" (click)="playChronicle(item)"><i class="fa fa-arrow-right"></i></button></div>
-              </div>
-            </li>
-          </ul>
+    <div class="col-md-4">
+      <div class="card border-warning mb-3 start-game-card">
+        <div class="card-header">{{'my-chronicles' | translate}}</div>
+        <div class="card-body">
+          <p class="card-text">{{'my-chronicles-description' | translate}}</p>
         </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item clearfix" *ngFor="let item of myChronicles | async">
+            <div class="float-left">{{ item.payload.val().name }}</div>
+            <div class="float-right"><button type="button" class="btn btn-outline-warning btn-sm" (click)="playChronicle(item)"><i class="fa fa-arrow-right"></i></button></div>
+          </li>
+        </ul>
       </div>
-      <div class="row">
-        <div class="card border-info mb-3 start-game-card">
-          <div class="card-header">{{'create-chronicle' | translate}}</div>
-          <div class="card-body">
-            <p class="card-text">{{'create-chronicle-description' | translate}}</p>
-            <form [formGroup]="formGroup" (submit)="createChronicle()">
-              <div class="form-group" [class.has-danger]="nameNgxErrors.hasError('*')">
-                <label class="form-control-label" for="inputName">{{ 'name' | translate }}</label>
-                <input type="text" class="form-control" [class.is-invalid]="nameNgxErrors.hasError('*')" id="inputName" formControlName="name">
-                <div ngxErrors="name" class="invalid-feedback" #nameNgxErrors="ngxErrors">
-                  <div ngxError="required">{{ 'name-required' | translate }}</div>
-                  <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
-                </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-info mb-3 start-game-card">
+        <div class="card-header">{{'create-chronicle' | translate}}</div>
+        <div class="card-body">
+          <p class="card-text">{{'create-chronicle-description' | translate}}</p>
+          <form [formGroup]="formGroup" (submit)="createChronicle()">
+            <div class="form-group" [class.has-danger]="nameNgxErrors.hasError('*')">
+              <label class="form-control-label" for="inputName">{{ 'name' | translate }}</label>
+              <input type="text" class="form-control" [class.is-invalid]="nameNgxErrors.hasError('*')" id="inputName" formControlName="name">
+              <div ngxErrors="name" class="invalid-feedback" #nameNgxErrors="ngxErrors">
+                <div ngxError="required">{{ 'name-required' | translate }}</div>
+                <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
               </div>
-              <button type="submit" class="btn btn-outline-info" [disabled]="!formGroup.valid"><i class="fa fa-plus"></i> {{ 'create' | translate }}</button>
-            </form>
-          </div>
+            </div>
+            <button type="submit" class="btn btn-outline-info" [disabled]="!formGroup.valid"><i class="fa fa-plus"></i> {{ 'create' | translate }}</button>
+          </form>
         </div>
       </div>
     </div>
