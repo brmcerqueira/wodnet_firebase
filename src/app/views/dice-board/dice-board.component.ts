@@ -53,6 +53,7 @@ export interface RollDetail {
 export class DiceBoardComponent {
 
   private readonly chronicleId: string;
+  public isShowPlayAccordionWhenCollapse: boolean;
   public isStoryteller: boolean;
   public rolls: Observable<Roll[]>;
   public customRollFormGroup: FormGroup;
@@ -69,6 +70,7 @@ export class DiceBoardComponent {
               private angularFireAuth: AngularFireAuth) {
     this.isStoryteller = activatedRoute.snapshot.data.isStoryteller;
     this.chronicleId = this.activatedRoute.snapshot.params.chronicleKey;
+    this.isShowPlayAccordionWhenCollapse = false;
 
     this.customRollFormGroup = this.formBuilder.group({
       amount: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
@@ -312,6 +314,10 @@ export class DiceBoardComponent {
 
   public adjunctsDescription(data: string[]): string {
     return data ? data.map(a => this.translate.instant(a)).join(',') : '';
+  }
+
+  public showPlayAccordion(): void {
+    this.isShowPlayAccordionWhenCollapse = !this.isShowPlayAccordionWhenCollapse;
   }
 
   private sortDices(l: number, r: number): number {
