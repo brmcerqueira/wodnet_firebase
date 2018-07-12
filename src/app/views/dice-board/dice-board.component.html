@@ -1,4 +1,11 @@
 <div class="container-fluid pt-3">
+  <div class="row play-accordion-collapse pb-3 pl-3 pr-3">
+    <button type="button" class="btn btn-lg btn-block" [class.btn-primary]="!isShowPlayAccordionWhenCollapse" [class.btn-warning]="isShowPlayAccordionWhenCollapse" (click)="showPlayAccordion()">
+      {{ isShowPlayAccordionWhenCollapse ? '' : ('play-dice' | translate) }}
+      <i class="fa" [class.fa-arrow-left]="isShowPlayAccordionWhenCollapse" [class.fa-arrow-right]="!isShowPlayAccordionWhenCollapse"></i>
+      {{ isShowPlayAccordionWhenCollapse ? ('plays' | translate) : '' }}
+    </button>
+  </div>
   <div class="clearfix">
     <div class="float-left w-75" [class.d-none]="isShowPlayAccordionWhenCollapse">
       <ul class="list-unstyled list-plays">
@@ -15,11 +22,6 @@
           </div>
         </li>
       </ul>
-    </div>
-    <div class="float-left ml-3 play-accordion-collapse">
-      <button type="button" class="btn btn-outline-secondary btn-sm pt-5 pb-5" (click)="showPlayAccordion()">
-        <i class="fa" [class.fa-arrow-left]="isShowPlayAccordionWhenCollapse" [class.fa-arrow-right]="!isShowPlayAccordionWhenCollapse"></i>
-      </button>
     </div>
     <div class="float-left ml-3" [class.play-accordion-hide-when-collapse]="!isShowPlayAccordionWhenCollapse">
       <ngb-accordion [closeOthers]="true" [activeIds]="isStoryteller ? 'choose-character-panel' : 'custom-roll-panel'">
