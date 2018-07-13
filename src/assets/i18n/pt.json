@@ -256,5 +256,7 @@
   "create-chronicle-description": "Crie uma crônica e jogue com seus amigos",
   "wodnet-description": "Uma aplicação para jogar Vampiro: A Máscara - 5th",
   "play-dice": "Jogar Dados",
-  "plays": "Jogadas"
+  "plays": "Jogadas",
+  "unknown": "Desconhecido...",
+  "successes": "Sucessos"
 }

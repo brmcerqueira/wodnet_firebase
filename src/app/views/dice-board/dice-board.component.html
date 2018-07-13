@@ -9,16 +9,36 @@
   <div class="clearfix">
     <div class="float-left w-75" [class.d-none]="isShowPlayAccordionWhenCollapse">
       <ul class="list-unstyled list-plays">
-        <li class="media mb-3" *ngFor="let item of rolls | async">
-          <img class="mr-3 player-photo" [src]="item.playerPhoto" alt="Generic placeholder image">
+        <li class="media mb-3 mr-3" *ngFor="let item of rolls | async">
+          <img class="mr-3 player-photo" [src]="item.playerPhoto" placement="bottom" [ngbTooltip]="item.player">
           <div class="media-body">
-            <h5 class="mt-0 mb-1">{{ item.characterName }} ({{item.player}})</h5>
-            <h6><strong>{{ item.detail.hungerDices }}</strong> - {{ item.detail.dices }}</h6>
-            <h6>{{ stateDescription(item.detail.state) }}</h6>
-            <h6>{{ hungerStateDescription(item.detail.hungerState) }}</h6>
-            <h6>{{ item.detail.successes }}</h6>
-            <h6>{{ item.dicePoll | translate }}</h6>
-            <h6>{{ adjunctsDescription(item.adjuncts) }}</h6>
+            <h5 class="mt-0 mb-1 clearfix">
+              <span class="float-left" [class.text-muted]="item.characterName == null">{{ item.characterName ? item.characterName : ('unknown' | translate) }}</span>
+              <span class="float-right badge badge-dark" placement="bottom" [ngbTooltip]="'successes' | translate">{{ item.detail.successes }}</span>
+            </h5>
+            <h6 *ngIf="item.dicePoll">
+              <span class="mr-3">{{ item.dicePoll | translate }}</span>
+              <span class="badge badge-secondary mr-1" *ngFor="let adjunct of item.adjuncts"><i class="fa fa-plus"></i> {{ adjunct | translate }}</span>
+            </h6>
+            <h6>
+              <span class="badge badge-danger mr-1" *ngFor="let hungerDice of item.detail.hungerDices">{{ hungerDice }}</span>
+            </h6>
+            <h6>
+              <span class="badge badge-dark mr-1" *ngFor="let dice of item.detail.dices">{{ dice }}</span>
+            </h6>
+            <h6 class="clearfix">
+              <span class="float-left">{{ item.when | date: 'dd/MM/yy hh:mm:ss' }}</span>
+              <span class="float-right" [ngSwitch]="item.detail.state">
+                <span class="badge badge-danger" *ngSwitchCase="rollState.Failure">{{ 'failure' | translate}}</span>
+                <span class="badge badge-success" *ngSwitchCase="rollState.Success">{{ 'success' | translate}}</span>
+                <span class="badge badge-warning" *ngSwitchCase="rollState.MessyCritical">{{ 'messycritical' | translate}}</span>
+                <span class="badge badge-info" *ngSwitchCase="rollState.CriticalSuccess">{{ 'criticalsuccess' | translate}}</span>
+              </span>
+              <span class="float-right mr-3" [ngSwitch]="item.detail.hungerState">
+                <span class="badge badge-warning" *ngSwitchCase="hungerState.Distracted">{{ 'distracted' | translate}}</span>
+                <span class="badge badge-danger" *ngSwitchCase="hungerState.Compulsion">{{ 'compulsion' | translate}}</span>
+              </span>
+            </h6>
           </div>
         </li>
       </ul>

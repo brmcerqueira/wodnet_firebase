@@ -8,14 +8,14 @@ export interface Adjunct {
 }
 
 export const adjuncts: { [name: string]: Adjunct } = {
-  'rapidity': {
+  'rapidity': <Adjunct>{
     automatic: false,
     get: c => c.disciplines.celerity,
     has: (c, t) => t.indexOf(Tag.Dexterity) > -1
     && (t.indexOf(Tag.Athletics) + t.indexOf(Tag.Dodge) + t.indexOf(Tag.Firearms) > -3)
     && (c.disciplines ? c.disciplines.celerity >= 3 : false)
   },
-  'prowess': {
+  'prowess': <Adjunct>{
     automatic: true,
     get: c => c.disciplines.potence,
     has: (c, t) => t.indexOf(Tag.Strength) > -1

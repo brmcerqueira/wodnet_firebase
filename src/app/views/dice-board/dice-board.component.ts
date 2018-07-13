@@ -33,6 +33,7 @@ export interface Roll {
   characterName: string;
   player: string;
   playerPhoto: string;
+  when: number;
   detail: RollDetail;
   dicePoll?: string;
   adjuncts?: string[];
@@ -51,6 +52,9 @@ export interface RollDetail {
   styleUrls: ['./dice-board.component.scss']
 })
 export class DiceBoardComponent {
+
+  public rollState = RollState;
+  public hungerState = HungerState;
 
   private readonly chronicleId: string;
   public isShowPlayAccordionWhenCollapse: boolean;
@@ -175,6 +179,7 @@ export class DiceBoardComponent {
       characterName: this.character ? this.character.name : null,
       player: this.angularFireAuth.auth.currentUser.displayName,
       playerPhoto: this.angularFireAuth.auth.currentUser.photoURL,
+      when: new Date().valueOf(),
       detail: detail
     };
   }
@@ -302,18 +307,6 @@ export class DiceBoardComponent {
     else {
       hunger.setValue(this.character.hunger);
     }
-  }
-
-  public stateDescription(state: RollState): string {
-    return this.translate.instant(RollState[state].toLowerCase());
-  }
-
-  public hungerStateDescription(hungerState: HungerState): string {
-    return hungerState === HungerState.None ? '' : this.translate.instant(HungerState[hungerState].toLowerCase());
-  }
-
-  public adjunctsDescription(data: string[]): string {
-    return data ? data.map(a => this.translate.instant(a)).join(',') : '';
   }
 
   public showPlayAccordion(): void {

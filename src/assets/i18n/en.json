@@ -256,5 +256,7 @@
   "create-chronicle-description": "Create a chronicle and play with your friends",
   "wodnet-description": "An application to play Vampire: The Masquerade - 5th",
   "play-dice": "Play Dice",
-  "plays": "Plays"
+  "plays": "Plays",
+  "unknown": "Unknown...",
+  "successes": "Successes"
 }
