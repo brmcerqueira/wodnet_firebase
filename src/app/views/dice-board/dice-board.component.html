@@ -8,9 +8,9 @@
   </div>
   <div class="row">
     <div class="col-md-8" [ngClass]="{'d-none d-lg-block': isShowPlayAccordionWhenCollapse}">
-      <ul class="list-unstyled list-plays list-plays-max-height">
+      <ul class="list-unstyled list-plays list-plays-responsive">
         <li class="media mb-3 mr-3" *ngFor="let item of rolls | async">
-          <img class="mr-3 player-photo" [src]="item.playerPhoto" placement="bottom" [ngbTooltip]="item.player">
+          <img class="mr-3 player-photo player-photo-responsive" [src]="item.playerPhoto" placement="bottom" [ngbTooltip]="item.player">
           <div class="media-body">
             <h5 class="mt-0 mb-1 clearfix">
               <span class="float-left" [class.text-muted]="item.characterName == null">{{ item.characterName ? item.characterName : ('unknown' | translate) }}</span>
