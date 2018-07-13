@@ -7,7 +7,7 @@
     </button>
   </div>
   <div class="row">
-    <div class="col-md-8" [ngClass]="{'d-sm-none d-md-none d-lg-block': isShowPlayAccordionWhenCollapse}">
+    <div class="col-md-8" [ngClass]="{'d-none d-lg-block': isShowPlayAccordionWhenCollapse}">
       <ul class="list-unstyled list-plays">
         <li class="media mb-3 mr-3" *ngFor="let item of rolls | async">
           <img class="mr-3 player-photo" [src]="item.playerPhoto" placement="bottom" [ngbTooltip]="item.player">
@@ -43,7 +43,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-4" [ngClass]="{'d-sm-none d-md-none d-lg-block': !isShowPlayAccordionWhenCollapse}">
+    <div class="col-md-4" [ngClass]="{'d-none d-lg-block': !isShowPlayAccordionWhenCollapse}">
       <ngb-accordion [closeOthers]="true" [activeIds]="isStoryteller ? 'choose-character-panel' : 'custom-roll-panel'">
         <ngb-panel id="choose-character-panel" *ngIf="isStoryteller">
           <ng-template ngbPanelTitle>{{ 'choose-character' | translate }}</ng-template>
