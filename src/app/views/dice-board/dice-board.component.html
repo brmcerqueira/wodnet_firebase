@@ -1,13 +1,13 @@
 <div class="container-fluid pt-3">
-  <div class="row play-accordion-collapse pb-3 pl-3 pr-3">
+  <div class="row d-lg-none d-xl-none pb-3 pl-3 pr-3">
     <button type="button" class="btn btn-lg btn-block" [class.btn-primary]="!isShowPlayAccordionWhenCollapse" [class.btn-warning]="isShowPlayAccordionWhenCollapse" (click)="showPlayAccordion()">
       {{ isShowPlayAccordionWhenCollapse ? '' : ('play-dice' | translate) }}
       <i class="fa" [class.fa-arrow-left]="isShowPlayAccordionWhenCollapse" [class.fa-arrow-right]="!isShowPlayAccordionWhenCollapse"></i>
       {{ isShowPlayAccordionWhenCollapse ? ('plays' | translate) : '' }}
     </button>
   </div>
-  <div class="clearfix">
-    <div class="float-left w-75" [class.d-none]="isShowPlayAccordionWhenCollapse">
+  <div class="row">
+    <div class="col-md-8" [ngClass]="{'d-sm-none d-md-none d-lg-block': isShowPlayAccordionWhenCollapse}">
       <ul class="list-unstyled list-plays">
         <li class="media mb-3 mr-3" *ngFor="let item of rolls | async">
           <img class="mr-3 player-photo" [src]="item.playerPhoto" placement="bottom" [ngbTooltip]="item.player">
@@ -43,7 +43,7 @@
         </li>
       </ul>
     </div>
-    <div class="float-left ml-3" [class.play-accordion-hide-when-collapse]="!isShowPlayAccordionWhenCollapse">
+    <div class="col-md-4" [ngClass]="{'d-sm-none d-md-none d-lg-block': !isShowPlayAccordionWhenCollapse}">
       <ngb-accordion [closeOthers]="true" [activeIds]="isStoryteller ? 'choose-character-panel' : 'custom-roll-panel'">
         <ngb-panel id="choose-character-panel" *ngIf="isStoryteller">
           <ng-template ngbPanelTitle>{{ 'choose-character' | translate }}</ng-template>
