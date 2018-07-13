@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-md-8" [ngClass]="{'d-none d-lg-block': isShowPlayAccordionWhenCollapse}">
-      <ul class="list-unstyled list-plays">
+      <ul class="list-unstyled list-plays list-plays-max-height">
         <li class="media mb-3 mr-3" *ngFor="let item of rolls | async">
           <img class="mr-3 player-photo" [src]="item.playerPhoto" placement="bottom" [ngbTooltip]="item.player">
           <div class="media-body">

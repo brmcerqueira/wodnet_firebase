@@ -1,3 +1,5 @@
+@import "../../../stylesheet/global";
+
 .player-photo {
     width: 9.375em;
     height: 9.375em;
@@ -5,8 +7,13 @@
 }
 
 .list-plays {
-    max-height: 40.000em;
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: visible;
+}
+
+@include media-breakpoint-up(lg) {
+  .list-plays-max-height {
+    max-height: 40.000em;
+  }
 }
