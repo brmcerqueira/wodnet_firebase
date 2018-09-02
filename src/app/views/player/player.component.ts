@@ -4,7 +4,7 @@ import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Character} from '../../character';
-import {blocker, fromPromise} from "../../observable.extensions";
+import {fromPromise} from "../../observable.extensions";
 
 @Component({
   templateUrl: './player.component.html',
@@ -23,6 +23,6 @@ export class PlayerComponent {
   }
 
   public save(character: Character): void {
-    fromPromise(this.daoCharacter.update(character)).pipe(blocker(this.blocker)).subscribe();
+    fromPromise(this.daoCharacter.update(character)).pipe(this.blocker.toPipe()).subscribe();
   }
 }

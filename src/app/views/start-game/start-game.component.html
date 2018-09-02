@@ -7,6 +7,9 @@
           <p class="card-text">{{'my-characters-description' | translate}}</p>
         </div>
         <ul class="list-group list-group-flush">
+          <li class="list-group-item clearfix" *ngIf="myCharactersBlocker.value">
+            <div class="d-flex justify-content-center"><span class="fa fa-spinner rotation-animation"></span></div>
+          </li>
           <li class="list-group-item clearfix" *ngFor="let item of myCharacters | async">
             <div class="float-left">{{ item.payload.val().name }} - {{ item.payload.val().chronicleId | chronicleName | async }}</div>
             <div class="float-right"><button type="button" class="btn btn-outline-primary btn-sm" (click)="playCharacter(item)"><i class="fa fa-arrow-right"></i></button></div>
@@ -21,6 +24,9 @@
           <p class="card-text">{{'my-chronicles-description' | translate}}</p>
         </div>
         <ul class="list-group list-group-flush">
+          <li class="list-group-item clearfix" *ngIf="myChroniclesBlocker.value">
+            <div class="d-flex justify-content-center"><span class="fa fa-spinner rotation-animation"></span></div>
+          </li>
           <li class="list-group-item clearfix" *ngFor="let item of myChronicles | async">
             <div class="float-left">{{ item.payload.val().name }}</div>
             <div class="float-right"><button type="button" class="btn btn-outline-warning btn-sm" (click)="playChronicle(item)"><i class="fa fa-arrow-right"></i></button></div>
@@ -42,7 +48,7 @@
                 <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
               </div>
             </div>
-            <button type="submit" class="btn btn-outline-info" [disabled]="!formGroup.valid"><i class="fa fa-plus"></i> {{ 'create' | translate }}</button>
+            <button type="submit" class="btn btn-outline-info btn-lg btn-block" [disabled]="!formGroup.valid"><i class="fa fa-plus"></i> {{ 'create' | translate }}</button>
           </form>
         </div>
       </div>

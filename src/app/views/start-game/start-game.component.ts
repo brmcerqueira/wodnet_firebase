@@ -3,9 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2/database';
 import {Blocker} from '../../blocker';
 import {Router} from '@angular/router';
-import {blocker, fromPromise} from '../../observable.extensions';
+import {fromPromise} from '../../observable.extensions';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs/Observable';
+import {map} from "rxjs/operators";
 
 @Component({
   templateUrl: './start-game.component.html',
@@ -13,6 +14,8 @@ import {Observable} from 'rxjs/Observable';
 })
 export class StartGameComponent {
   public formGroup: FormGroup;
+  public myCharactersBlocker: Blocker;
+  public myChroniclesBlocker: Blocker;
   public myCharacters: Observable<SnapshotAction[]>;
   public myChronicles: Observable<SnapshotAction[]>;
   private daoMyChronicles: AngularFireList<any>;
@@ -22,6 +25,8 @@ export class StartGameComponent {
               private database: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth,
               private blocker: Blocker) {
+    this.myCharactersBlocker = new Blocker();
+    this.myChroniclesBlocker = new Blocker();
     this.formGroup = this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]]
     });
@@ -29,13 +34,13 @@ export class StartGameComponent {
       r => r.orderByChild('ownerId').equalTo(this.angularFireAuth.auth.currentUser.uid));
     this.myCharacters = database.list('characters',
       r => r.orderByChild('ownerId').equalTo(this.angularFireAuth.auth.currentUser.uid))
-      .snapshotChanges().map(array => array.filter(u => u.payload.val().storytellerId !== this.angularFireAuth.auth.currentUser.uid));
-    this.myChronicles = this.daoMyChronicles.snapshotChanges();
+      .snapshotChanges().pipe(this.myCharactersBlocker.toPipe(), map(array => array.filter(u => u.payload.val().storytellerId !== this.angularFireAuth.auth.currentUser.uid)));
+    this.myChronicles = this.daoMyChronicles.snapshotChanges().pipe(this.myChroniclesBlocker.toPipe());
   }
 
   public createChronicle(): void {
     fromPromise(this.daoMyChronicles.push(Object.assign({ ownerId: this.angularFireAuth.auth.currentUser.uid }, this.formGroup.value)))
-      .pipe(blocker(this.blocker)).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
+      .pipe(this.blocker.toPipe()).subscribe(r => this.router.navigate(['in/chronicle', r.key]));
   }
 
   public playCharacter(snapshotAction: SnapshotAction): void {

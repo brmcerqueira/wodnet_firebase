@@ -4,7 +4,7 @@ import {AngularFireDatabase, AngularFireList, SnapshotAction} from 'angularfire2
 import {Blocker} from '../../blocker';
 import {Character} from '../../character';
 import {Observable} from 'rxjs/Observable';
-import {blocker, fromPromise} from '../../observable.extensions';
+import {fromPromise} from '../../observable.extensions';
 import {Subject} from 'rxjs/Subject';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Virtue} from '../../virtue';
@@ -111,10 +111,10 @@ export class ChronicleComponent {
 
   public save(character: Character): void {
     if (this.characterKey) {
-      fromPromise(this.daoCharacters.update(this.characterKey, character)).pipe(blocker(this.blocker)).subscribe();
+      fromPromise(this.daoCharacters.update(this.characterKey, character)).pipe(this.blocker.toPipe()).subscribe();
     }
     else {
-      fromPromise(this.daoCharacters.push(character)).pipe(blocker(this.blocker)).subscribe(r => this.characterKey = r.key);
+      fromPromise(this.daoCharacters.push(character)).pipe(this.blocker.toPipe()).subscribe(r => this.characterKey = r.key);
     }
   }
 }

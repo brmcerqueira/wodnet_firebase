@@ -5,6 +5,8 @@ import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import {Blocker} from "../../blocker";
+import {fromPromise} from "../../observable.extensions";
+import {flatMap} from "rxjs/operators";
 
 @Component({
   templateUrl: './sign-in.component.html',
@@ -31,16 +33,13 @@ export class SignInComponent {
   }
 
   public signInWithGoogle(): void {
-    this.blocker.subject.next(true);
-    this.angularFireAuth.auth.signInWithPopup(new GoogleAuthProvider()).then(() => {
-      this.daoUsers.update(this.angularFireAuth.auth.currentUser.uid, {
-        name: this.angularFireAuth.auth.currentUser.displayName.toLowerCase(),
-        photo: this.angularFireAuth.auth.currentUser.photoURL
-      }).then(() => {
-        this.blocker.subject.next(false);
-        this.goIn();
-      });
-    });
+    fromPromise(this.angularFireAuth.auth.signInWithPopup(new GoogleAuthProvider()))
+      .pipe(flatMap(u => {
+        return fromPromise(this.daoUsers.update(u.user.uid, {
+          name: u.user.displayName.toLowerCase(),
+          photo: u.user.photoURL
+        }))
+      }), this.blocker.toPipe()).subscribe(() => this.goIn());
   }
 
   private goIn() {
