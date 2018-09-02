@@ -259,5 +259,9 @@
   "plays": "Plays",
   "unknown": "Unknown...",
   "successes": "Successes",
-  "choose-character": "Choose a character"
+  "choose-character": "Choose a character",
+  "custom-roll": "Roll dices",
+  "amount": "Amount",
+  "roll": "Roll",
+  "no-hunger": "No hunger"
 }

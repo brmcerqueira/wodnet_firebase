@@ -14,6 +14,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {adjuncts} from '../../adjunct';
 import {specializations} from '../../specialization';
 import {map} from "rxjs/operators";
+import {Blocker} from "../../blocker";
 
 enum RollState {
   Failure,
@@ -66,6 +67,7 @@ export class DiceBoardComponent {
   public characters: Observable<SnapshotAction[]>;
   private subscription: Subscription;
   public character: Character;
+  public charactersBlocker: Blocker;
 
   constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -75,6 +77,7 @@ export class DiceBoardComponent {
     this.isStoryteller = activatedRoute.snapshot.data.isStoryteller;
     this.chronicleId = this.activatedRoute.snapshot.params.chronicleKey;
     this.isShowPlayAccordionWhenCollapse = false;
+    this.charactersBlocker = new Blocker();
 
     this.customRollFormGroup = this.formBuilder.group({
       amount: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
@@ -89,7 +92,7 @@ export class DiceBoardComponent {
 
     if (this.isStoryteller) {
       this.characters = database.list('characters',
-        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges();
+        r => r.orderByChild('chronicleId').equalTo(this.chronicleId)).snapshotChanges().pipe(this.charactersBlocker.toPipe());
     }
 
     this.character = null;

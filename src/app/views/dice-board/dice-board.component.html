@@ -49,6 +49,9 @@
           <ng-template ngbPanelTitle><span class="pr-4">{{ 'choose-character' | translate }}</span><span class="badge badge-secondary" *ngIf="character">{{character.name}}</span></ng-template>
           <ng-template ngbPanelContent>
             <ul class="list-group list-group-flush">
+              <li class="list-group-item clearfix" *ngIf="charactersBlocker.value">
+                <div class="d-flex justify-content-center"><span class="fa fa-spinner rotation-animation"></span></div>
+              </li>
               <li class="list-group-item clearfix" *ngFor="let item of characters | async">
                 <div class="float-left">{{ item.payload.val().name }}</div>
                 <div class="float-right"><button type="button" class="btn btn-outline-primary btn-sm" (click)="observeCharacter(item.payload.key)"><i class="fa fa-arrow-right"></i></button></div>
@@ -63,10 +66,18 @@
           <ng-template ngbPanelTitle>{{ 'custom-roll' | translate }}</ng-template>
           <ng-template ngbPanelContent>
             <form [formGroup]="customRollFormGroup" (submit)="customRoll()">
-              <button [disabled]="!customRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
-              <input type="number" formControlName="amount"/>
-              <button *ngIf="!isStoryteller" type="button" (click)="noHunger()">{{ 'no-hunger' | translate }}</button>
-              <input type="number" formControlName="hunger" [readonly]="!isStoryteller"/>
+              <div class="form-group">
+                <label class="form-control-label" for="inputAmount">{{ 'amount' | translate }}</label>
+                <input type="number" class="form-control" id="inputAmount" formControlName="amount">
+              </div>
+              <div class="form-group">
+                <label class="form-control-label" for="inputHunger">{{ 'hunger' | translate }}</label>
+                <input type="number" class="form-control" id="inputHunger" formControlName="hunger" [readonly]="!isStoryteller">
+              </div>
+              <div class="d-flex justify-content-around">
+                <div class="p-2" *ngIf="!isStoryteller"><button type="button" class="btn btn-outline-primary" (click)="noHunger()">{{ 'no-hunger' | translate }}</button></div>
+                <div class="p-2"><button type="submit" class="btn btn-outline-primary" [disabled]="!customRollFormGroup.valid">{{ 'roll' | translate }}</button></div>
+              </div>
             </form>
           </ng-template>
         </ngb-panel>

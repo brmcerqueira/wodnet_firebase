@@ -259,5 +259,9 @@
   "plays": "Jogadas",
   "unknown": "Desconhecido...",
   "successes": "Sucessos",
-  "choose-character": "Escolha um personagem"
+  "choose-character": "Escolha um personagem",
+  "custom-roll": "Jogar dados",
+  "amount": "Quantidade",
+  "roll": "Jogar",
+  "no-hunger": "Sem fome"
 }
