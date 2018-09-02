@@ -20,3 +20,26 @@ ul {
   from { -webkit-transform: rotate(0deg);}
   to { -webkit-transform: rotate(360deg);}
 }
+
+.ng-invalid.ng-touched {
+  border-color: #FF0039;
+}
+
+.ng-valid.ng-touched{
+  border-color: #34ad34;
+}
+
+.form-errors{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #FF0039;
+  li{
+    margin: 0;
+    padding: 0;
+  }
+}

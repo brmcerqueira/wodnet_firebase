@@ -40,13 +40,13 @@
         <div class="card-body">
           <p class="card-text">{{'create-chronicle-description' | translate}}</p>
           <form [formGroup]="formGroup" (submit)="createChronicle()">
-            <div class="form-group" [class.has-danger]="nameNgxErrors.hasError('*')">
+            <div class="form-group">
               <label class="form-control-label" for="inputName">{{ 'name' | translate }}</label>
-              <input type="text" class="form-control" [class.is-invalid]="nameNgxErrors.hasError('*')" id="inputName" formControlName="name">
-              <div ngxErrors="name" class="invalid-feedback" #nameNgxErrors="ngxErrors">
-                <div ngxError="required">{{ 'name-required' | translate }}</div>
-                <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
-              </div>
+              <input type="text" class="form-control" id="inputName" formControlName="name">
+              <ul ngxErrors="name" class="form-errors">
+                <li ngxError="required" when="touched"> {{ 'name-required' | translate }} </li>
+                <li [ngxError]="['minlength', 'maxlength']" when="dirty"> {{ 'name-minlength-maxlength' | translate }} </li>
+              </ul>
             </div>
             <button type="submit" class="btn btn-outline-info btn-lg btn-block" [disabled]="!formGroup.valid"><i class="fa fa-plus"></i> {{ 'create' | translate }}</button>
           </form>
