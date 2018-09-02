@@ -8,7 +8,7 @@
   "create-chronicle": "Create Chronicle",
   "name-required": "Name required",
   "name-minlength-maxlength": "Name is not within range",
-  "none": "Nothing loaded yet...",
+  "none": "None",
   "new": "New",
   "save": "Save",
   "isOpen": "Is Open?",
@@ -258,5 +258,6 @@
   "play-dice": "Play Dice",
   "plays": "Plays",
   "unknown": "Unknown...",
-  "successes": "Successes"
+  "successes": "Successes",
+  "choose-character": "Choose a character"
 }

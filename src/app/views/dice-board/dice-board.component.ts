@@ -119,6 +119,7 @@ export class DiceBoardComponent {
       });
     }
     else {
+      this.character = null;
       this.customRollFormGroup.controls.hunger.setValue(1);
     }
   }

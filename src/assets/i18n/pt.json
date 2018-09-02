@@ -8,7 +8,7 @@
   "create-chronicle": "Criar Crônica",
   "name-required": "Nome obrigatório",
   "name-minlength-maxlength": "O nome não está dentro dos limites",
-  "none": "Nada carregado ainda...",
+  "none": "Nenhum",
   "new": "Novo",
   "save": "Salvar",
   "isOpen": "Pode editar?",
@@ -258,5 +258,6 @@
   "play-dice": "Jogar Dados",
   "plays": "Jogadas",
   "unknown": "Desconhecido...",
-  "successes": "Sucessos"
+  "successes": "Sucessos",
+  "choose-character": "Escolha um personagem"
 }

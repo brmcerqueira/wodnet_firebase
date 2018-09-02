@@ -46,11 +46,16 @@
     <div class="col-md-4" [ngClass]="{'d-none d-lg-block': !isShowPlayAccordionWhenCollapse}">
       <ngb-accordion [closeOthers]="true" [activeIds]="isStoryteller ? 'choose-character-panel' : 'custom-roll-panel'">
         <ngb-panel id="choose-character-panel" *ngIf="isStoryteller">
-          <ng-template ngbPanelTitle>{{ 'choose-character' | translate }}</ng-template>
+          <ng-template ngbPanelTitle><span class="pr-4">{{ 'choose-character' | translate }}</span><span class="badge badge-secondary" *ngIf="character">{{character.name}}</span></ng-template>
           <ng-template ngbPanelContent>
-            <ul>
-              <li><button (click)="observeCharacter(null)">{{ 'none' | translate }}</button></li>
-              <li *ngFor="let item of characters | async"><button (click)="observeCharacter(item.payload.key)">{{ item.payload.val().name }}</button></li>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item clearfix" *ngFor="let item of characters | async">
+                <div class="float-left">{{ item.payload.val().name }}</div>
+                <div class="float-right"><button type="button" class="btn btn-outline-primary btn-sm" (click)="observeCharacter(item.payload.key)"><i class="fa fa-arrow-right"></i></button></div>
+              </li>
+              <li class="list-group-item clearfix">
+                <button class="btn btn-outline-primary btn-lg btn-block" (click)="observeCharacter(null)">{{ 'none' | translate }}</button>
+              </li>
             </ul>
           </ng-template>
         </ngb-panel>
