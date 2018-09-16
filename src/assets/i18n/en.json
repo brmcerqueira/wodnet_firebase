@@ -263,5 +263,9 @@
   "custom-roll": "Roll dices",
   "amount": "Amount",
   "roll": "Roll",
-  "no-hunger": "No hunger"
+  "no-hunger": "No hunger",
+  "dice-pool-roll": "Play using dice pool",
+  "modifier": "Modifier",
+  "dice-pool": "Dice pool",
+  "adjuncts": "Adjuncts"
 }

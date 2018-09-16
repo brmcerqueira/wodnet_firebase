@@ -82,14 +82,30 @@
           </ng-template>
         </ngb-panel>
         <ngb-panel id="dice-poll-roll-panel" [disabled]="!character">
-          <ng-template ngbPanelTitle>{{ 'dice-poll-roll' | translate }}</ng-template>
+          <ng-template ngbPanelTitle>{{ 'dice-pool-roll' | translate }}</ng-template>
           <ng-template ngbPanelContent>
             <form [formGroup]="dicePollRollFormGroup" (submit)="dicePollRoll()">
-              <button [disabled]="!dicePollRollFormGroup.valid" type="submit">{{ 'roll' | translate }}</button>
-              {{ character.hunger }}
-              <single-select formControlName="dicePoll" [source]="dicePolls" (selected)="chooseDicePoll($event)"></single-select>
-              <multi-select formControlName="adjuncts" [source]="adjunctsSource"></multi-select>
-              <input type="number" formControlName="modifier"/>
+              <div class="form-group">
+                <label class="form-control-label" for="inputDicePool">{{ 'dice-pool' | translate }}</label>
+                <single-select formControlName="dicePoll" id="inputDicePool" [source]="dicePolls" (selected)="chooseDicePoll($event)"></single-select>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label" for="inputAdjuncts">{{ 'adjuncts' | translate }}</label>
+                <multi-select formControlName="adjuncts" id="inputAdjuncts" [source]="adjunctsSource"></multi-select>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label" for="inputModifier">{{ 'modifier' | translate }}</label>
+                <input type="number" class="form-control" id="inputModifier" formControlName="modifier">
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ 'hunger' | translate }}
+                  <span class="badge badge-primary badge-pill">{{ character.hunger }}</span>
+                </li>
+              </ul>
+              <div class="d-flex justify-content-around">
+                <div class="p-2"><button type="submit" class="btn btn-outline-primary" [disabled]="!dicePollRollFormGroup.valid">{{ 'roll' | translate }}</button></div>
+              </div>
             </form>
           </ng-template>
         </ngb-panel>

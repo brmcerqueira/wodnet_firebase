@@ -263,5 +263,9 @@
   "custom-roll": "Jogar dados",
   "amount": "Quantidade",
   "roll": "Jogar",
-  "no-hunger": "Sem fome"
+  "no-hunger": "Sem fome",
+  "dice-pool-roll": "Jogar usando parada de dados",
+  "modifier": "Modificador",
+  "dice-pool": "Parada de dados",
+  "adjuncts": "Complementos"
 }
