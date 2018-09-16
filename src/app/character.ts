@@ -1,6 +1,5 @@
 import {Clan} from './clan';
-import {Virtue} from './virtue';
-import {Vice} from './vice';
+import {Predator} from "./predator";
 
 export interface Character {
   name: string;
@@ -8,18 +7,18 @@ export interface Character {
   storytellerId: string;
   chronicleId: string;
   isOpen: boolean;
-  virtue: Virtue;
-  vice: Vice;
+  generation: number,
+  predator: Predator;
   clan: Clan;
   strength: number;
   dexterity: number;
   stamina: number;
   charisma: number;
   manipulation: number;
-  appearance: number;
-  perception: number;
+  composure: number;
   intelligence: number;
   wits: number;
+  resolve: number;
   humanity: number;
   touchstones: string;
   backgroundsAndMerits: string;
@@ -27,8 +26,6 @@ export interface Character {
   aggravatedDamage: number;
   consolidateWillpower: number;
   willpower: number;
-  consolidateComposure: number;
-  composure: number;
   hunger: number;
   physical: {
     athletics: number;

@@ -25,18 +25,24 @@
             </ul>
           </div>
         </td>
-        <td>{{ 'virtue' | translate }}</td>
-        <td><single-select formControlName="virtue" [isDisabled]="!isOpen(group)" [source]="virtues"></single-select></td>
-        <td>{{ 'clan' | translate }}</td>
-        <td><single-select formControlName="clan" [isDisabled]="!isOpen(group)" [source]="clans"></single-select></td>
+        <td>{{ 'predator' | translate }}</td>
+        <td><single-select formControlName="predator" [isDisabled]="!isOpen(group)" [source]="predators"></single-select></td>
       </tr>
       <tr>
         <td>{{ 'player' | translate }}</td>
         <td><single-select formControlName="ownerId" [isDisabled]="!isStoryteller" [source]="users"></single-select></td>
-        <td>{{ 'vice' | translate }}</td>
-        <td><single-select formControlName="vice" [isDisabled]="!isOpen(group)" [source]="vices"></single-select></td>
+        <td>{{ 'clan' | translate }}</td>
+        <td><single-select formControlName="clan" [isDisabled]="!isOpen(group)" [source]="clans"></single-select></td>
+      </tr>
+      <tr>
         <td></td>
         <td></td>
+        <td>{{ 'generation' | translate }}</td>
+        <td>
+          <div class="form-group">
+            <input type="number" class="form-control" formControlName="generation" [readonly]="!isOpen(group)">
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -54,24 +60,24 @@
         <td><circle-spinner formControlName="strength" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
         <td>{{ 'charisma' | translate }}</td>
         <td><circle-spinner formControlName="charisma" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'perception' | translate }}</td>
-        <td><circle-spinner formControlName="perception" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'intelligence' | translate }}</td>
+        <td><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
       <tr>
       <tr>
         <td>{{ 'dexterity' | translate }}</td>
         <td><circle-spinner formControlName="dexterity" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
         <td>{{ 'manipulation' | translate }}</td>
         <td><circle-spinner formControlName="manipulation" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'intelligence' | translate }}</td>
-        <td><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'wits' | translate }}</td>
+        <td><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
       <tr>
       <tr>
         <td>{{ 'stamina' | translate }}</td>
         <td><circle-spinner formControlName="stamina" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'appearance' | translate }}</td>
-        <td><circle-spinner formControlName="appearance" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'wits' | translate }}</td>
-        <td><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'composure' | translate }}</td>
+        <td><circle-spinner formControlName="composure" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'resolve' | translate }}</td>
+        <td><circle-spinner formControlName="resolve" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
       <tr>
       </tbody>
     </table>
@@ -104,9 +110,6 @@
     <span>{{ 'willpower' | translate }}</span>
     <span><circle-spinner formControlName="consolidateWillpower" min="0" max="5" [isDisabled]="!isOpen(group)"></circle-spinner></span>
     <span><square-spinner formControlName="willpower" min="0" maxByControl="consolidateWillpower" [isDisabled]="!isOpen(group)"></square-spinner></span>
-    <span>{{ 'composure' | translate }}</span>
-    <span><circle-spinner formControlName="consolidateComposure" min="0" max="5" [isDisabled]="!isOpen(group)"></circle-spinner></span>
-    <span><square-spinner formControlName="composure" min="0" maxByControl="consolidateComposure" [isDisabled]="!isOpen(group)"></square-spinner></span>
     <span>{{ 'hunger' | translate }}</span>
     <span><square-spinner formControlName="hunger" min="0" max="5" [isDisabled]="!isOpen(group)"></square-spinner></span>
     <multi-select formControlName="specializations" [isDisabled]="!isOpen(group)" [source]="specializationsSource"></multi-select>

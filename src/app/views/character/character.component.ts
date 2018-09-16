@@ -7,11 +7,10 @@ import {SelectSource} from '../../select.source';
 import {Character} from '../../character';
 import {Clan} from '../../clan';
 import {TranslateService} from '@ngx-translate/core';
-import {Virtue} from '../../virtue';
-import {Vice} from '../../vice';
 import {Discipline} from '../../discipline';
 import {specializations} from '../../specialization';
 import {Tag} from '../../tag';
+import {Predator} from "../../predator";
 
 @Component({
   selector: 'character',
@@ -49,18 +48,18 @@ export class CharacterComponent implements OnInit {
         storytellerId: c.storytellerId,
         chronicleId: c.chronicleId,
         isOpen: c.isOpen,
-        virtue: c.virtue,
-        vice: c.vice,
+        generation: c.generation,
+        predator: c.predator,
         clan: c.clan,
         strength: c.strength,
         dexterity: c.dexterity,
         stamina: c.stamina,
         charisma: c.charisma,
         manipulation: c.manipulation,
-        appearance: c.appearance,
-        perception: c.perception,
+        composure: c.composure,
         intelligence: c.intelligence,
         wits: c.wits,
+        resolve: c.resolve,
         humanity: c.humanity,
         touchstones: c.touchstones,
         backgroundsAndMerits: c.backgroundsAndMerits,
@@ -68,8 +67,6 @@ export class CharacterComponent implements OnInit {
         aggravatedDamage: c.aggravatedDamage,
         consolidateWillpower: c.consolidateWillpower,
         willpower: c.willpower,
-        consolidateComposure: c.consolidateComposure,
-        composure: c.composure,
         hunger: c.hunger,
         physical: this.formBuilder.group({
           athletics: c.physical.athletics,
@@ -131,12 +128,8 @@ export class CharacterComponent implements OnInit {
     };
   }
 
-  public get virtues(): SelectSource {
-    return this.enumSelectSource(Virtue, true);
-  }
-
-  public get vices(): SelectSource {
-    return this.enumSelectSource(Vice, true);
+  public get predators(): SelectSource {
+    return this.enumSelectSource(Predator, true);
   }
 
   public get clans(): SelectSource {

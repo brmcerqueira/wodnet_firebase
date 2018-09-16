@@ -31,8 +31,8 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-surprise-attack': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.mental.awareness,
-    tags: [Tag.Perception, Tag.Awareness]
+    get: c => c.resolve + c.mental.awareness,
+    tags: [Tag.Resolve, Tag.Awareness]
   },
   'close-combat-brawl': <DicePoll>{
     withHunger: true,
@@ -46,7 +46,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'composure': <DicePoll>{
     withHunger: false,
-    get: c => c.consolidateComposure - c.composure
+    get: c => c.composure
   },
   'willpower': <DicePoll>{
     withHunger: false,
@@ -64,8 +64,8 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'ranged-combat-perception': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.mental.firearms,
-    tags: [Tag.Perception, Tag.Firearms]
+    get: c => c.resolve + c.mental.firearms,
+    tags: [Tag.Resolve, Tag.Firearms]
   },
   'thrown-weapons': <DicePoll>{
     withHunger: true,
@@ -101,20 +101,20 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'auspex-seeing-the-invisible': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.mental.investigation,
-    tags: [Tag.Perception, Tag.Investigation],
+    get: c => c.resolve + c.mental.investigation,
+    tags: [Tag.Resolve, Tag.Investigation],
     has: c => c.disciplines ? c.disciplines.auspex >= 1 : false
   },
   'auspex-heighten-senses': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.mental.investigation,
-    tags: [Tag.Perception, Tag.Investigation],
+    get: c => c.resolve + c.mental.investigation,
+    tags: [Tag.Resolve, Tag.Investigation],
     has: c => c.disciplines ? c.disciplines.auspex >= 1 : false
   },
   'auspex-aura-perception': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.social.empathy,
-    tags: [Tag.Perception, Tag.Empathy],
+    get: c => c.resolve + c.social.empathy,
+    tags: [Tag.Resolve, Tag.Empathy],
     has: c => c.disciplines ? c.disciplines.auspex >= 2 : false
   },
   'resistance-auspex-aura-perception': <DicePoll>{
@@ -124,8 +124,8 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'auspex-spirits-touch': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.social.empathy,
-    tags: [Tag.Perception, Tag.Empathy],
+    get: c => c.resolve + c.social.empathy,
+    tags: [Tag.Resolve, Tag.Empathy],
     has: c => c.disciplines ? c.disciplines.auspex >= 3 : false
   },
   'dominate-command': <DicePoll>{
@@ -193,8 +193,8 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-presence-awe': <DicePoll>{
     withHunger: true,
-    get: c => c.perception + c.consolidateWillpower - c.willpower,
-    tags: [Tag.Perception]
+    get: c => c.resolve + c.consolidateWillpower - c.willpower,
+    tags: [Tag.Resolve]
   },
   'presence-dread-gaze': <DicePoll>{
     withHunger: true,

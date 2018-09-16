@@ -7,9 +7,8 @@ import {Observable} from 'rxjs/Observable';
 import {fromPromise} from '../../observable.extensions';
 import {Subject} from 'rxjs/Subject';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {Virtue} from '../../virtue';
-import {Vice} from '../../vice';
 import {Clan} from '../../clan';
+import {Predator} from "../../predator";
 
 @Component({
   templateUrl: './chronicle.component.html',
@@ -49,18 +48,18 @@ export class ChronicleComponent {
       storytellerId: this.angularFireAuth.auth.currentUser.uid,
       chronicleId: this.chronicleId,
       isOpen: false,
-      virtue: Virtue.Ambitious,
-      vice: Vice.Addictive,
+      generation: 13,
+      predator: Predator.Alleycat,
       clan: Clan.Brujah,
       strength: 1,
       dexterity: 1,
       stamina: 1,
       charisma: 1,
       manipulation: 1,
-      appearance: 1,
-      perception: 1,
+      composure: 1,
       intelligence: 1,
       wits: 1,
+      resolve: 1,
       humanity: 7,
       touchstones: '',
       backgroundsAndMerits: '',
@@ -68,8 +67,6 @@ export class ChronicleComponent {
       aggravatedDamage: 0,
       consolidateWillpower: 0,
       willpower: 0,
-      consolidateComposure: 0,
-      composure: 0,
       hunger: 1,
       physical: {
         athletics: 0,
