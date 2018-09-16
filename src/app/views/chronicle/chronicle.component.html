@@ -1,5 +1,5 @@
 <div class="d-flex flex-row">
-  <div class="mr-auto p-1"><button class="btn btn-primary btn-sm" (click)="newCharacter()">{{ 'new' | translate }}</button></div>
   <div class="p-1" *ngFor="let item of characters | async"><button class="btn btn-outline-primary btn-sm" (click)="characterChange(item)">{{ item.payload.val().name }}</button></div>
+  <div class="ml-auto p-1"><button class="btn btn-primary btn-sm" (click)="newCharacter()">{{ 'new' | translate }}</button></div>
 </div>
 <character [character]="characterSubject" [isStoryteller]="true" (save)="save($event)"></character>

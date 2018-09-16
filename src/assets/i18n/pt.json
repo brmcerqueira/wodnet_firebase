@@ -267,5 +267,7 @@
   "dice-pool-roll": "Jogar usando parada de dados",
   "modifier": "Modificador",
   "dice-pool": "Parada de dados",
-  "adjuncts": "Complementos"
+  "adjuncts": "Complementos",
+  "yes": "Sim",
+  "no": "Não"
 }

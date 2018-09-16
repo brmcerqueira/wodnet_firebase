@@ -1,3 +1,5 @@
-<button *ngIf="!isDisabled" type="button" (click)="less()">-</button>
-<span [innerHTML]="text"></span>
-<button *ngIf="!isDisabled" type="button" (click)="add()">+</button>
+<div class="d-flex flex-row">
+  <button *ngIf="!isDisabled" type="button" class="btn btn-outline-primary btn-sm" (click)="less()"><i class="fas fa-minus"></i></button>
+  <div class="pr-2 pl-2" [innerHTML]="text"></div>
+  <button *ngIf="!isDisabled" type="button" class="btn btn-outline-primary btn-sm" (click)="add()"><i class="fas fa-plus"></i></button>
+</div>

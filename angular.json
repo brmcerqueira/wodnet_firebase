@@ -21,7 +21,10 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
               "src/stylesheet/global.scss"
             ],
             "scripts": []
@@ -72,7 +75,10 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
               "src/stylesheet/global.scss"
             ],
             "assets": [

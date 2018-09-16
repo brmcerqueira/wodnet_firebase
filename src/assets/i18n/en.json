@@ -267,5 +267,7 @@
   "dice-pool-roll": "Play using dice pool",
   "modifier": "Modifier",
   "dice-pool": "Dice pool",
-  "adjuncts": "Adjuncts"
+  "adjuncts": "Adjuncts",
+  "yes": "Yes",
+  "no": "No"
 }

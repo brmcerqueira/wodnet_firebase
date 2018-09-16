@@ -1,69 +1,78 @@
 <div *ngIf="formGroup | async; else none; let group">
   <form [formGroup]="group" (submit)="submit(group.value)">
-    <button *ngIf="isOpen(group)" [disabled]="!group.valid" type="submit">{{ 'save' | translate }}</button>
-    <div *ngIf="isStoryteller">
-      <label for="isOpen">{{ 'isOpen' | translate }}</label>
-      <input id="isOpen" type="checkbox" formControlName="isOpen"/>
+    <div class="d-flex flex-row-reverse">
+      <div class="p-1" *ngIf="isOpen(group)"><button class="btn btn-primary btn-sm" [disabled]="!group.valid" type="submit">{{ 'save' | translate }}</button></div>
+      <div class="p-1 btn-group btn-group-toggle" *ngIf="isStoryteller" ngbRadioGroup formControlName="isOpen">
+        <label ngbButtonLabel class="btn btn-outline-success btn-sm">
+          <input ngbButton type="radio" [value]="true"> {{ 'yes' | translate }}
+        </label>
+        <label ngbButtonLabel class="btn btn-outline-warning btn-sm">
+          <input ngbButton type="radio" [value]="false"> {{ 'no' | translate }}
+        </label>
+      </div>
+      <div class="p-1" *ngIf="isStoryteller"><h6>{{ 'isOpen' | translate }}</h6></div>
     </div>
-    <table>
+    <table class="table table-hover">
       <tbody>
-        <tr>
-          <td>{{ 'name' | translate }}</td>
-          <td>
-            <input type="text" formControlName="name" [readonly]="!isOpen(group)"/>
-            <div ngxErrors="name">
-              <div ngxError="required">{{ 'name-required' | translate }}</div>
-              <div [ngxError]="['minlength', 'maxlength']">{{ 'name-minlength-maxlength' | translate }}</div>
-            </div>
-          </td>
-          <td>{{ 'virtue' | translate }}</td>
-          <td><single-select formControlName="virtue" [isDisabled]="!isOpen(group)" [source]="virtues"></single-select></td>
-          <td>{{ 'clan' | translate }}</td>
-          <td><single-select formControlName="clan" [isDisabled]="!isOpen(group)" [source]="clans"></single-select></td>
-        </tr>
-        <tr>
-          <td>{{ 'player' | translate }}</td>
-          <td><single-select formControlName="ownerId" [isDisabled]="!isStoryteller" [source]="users"></single-select></td>
-          <td>{{ 'vice' | translate }}</td>
-          <td><single-select formControlName="vice" [isDisabled]="!isOpen(group)" [source]="vices"></single-select></td>
-          <td></td>
-          <td></td>
-        </tr>
+      <tr>
+        <td>{{ 'name' | translate }}</td>
+        <td>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="name" [readonly]="!isOpen(group)">
+            <ul ngxErrors="name" class="form-errors">
+              <li ngxError="required" when="touched"> {{ 'name-required' | translate }} </li>
+              <li [ngxError]="['minlength', 'maxlength']" when="dirty"> {{ 'name-minlength-maxlength' | translate }} </li>
+            </ul>
+          </div>
+        </td>
+        <td>{{ 'virtue' | translate }}</td>
+        <td><single-select formControlName="virtue" [isDisabled]="!isOpen(group)" [source]="virtues"></single-select></td>
+        <td>{{ 'clan' | translate }}</td>
+        <td><single-select formControlName="clan" [isDisabled]="!isOpen(group)" [source]="clans"></single-select></td>
+      </tr>
+      <tr>
+        <td>{{ 'player' | translate }}</td>
+        <td><single-select formControlName="ownerId" [isDisabled]="!isStoryteller" [source]="users"></single-select></td>
+        <td>{{ 'vice' | translate }}</td>
+        <td><single-select formControlName="vice" [isDisabled]="!isOpen(group)" [source]="vices"></single-select></td>
+        <td></td>
+        <td></td>
+      </tr>
       </tbody>
     </table>
-    <table>
+    <table class="table table-hover">
       <thead>
-        <tr>
-          <th colspan="2">{{ 'physical' | translate }}</th>
-          <th colspan="2">{{ 'social' | translate }}</th>
-          <th colspan="2">{{ 'mental' | translate }}</th>
-        </tr>
+      <tr>
+        <th colspan="2">{{ 'physical' | translate }}</th>
+        <th colspan="2">{{ 'social' | translate }}</th>
+        <th colspan="2">{{ 'mental' | translate }}</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{ 'strength' | translate }}</td>
-          <td><circle-spinner formControlName="strength" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-          <td>{{ 'charisma' | translate }}</td>
-          <td><circle-spinner formControlName="charisma" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-          <td>{{ 'perception' | translate }}</td>
-          <td><circle-spinner formControlName="perception" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <tr>
-        <tr>
-          <td>{{ 'dexterity' | translate }}</td>
-          <td><circle-spinner formControlName="dexterity" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-          <td>{{ 'manipulation' | translate }}</td>
-          <td><circle-spinner formControlName="manipulation" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-          <td>{{ 'intelligence' | translate }}</td>
-          <td><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <tr>
-        <tr>
-          <td>{{ 'stamina' | translate }}</td>
-          <td><circle-spinner formControlName="stamina" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-          <td>{{ 'appearance' | translate }}</td>
-          <td><circle-spinner formControlName="appearance" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-          <td>{{ 'wits' | translate }}</td>
-          <td><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <tr>
+      <tr>
+        <td>{{ 'strength' | translate }}</td>
+        <td><circle-spinner formControlName="strength" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'charisma' | translate }}</td>
+        <td><circle-spinner formControlName="charisma" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'perception' | translate }}</td>
+        <td><circle-spinner formControlName="perception" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+      <tr>
+      <tr>
+        <td>{{ 'dexterity' | translate }}</td>
+        <td><circle-spinner formControlName="dexterity" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'manipulation' | translate }}</td>
+        <td><circle-spinner formControlName="manipulation" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'intelligence' | translate }}</td>
+        <td><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+      <tr>
+      <tr>
+        <td>{{ 'stamina' | translate }}</td>
+        <td><circle-spinner formControlName="stamina" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'appearance' | translate }}</td>
+        <td><circle-spinner formControlName="appearance" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+        <td>{{ 'wits' | translate }}</td>
+        <td><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
+      <tr>
       </tbody>
     </table>
     <ul [formGroup]="group.controls.physical">
@@ -109,4 +118,3 @@
   </form>
 </div>
 <ng-template #none><p>{{ 'none' | translate }}</p></ng-template>
-
