@@ -29,8 +29,6 @@
   "stamina": "Vigor",
   "charisma": "Carisma",
   "manipulation": "Manipulação",
-  "appearance": "Aparência",
-  "perception": "Percepção",
   "intelligence": "Inteligência",
   "wits": "Raciocínio",
   "athletics": "Esportes",
@@ -261,5 +259,6 @@
   "sandman": "João pestana",
   "scenequeen": "Rainha da cena",
   "siren": "Sereia",
-  "resolve": "Perseverança"
+  "resolve": "Perseverança",
+  "experience": "Experiência"
 }

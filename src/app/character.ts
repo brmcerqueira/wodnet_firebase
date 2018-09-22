@@ -7,6 +7,7 @@ export interface Character {
   storytellerId: string;
   chronicleId: string;
   isOpen: boolean;
+  experience: number;
   generation: number,
   predator: Predator;
   clan: Clan;

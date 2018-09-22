@@ -48,6 +48,7 @@ export class ChronicleComponent {
       storytellerId: this.angularFireAuth.auth.currentUser.uid,
       chronicleId: this.chronicleId,
       isOpen: false,
+      experience: 0,
       generation: 13,
       predator: Predator.Alleycat,
       clan: Clan.Brujah,

@@ -12,93 +12,115 @@
       </div>
       <div class="p-1" *ngIf="isStoryteller"><h6>{{ 'isOpen' | translate }}</h6></div>
     </div>
-    <table class="table table-hover">
-      <tbody>
-      <tr>
-        <td>{{ 'name' | translate }}</td>
-        <td>
-          <div class="form-group">
+    <div class="d-flex justify-content-around">
+      <ul>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'name' | translate }}</div>
+          <div class="w-50">
             <input type="text" class="form-control" formControlName="name" [readonly]="!isOpen(group)">
             <ul ngxErrors="name" class="form-errors">
               <li ngxError="required" when="touched"> {{ 'name-required' | translate }} </li>
               <li [ngxError]="['minlength', 'maxlength']" when="dirty"> {{ 'name-minlength-maxlength' | translate }} </li>
             </ul>
           </div>
-        </td>
-        <td>{{ 'predator' | translate }}</td>
-        <td><single-select formControlName="predator" [isDisabled]="!isOpen(group)" [source]="predators"></single-select></td>
-      </tr>
-      <tr>
-        <td>{{ 'player' | translate }}</td>
-        <td><single-select formControlName="ownerId" [isDisabled]="!isStoryteller" [source]="users"></single-select></td>
-        <td>{{ 'clan' | translate }}</td>
-        <td><single-select formControlName="clan" [isDisabled]="!isOpen(group)" [source]="clans"></single-select></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td>{{ 'generation' | translate }}</td>
-        <td>
-          <div class="form-group">
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'player' | translate }}</div>
+          <div class="w-50"><single-select formControlName="ownerId" [isDisabled]="!isStoryteller" [source]="users"></single-select></div>
+        </li>
+      </ul>
+      <ul>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'predator' | translate }}</div>
+          <div class="w-50"><single-select formControlName="predator" [isDisabled]="!isOpen(group)" [source]="predators"></single-select></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'clan' | translate }}</div>
+          <div class="w-50"><single-select formControlName="clan" [isDisabled]="!isOpen(group)" [source]="clans"></single-select></div>
+        </li>
+      </ul>
+      <ul>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'generation' | translate }}</div>
+          <div class="w-50">
             <input type="number" class="form-control" formControlName="generation" [readonly]="!isOpen(group)">
           </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th colspan="2">{{ 'physical' | translate }}</th>
-        <th colspan="2">{{ 'social' | translate }}</th>
-        <th colspan="2">{{ 'mental' | translate }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>{{ 'strength' | translate }}</td>
-        <td><circle-spinner formControlName="strength" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'charisma' | translate }}</td>
-        <td><circle-spinner formControlName="charisma" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'intelligence' | translate }}</td>
-        <td><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-      <tr>
-      <tr>
-        <td>{{ 'dexterity' | translate }}</td>
-        <td><circle-spinner formControlName="dexterity" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'manipulation' | translate }}</td>
-        <td><circle-spinner formControlName="manipulation" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'wits' | translate }}</td>
-        <td><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-      <tr>
-      <tr>
-        <td>{{ 'stamina' | translate }}</td>
-        <td><circle-spinner formControlName="stamina" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'composure' | translate }}</td>
-        <td><circle-spinner formControlName="composure" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-        <td>{{ 'resolve' | translate }}</td>
-        <td><circle-spinner formControlName="resolve" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></td>
-      <tr>
-      </tbody>
-    </table>
-    <ul [formGroup]="group.controls.physical">
-      <li *ngFor="let item of group.controls.physical | formGroupParse">
-        <span>{{ item.label }}</span>
-        <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></span>
-      </li>
-    </ul>
-    <ul [formGroup]="group.controls.social">
-      <li *ngFor="let item of group.controls.social | formGroupParse">
-        <span>{{ item.label }}</span>
-        <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></span>
-      </li>
-    </ul>
-    <ul [formGroup]="group.controls.mental">
-      <li *ngFor="let item of group.controls.mental | formGroupParse">
-        <span>{{ item.label }}</span>
-        <span><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></span>
-      </li>
-    </ul>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'experience' | translate }}</div>
+          <div class="w-50">
+            <input type="number" class="form-control" formControlName="experience" [readonly]="!isOpen(group)">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-around">
+      <ul>
+        <li class="attributes"><h5>{{ 'physical' | translate }}</h5></li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'strength' | translate }}</div>
+          <div><circle-spinner formControlName="strength" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'dexterity' | translate }}</div>
+          <div><circle-spinner formControlName="dexterity" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'stamina' | translate }}</div>
+          <div><circle-spinner formControlName="stamina" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+      </ul>
+      <ul>
+        <li class="attributes"><h5>{{ 'social' | translate }}</h5></li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'charisma' | translate }}</div>
+          <div><circle-spinner formControlName="charisma" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'manipulation' | translate }}</div>
+          <div><circle-spinner formControlName="manipulation" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'composure' | translate }}</div>
+          <div><circle-spinner formControlName="composure" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+      </ul>
+      <ul>
+        <li class="attributes"><h5>{{ 'mental' | translate }}</h5></li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'intelligence' | translate }}</div>
+          <div><circle-spinner formControlName="intelligence" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'wits' | translate }}</div>
+          <div><circle-spinner formControlName="wits" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+        <li class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ 'resolve' | translate }}</div>
+          <div><circle-spinner formControlName="resolve" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-around">
+      <ul [formGroup]="group.controls.physical">
+        <li *ngFor="let item of group.controls.physical | formGroupParse" class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ item.label }}</div>
+          <div><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+      </ul>
+      <ul [formGroup]="group.controls.social">
+        <li *ngFor="let item of group.controls.social | formGroupParse" class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ item.label }}</div>
+          <div><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+      </ul>
+      <ul [formGroup]="group.controls.mental">
+        <li *ngFor="let item of group.controls.mental | formGroupParse" class="d-flex justify-content-end pt-1 pb-1">
+          <div class="pr-4 tag">{{ item.label }}</div>
+          <div><circle-spinner [formControlName]="item.key" [min]="skillMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner></div>
+        </li>
+      </ul>
+    </div>
     <span>{{ 'humanity' | translate }}</span>
     <span><circle-spinner formControlName="humanity" min="1" max="10" [isDisabled]="!isOpen(group)"></circle-spinner></span>
     <span>{{ 'touchstones' | translate }}</span>

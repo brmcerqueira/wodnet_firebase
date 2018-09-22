@@ -48,6 +48,7 @@ export class CharacterComponent implements OnInit {
         storytellerId: c.storytellerId,
         chronicleId: c.chronicleId,
         isOpen: c.isOpen,
+        experience: c.experience,
         generation: c.generation,
         predator: c.predator,
         clan: c.clan,

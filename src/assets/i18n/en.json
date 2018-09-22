@@ -29,8 +29,6 @@
   "stamina": "Stamina",
   "charisma": "Charisma",
   "manipulation": "Manipulation",
-  "appearance": "Appearance",
-  "perception": "Perception",
   "intelligence": "Intelligence",
   "wits": "Wits",
   "athletics": "Athletics",
@@ -261,5 +259,6 @@
   "sandman": "Sandman",
   "scenequeen": "Scene Queen",
   "siren": "Siren",
-  "resolve": "Resolve"
+  "resolve": "Resolve",
+  "experience": "Experience"
 }
