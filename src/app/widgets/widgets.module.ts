@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
 import {ChronicleNamePipe} from "./chronicle.name.pipe";
+import {WillpowerComponent} from "./health/willpower.component";
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import {ChronicleNamePipe} from "./chronicle.name.pipe";
     SquareSpinnerComponent,
     DynamicFormGroupComponent,
     HealthComponent,
+    WillpowerComponent,
     FormGroupParsePipe,
     ChronicleNamePipe,
     WrapperDirective
@@ -44,6 +46,7 @@ import {ChronicleNamePipe} from "./chronicle.name.pipe";
     SquareSpinnerComponent,
     DynamicFormGroupComponent,
     HealthComponent,
+    WillpowerComponent,
     FormGroupParsePipe,
     ChronicleNamePipe,
     WrapperDirective

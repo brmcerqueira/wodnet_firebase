@@ -23,10 +23,10 @@ export interface Character {
   humanity: number;
   touchstones: string;
   backgroundsAndMerits: string;
-  superficialDamage: number;
-  aggravatedDamage: number;
-  consolidateWillpower: number;
-  willpower: number;
+  healthSuperficialDamage: number;
+  healthAggravatedDamage: number;
+  willpowerSuperficialDamage: number;
+  willpowerAggravatedDamage: number;
   hunger: number;
   physical: {
     athletics: number;

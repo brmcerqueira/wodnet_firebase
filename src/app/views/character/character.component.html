@@ -102,6 +102,16 @@
       </ul>
     </div>
     <div class="d-flex justify-content-around">
+      <ul>
+        <li class="attributes"><h5>{{ 'health' | translate }}</h5></li>
+        <li><health [isDisabled]="!isOpen(group)"></health></li>
+      </ul>
+      <ul>
+        <li class="attributes"><h5>{{ 'willpower' | translate }}</h5></li>
+        <li><willpower [isDisabled]="!isOpen(group)"></willpower></li>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-around">
       <ul [formGroup]="group.controls.physical">
         <li *ngFor="let item of group.controls.physical | formGroupParse" class="d-flex justify-content-end pt-1 pb-1">
           <div class="pr-4 tag">{{ item.label }}</div>
@@ -127,11 +137,6 @@
     <input type="text" formControlName="touchstones" [readonly]="!isOpen(group)"/>
     <span>{{ 'backgroundsAndMerits' | translate }}</span>
     <input type="text" formControlName="backgroundsAndMerits" [readonly]="!isOpen(group)"/>
-    <span>{{ 'health' | translate }}</span>
-    <health [isDisabled]="!isOpen(group)"></health>
-    <span>{{ 'willpower' | translate }}</span>
-    <span><circle-spinner formControlName="consolidateWillpower" min="0" max="5" [isDisabled]="!isOpen(group)"></circle-spinner></span>
-    <span><square-spinner formControlName="willpower" min="0" maxByControl="consolidateWillpower" [isDisabled]="!isOpen(group)"></square-spinner></span>
     <span>{{ 'hunger' | translate }}</span>
     <span><square-spinner formControlName="hunger" min="0" max="5" [isDisabled]="!isOpen(group)"></square-spinner></span>
     <multi-select formControlName="specializations" [isDisabled]="!isOpen(group)" [source]="specializationsSource"></multi-select>

@@ -13,7 +13,7 @@ import {FormGroupDirective, NG_VALUE_ACCESSOR} from "@angular/forms";
   }]
 })
 export class SquareSpinnerComponent extends SpinnerComponent {
-  public fillMark = 'p-1 fas fa-square';
+  public fillMark = 'p-1 far fa-check-square';
   public emptyMark = 'p-1 far fa-square';
 
   constructor(@Host() @SkipSelf() parent: FormGroupDirective) {

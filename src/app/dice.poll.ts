@@ -48,10 +48,6 @@ export const dicePolls: { [name: string]: DicePoll } = {
     withHunger: false,
     get: c => c.composure
   },
-  'willpower': <DicePoll>{
-    withHunger: false,
-    get: c => c.consolidateWillpower - c.willpower
-  },
   'grappling': <DicePoll>{
     withHunger: true,
     get: c => c.strength + c.physical.brawl,
@@ -96,7 +92,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-animalism-quell-the-beast': <DicePoll>{
     withHunger: true,
-    get: c => c.charisma + c.consolidateWillpower - c.willpower,
+    get: c => c.charisma,
     tags: [Tag.Charisma]
   },
   'auspex-seeing-the-invisible': <DicePoll>{
@@ -119,7 +115,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-auspex-aura-perception': <DicePoll>{
     withHunger: true,
-    get: c => c.manipulation + c.consolidateWillpower - c.willpower,
+    get: c => c.manipulation,
     tags: [Tag.Manipulation]
   },
   'auspex-spirits-touch': <DicePoll>{
@@ -136,7 +132,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-dominate-command': <DicePoll>{
     withHunger: true,
-    get: c => c.wits + c.consolidateWillpower - c.willpower,
+    get: c => c.wits,
     tags: [Tag.Wits]
   },
   'dominate-mesmerism': <DicePoll>{
@@ -147,7 +143,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-dominate-mesmerism': <DicePoll>{
     withHunger: true,
-    get: c => c.intelligence + c.consolidateWillpower - c.willpower,
+    get: c => c.intelligence,
     tags: [Tag.Intelligence]
   },
   'dominate-forgetful-mind': <DicePoll>{
@@ -158,7 +154,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-dominate-forgetful-mind': <DicePoll>{
     withHunger: true,
-    get: c => c.intelligence + c.consolidateWillpower - c.willpower,
+    get: c => c.intelligence,
     tags: [Tag.Intelligence]
   },
   'resistance-obfuscate-seeing-the-invisible': <DicePoll>{
@@ -193,7 +189,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-presence-awe': <DicePoll>{
     withHunger: true,
-    get: c => c.resolve + c.consolidateWillpower - c.willpower,
+    get: c => c.resolve,
     tags: [Tag.Resolve]
   },
   'presence-dread-gaze': <DicePoll>{
@@ -204,7 +200,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-presence-dread-gaze': <DicePoll>{
     withHunger: true,
-    get: c => c.charisma + c.consolidateWillpower - c.willpower,
+    get: c => c.charisma,
     tags: [Tag.Charisma]
   },
   'presence-entrancement': <DicePoll>{
@@ -215,7 +211,7 @@ export const dicePolls: { [name: string]: DicePoll } = {
   },
   'resistance-presence-entrancement': <DicePoll>{
     withHunger: true,
-    get: c => c.intelligence + c.consolidateWillpower - c.willpower,
+    get: c => c.intelligence,
     tags: [Tag.Intelligence]
   }
 };
