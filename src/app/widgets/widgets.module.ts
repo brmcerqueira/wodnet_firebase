@@ -13,7 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
 import {ChronicleNamePipe} from "./chronicle.name.pipe";
-import {DamageComponent} from "./health/damage.component";
+import {DamageComponent} from "./damage/damage.component";
 
 @NgModule({
   imports: [

@@ -11,8 +11,7 @@ import {Discipline} from '../../discipline';
 import {specializations} from '../../specialization';
 import {Tag} from '../../tag';
 import {Predator} from "../../predator";
-import { map} from "rxjs/operators";
-import { merge } from 'rxjs';
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'character',
@@ -43,7 +42,7 @@ export class CharacterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formGroup = this.character.map(c => {
+    this.formGroup = this.character.pipe(map(c => {
       return this.formBuilder.group({
         name: [c.name, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
         ownerId: c.ownerId,
@@ -105,7 +104,7 @@ export class CharacterComponent implements OnInit {
         specializations: this.formBuilder.control(c.specializations ? c.specializations : null),
         disciplines: this.formBuilder.group(c.disciplines ? c.disciplines : {})
       });
-    });
+    }));
   }
 
   private enumSelectSource(enumObject: any, useIndex: boolean): SelectSource {
@@ -165,26 +164,17 @@ export class CharacterComponent implements OnInit {
       return this.database.list('users', r => byKey
         ? r.orderByKey().equalTo(data)
         : r.orderByChild('name').startAt(data).endAt(`${data}\uf8ff`))
-        .snapshotChanges().map(array => array.map(u => {
+        .snapshotChanges().pipe(map(array => array.map(u => {
           return { id: u.payload.key, text: u.payload.val().name };
-        }));
+        })));
     };
   }
 
   public createDisciplineControl(): AbstractControl {
-    return new FormControl(1);
+    return this.formBuilder.control(1);
   }
 
   public submit(character: Character): void {
     this.save.emit(character);
-  }
-
-  public healthMax(formGroup: FormGroup): Observable<number> {
-    return formGroup.controls.stamina.valueChanges.pipe(map(v => v + 3));
-  }
-
-  public willpowerMax(formGroup: FormGroup): Observable<number> {
-    return merge(formGroup.controls.composure.valueChanges.pipe(map(v => v + formGroup.controls.resolve.value)),
-      formGroup.controls.resolve.valueChanges.pipe(map(v => v + formGroup.controls.composure.value)));
   }
 }

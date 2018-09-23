@@ -1,4 +1,4 @@
-import {Host, Input, OnInit, SkipSelf} from '@angular/core';
+import {Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormGroupDirective} from '@angular/forms';
 
 export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
@@ -12,7 +12,7 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
   private onChange: (value: number) => void;
   private onTouched: () => void;
 
-  constructor(private parent: FormGroupDirective) {
+  protected constructor(private parent: FormGroupDirective) {
     this.value = 0;
     this.text = null;
   }
@@ -23,7 +23,15 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
 
   public ngOnInit(): void {
     this.value = this.min;
+    this.updateSubscribes();
+    this.updateValue();
+  }
 
+  public abstract get fillMark(): string;
+
+  public abstract get emptyMark(): string;
+
+  private updateSubscribes(): void {
     if (this.maxByControl) {
       this.parent.form.controls[this.maxByControl].valueChanges.subscribe(m => {
         if (this.value > this.currentMax) {
@@ -32,13 +40,7 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
         this.updateValue();
       });
     }
-
-    this.updateValue();
   }
-
-  public abstract get fillMark(): string;
-
-  public abstract get emptyMark(): string;
 
   public updateText(): void {
       this.text = '';
@@ -79,6 +81,7 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
   public writeValue(value: number): void {
     this.value = value;
     this.updateText();
+    this.updateSubscribes();
   }
 
   public registerOnChange(fn: (value: number) => void): void {
