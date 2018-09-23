@@ -1,82 +1,120 @@
-import {Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Damage} from "../../damage";
 
-export abstract class DamageComponent implements OnInit {
+@Component({
+  selector: 'damage',
+  templateUrl: './damage.component.html',
+  styleUrls: ['./damage.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DamageComponent),
+    multi: true
+  }]
+})
+export class DamageComponent implements ControlValueAccessor, OnInit {
 
-  public damage: string;
+  private superficial: number;
+  private aggravated: number;
+  private total: number;
+  public text: string;
+  @Input() public max: Observable<number>;
   @Input() public isDisabled: boolean;
+  private onChange: (damage: Damage) => void;
+  private onTouched: () => void;
 
   constructor() {
-    this.damage = null;
+    this.superficial = 0;
+    this.aggravated = 0;
+    this.total = this.totalDamage;
+    this.text = null;
   }
 
   public ngOnInit(): void {
-    this.updateDamage();
-    this.valueChanges.subscribe(() => {
-      if (this.totalDamage > this.totalHealth) {
-        if (this.superficialDamage > 0) {
-          this.superficialDamage--;
+    this.updateText();
+    this.max.subscribe(m => {
+      this.total = m;
+      if (this.totalDamage > this.total) {
+        if (this.superficial > 0) {
+          this.superficial--;
         }
         else {
-          this.aggravatedDamage--;
+          this.aggravated--;
         }
       }
-      this.updateDamage();
+      this.updateValue();
     });
   }
 
-  protected abstract get valueChanges(): Observable<number>;
+  private get totalDamage(): number {
+    return this.aggravated + this.superficial;
+  }
 
-  protected abstract get totalHealth(): number;
-
-  protected abstract get superficialDamage(): number;
-
-  protected abstract set superficialDamage(value: number);
-
-  protected abstract get aggravatedDamage(): number;
-
-  protected abstract set aggravatedDamage(value: number);
-
-  protected abstract get totalDamage(): number;
-
-  private updateDamage(): void {
-    this.damage = '';
-    for (let i = 0; i < this.aggravatedDamage; i++) {
-      this.damage += '<i class="p-1 fas fa-square"></i>';
+  private updateText(): void {
+    this.text = '';
+    for (let i = 0; i < this.aggravated; i++) {
+      this.text += '<i class="p-1 fas fa-square"></i>';
     }
-    for (let i = 0; i < this.superficialDamage; i++) {
-      this.damage += '<i class="p-1 far fa-check-square"></i>';
+    for (let i = 0; i < this.superficial; i++) {
+      this.text += '<i class="p-1 far fa-check-square"></i>';
     }
-    for (let i = 0; i < this.totalHealth - this.totalDamage; i++) {
-      this.damage += '<i class="p-1 far fa-square"></i>';
+    for (let i = 0; i < this.total - this.totalDamage; i++) {
+      this.text += '<i class="p-1 far fa-square"></i>';
+    }
+  }
+
+  private updateValue() {
+    this.updateText();
+
+    if (this.onChange) {
+      this.onChange({ superficial: this.superficial, aggravated: this.aggravated });
+    }
+
+    if (this.onTouched) {
+      this.onTouched();
     }
   }
 
   public lessAggravated(): void {
-    if (this.aggravatedDamage > 0) {
-      this.aggravatedDamage--;
-      this.updateDamage();
+    if (this.aggravated > 0) {
+      this.aggravated--;
+      this.updateValue();
     }
   }
 
   public lessSuperficial(): void {
-    if (this.superficialDamage > 0) {
-      this.superficialDamage--;
-      this.updateDamage();
+    if (this.superficial > 0) {
+      this.superficial--;
+      this.updateValue();
     }
   }
 
   public addSuperficial(): void {
-    if (this.totalHealth > this.totalDamage) {
-      this.superficialDamage++;
-      this.updateDamage();
+    if (this.total > this.totalDamage) {
+      this.superficial++;
+      this.updateValue();
     }
   }
 
   public addAggravated(): void {
-    if (this.totalHealth > this.totalDamage) {
-      this.aggravatedDamage++;
-      this.updateDamage();
+    if (this.total > this.totalDamage) {
+      this.aggravated++;
+      this.updateValue();
     }
+  }
+
+  public writeValue(value: Damage): void {
+    this.superficial = value.superficial;
+    this.aggravated = value.aggravated;
+    this.updateText();
+  }
+
+  public registerOnChange(fn: (damage: Damage) => void): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 }

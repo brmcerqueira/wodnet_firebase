@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-outline-primary btn-sm" (click)="lessAggravated()"><i class="fas fa-minus pr-1"></i><i class="fas fa-square"></i></button>
     <button type="button" class="btn btn-outline-primary btn-sm" (click)="lessSuperficial()"><i class="fas fa-minus pr-1"></i><i class="far fa-check-square"></i></button>
   </div>
-  <div class="pr-2 pl-2" [innerHTML]="damage"></div>
+  <div class="pr-2 pl-2" [innerHTML]="text"></div>
   <div *ngIf="!isDisabled" class="btn-group">
     <button type="button" class="btn btn-outline-primary btn-sm" (click)="addSuperficial()"><i class="far fa-check-square pr-1"></i><i class="fas fa-plus"></i></button>
     <button type="button" class="btn btn-outline-primary btn-sm" (click)="addAggravated()"><i class="fas fa-square pr-1"></i><i class="fas fa-plus"></i></button>

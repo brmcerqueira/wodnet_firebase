@@ -64,10 +64,14 @@ export class ChronicleComponent {
       humanity: 7,
       touchstones: '',
       backgroundsAndMerits: '',
-      healthSuperficialDamage: 0,
-      healthAggravatedDamage: 0,
-      willpowerSuperficialDamage: 0,
-      willpowerAggravatedDamage: 0,
+      health: {
+        superficial: 0,
+        aggravated: 0
+      },
+      willpower: {
+        superficial: 0,
+        aggravated: 0
+      },
       hunger: 1,
       physical: {
         athletics: 0,

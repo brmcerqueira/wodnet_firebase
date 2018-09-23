@@ -1,5 +1,6 @@
 import {Clan} from './clan';
 import {Predator} from "./predator";
+import {Damage} from "./damage";
 
 export interface Character {
   name: string;
@@ -23,10 +24,8 @@ export interface Character {
   humanity: number;
   touchstones: string;
   backgroundsAndMerits: string;
-  healthSuperficialDamage: number;
-  healthAggravatedDamage: number;
-  willpowerSuperficialDamage: number;
-  willpowerAggravatedDamage: number;
+  health: Damage;
+  willpower: Damage;
   hunger: number;
   physical: {
     athletics: number;

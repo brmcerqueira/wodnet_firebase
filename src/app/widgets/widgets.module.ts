@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { GlobalBlockerComponent } from './global-blocker/global-blocker.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import {HealthComponent} from "./health/health.component";
 import {SingleSelectComponent} from "./select/single-select.component";
 import {MultiSelectComponent} from "./select/multi-select.component";
 import {SquareSpinnerComponent} from "./spinner/square-spinner.component";
@@ -14,7 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormGroupParsePipe} from "./form.group.parse.pipe";
 import {WrapperDirective} from "./wrapper.directive";
 import {ChronicleNamePipe} from "./chronicle.name.pipe";
-import {WillpowerComponent} from "./health/willpower.component";
+import {DamageComponent} from "./health/damage.component";
 
 @NgModule({
   imports: [
@@ -32,8 +31,7 @@ import {WillpowerComponent} from "./health/willpower.component";
     CircleSpinnerComponent,
     SquareSpinnerComponent,
     DynamicFormGroupComponent,
-    HealthComponent,
-    WillpowerComponent,
+    DamageComponent,
     FormGroupParsePipe,
     ChronicleNamePipe,
     WrapperDirective
@@ -45,8 +43,7 @@ import {WillpowerComponent} from "./health/willpower.component";
     CircleSpinnerComponent,
     SquareSpinnerComponent,
     DynamicFormGroupComponent,
-    HealthComponent,
-    WillpowerComponent,
+    DamageComponent,
     FormGroupParsePipe,
     ChronicleNamePipe,
     WrapperDirective

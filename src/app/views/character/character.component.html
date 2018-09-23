@@ -104,11 +104,11 @@
     <div class="d-flex justify-content-around">
       <ul>
         <li class="attributes"><h5>{{ 'health' | translate }}</h5></li>
-        <li><health [isDisabled]="!isOpen(group)"></health></li>
+        <li><damage formControlName="health" [max]="healthMax(group)" [isDisabled]="!isOpen(group)"></damage></li>
       </ul>
       <ul>
         <li class="attributes"><h5>{{ 'willpower' | translate }}</h5></li>
-        <li><willpower [isDisabled]="!isOpen(group)"></willpower></li>
+        <li><damage formControlName="willpower" [max]="willpowerMax(group)" [isDisabled]="!isOpen(group)"></damage></li>
       </ul>
     </div>
     <div class="d-flex justify-content-around">

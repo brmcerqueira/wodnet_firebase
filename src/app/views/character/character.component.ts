@@ -11,6 +11,8 @@ import {Discipline} from '../../discipline';
 import {specializations} from '../../specialization';
 import {Tag} from '../../tag';
 import {Predator} from "../../predator";
+import { map} from "rxjs/operators";
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'character',
@@ -64,10 +66,8 @@ export class CharacterComponent implements OnInit {
         humanity: c.humanity,
         touchstones: c.touchstones,
         backgroundsAndMerits: c.backgroundsAndMerits,
-        healthSuperficialDamage: c.healthSuperficialDamage,
-        healthAggravatedDamage: c.healthAggravatedDamage,
-        willpowerSuperficialDamage: c.willpowerSuperficialDamage,
-        willpowerAggravatedDamage: c.willpowerAggravatedDamage,
+        health: this.formBuilder.control(c.health),
+        willpower: this.formBuilder.control(c.willpower),
         hunger: c.hunger,
         physical: this.formBuilder.group({
           athletics: c.physical.athletics,
@@ -102,7 +102,7 @@ export class CharacterComponent implements OnInit {
           science: c.mental.science,
           technology: c.mental.technology
         }),
-        specializations: new FormControl(c.specializations ? c.specializations : null),
+        specializations: this.formBuilder.control(c.specializations ? c.specializations : null),
         disciplines: this.formBuilder.group(c.disciplines ? c.disciplines : {})
       });
     });
@@ -177,5 +177,14 @@ export class CharacterComponent implements OnInit {
 
   public submit(character: Character): void {
     this.save.emit(character);
+  }
+
+  public healthMax(formGroup: FormGroup): Observable<number> {
+    return formGroup.controls.stamina.valueChanges.pipe(map(v => v + 3));
+  }
+
+  public willpowerMax(formGroup: FormGroup): Observable<number> {
+    return merge(formGroup.controls.composure.valueChanges.pipe(map(v => v + formGroup.controls.resolve.value)),
+      formGroup.controls.resolve.valueChanges.pipe(map(v => v + formGroup.controls.composure.value)));
   }
 }
