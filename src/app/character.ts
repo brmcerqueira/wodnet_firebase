@@ -26,6 +26,7 @@ export interface Character {
   backgroundsAndMerits: string;
   health: Damage;
   willpower: Damage;
+  bloodPotency: number;
   hunger: number;
   physical: {
     athletics: number;

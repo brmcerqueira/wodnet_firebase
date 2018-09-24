@@ -8,6 +8,8 @@
   "create-chronicle": "Criar Crônica",
   "name-required": "Nome obrigatório",
   "name-minlength-maxlength": "O nome não está dentro dos limites",
+  "generation-required": "Geração obrigatória",
+  "generation-min-max": "A geração não está dentro dos limites",
   "none": "Nenhum",
   "new": "Novo",
   "save": "Salvar",
@@ -261,5 +263,7 @@
   "siren": "Sereia",
   "resolve": "Perseverança",
   "experience": "Experiência",
-  "health": "Vitalidade"
+  "health": "Vitalidade",
+  "blood-potency": "Potência Sanguínea",
+  "humanity": "Humanidade"
 }

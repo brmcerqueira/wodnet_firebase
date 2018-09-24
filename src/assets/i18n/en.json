@@ -8,6 +8,8 @@
   "create-chronicle": "Create Chronicle",
   "name-required": "Name required",
   "name-minlength-maxlength": "Name is not within range",
+  "generation-required": "Generation required",
+  "generation-min-max": "Generation is not within range",
   "none": "None",
   "new": "New",
   "save": "Save",
@@ -261,5 +263,7 @@
   "siren": "Siren",
   "resolve": "Resolve",
   "experience": "Experience",
-  "health": "Health"
+  "health": "Health",
+  "blood-potency": "Blood Potency",
+  "humanity": "Humanity"
 }

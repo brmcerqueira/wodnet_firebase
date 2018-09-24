@@ -42,15 +42,15 @@ export class CharacterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formGroup = this.character.pipe(map(c => {
+    this.formGroup = this.character.pipe(map((c: Character) => {
       return this.formBuilder.group({
         name: [c.name, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+        generation: [c.generation, [Validators.required, Validators.min(4), Validators.max(16)]],
         ownerId: c.ownerId,
         storytellerId: c.storytellerId,
         chronicleId: c.chronicleId,
         isOpen: c.isOpen,
         experience: c.experience,
-        generation: c.generation,
         predator: c.predator,
         clan: c.clan,
         strength: c.strength,
@@ -67,6 +67,7 @@ export class CharacterComponent implements OnInit {
         backgroundsAndMerits: c.backgroundsAndMerits,
         health: this.formBuilder.control(c.health),
         willpower: this.formBuilder.control(c.willpower),
+        bloodPotency: c.bloodPotency,
         hunger: c.hunger,
         physical: this.formBuilder.group({
           athletics: c.physical.athletics,

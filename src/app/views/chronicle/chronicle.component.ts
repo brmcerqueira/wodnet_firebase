@@ -49,7 +49,7 @@ export class ChronicleComponent {
       chronicleId: this.chronicleId,
       isOpen: false,
       experience: 0,
-      generation: 13,
+      generation: 16,
       predator: Predator.Alleycat,
       clan: Clan.Brujah,
       strength: 1,
@@ -72,6 +72,7 @@ export class ChronicleComponent {
         superficial: 0,
         aggravated: 0
       },
+      bloodPotency: 0,
       hunger: 1,
       physical: {
         athletics: 0,
