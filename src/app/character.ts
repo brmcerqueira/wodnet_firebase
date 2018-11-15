@@ -21,7 +21,7 @@ export interface Character {
   intelligence: number;
   wits: number;
   resolve: number;
-  humanity: number;
+  humanity: Damage;
   touchstones: string;
   backgroundsAndMerits: string;
   health: Damage;

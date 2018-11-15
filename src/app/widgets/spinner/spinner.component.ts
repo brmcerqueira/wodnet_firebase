@@ -45,11 +45,15 @@ export abstract class SpinnerComponent implements ControlValueAccessor, OnInit {
   public updateText(): void {
       this.text = '';
       for (let i = 0; i < this.value; i++) {
-        this.text += `<i class="${this.fillMark}"></i>`;
+        this.putMarker(this.fillMark, i == 5);
       }
-      for (let i = 0; i < this.currentMax - this.value; i++) {
-        this.text += `<i class="${this.emptyMark}"></i>`;
+      for (let i = this.value; i < this.currentMax; i++) {
+        this.putMarker(this.emptyMark, i == 5);
       }
+  }
+
+  public putMarker(marker: string, putSpace: boolean): void {
+    this.text += putSpace ? `<i class="ml-2 ${marker}"></i>` : `<i class="${marker}"></i>`;
   }
 
   public add(): void {

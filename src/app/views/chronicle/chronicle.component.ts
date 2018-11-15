@@ -61,7 +61,10 @@ export class ChronicleComponent {
       intelligence: 1,
       wits: 1,
       resolve: 1,
-      humanity: 7,
+      humanity: {
+        superficial: 0,
+        aggravated: 7
+      },
       touchstones: '',
       backgroundsAndMerits: '',
       health: {

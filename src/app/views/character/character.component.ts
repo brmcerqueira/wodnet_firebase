@@ -62,7 +62,7 @@ export class CharacterComponent implements OnInit {
         intelligence: c.intelligence,
         wits: c.wits,
         resolve: c.resolve,
-        humanity: c.humanity,
+        humanity: this.formBuilder.control(c.humanity),
         touchstones: c.touchstones,
         backgroundsAndMerits: c.backgroundsAndMerits,
         health: this.formBuilder.control(c.health),
