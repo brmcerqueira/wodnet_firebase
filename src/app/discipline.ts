@@ -6,6 +6,7 @@ export enum Discipline {
   Fortitude,
   Obfuscate,
   Potence,
+  Presence,
   Protean,
-  Presence
+  BloodSorcery,
 }

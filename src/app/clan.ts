@@ -1,7 +1,11 @@
 export enum Clan {
   Brujah = 1,
   Gangrel,
+  Malkavians,
   Nosferatu,
   Toreador,
-  Ventrue
+  Tremere,
+  Ventrue,
+  Caitiff,
+  ThinBlooded
 }
