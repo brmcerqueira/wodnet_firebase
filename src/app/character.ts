@@ -62,7 +62,5 @@ export interface Character {
     technology: number;
   };
   specializations: string[];
-  disciplines: {
-    [discipline: string]: number
-  };
+  disciplineLevels: string[];
 }

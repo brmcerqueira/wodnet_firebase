@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {SelectItem} from '../../select.item';
 import {AngularFireDatabase} from 'angularfire2/database';
@@ -7,11 +7,12 @@ import {SelectSource} from '../../select.source';
 import {Character} from '../../character';
 import {Clan} from '../../clan';
 import {TranslateService} from '@ngx-translate/core';
-import {Discipline} from '../../discipline';
 import {specializations} from '../../specialization';
 import {Tag} from '../../tag';
 import {Predator} from "../../predator";
 import { map } from "rxjs/operators";
+import {DisciplineLevel, disciplineLevels} from "../../discipline.level";
+import {Discipline} from "../../discipline";
 
 @Component({
   selector: 'character',
@@ -103,7 +104,7 @@ export class CharacterComponent implements OnInit {
           technology: c.mental.technology
         }),
         specializations: this.formBuilder.control(c.specializations ? c.specializations : null),
-        disciplines: this.formBuilder.group(c.disciplines ? c.disciplines : {})
+        disciplineLevels: this.formBuilder.control(c.disciplineLevels ? c.disciplineLevels : null)
       });
     }));
   }
@@ -137,8 +138,16 @@ export class CharacterComponent implements OnInit {
     return this.enumSelectSource(Clan, true);
   }
 
-  public get disciplines(): SelectSource {
-    return this.enumSelectSource(Discipline, false);
+  public get disciplineLevelsSource(): SelectSource {
+    const transform = id => {
+      const disciplineLevel: DisciplineLevel = disciplineLevels[id];
+      return {
+        id: id,
+        text: `${this.translate.instant(Discipline[disciplineLevel.discipline].toLowerCase())} - ${this.translate.instant(id)} = ${disciplineLevel.level}`
+      };
+    };
+
+    return this.transformSelectSource(transform, disciplineLevels);
   }
 
   public get specializationsSource(): SelectSource {
@@ -149,11 +158,15 @@ export class CharacterComponent implements OnInit {
       };
     };
 
+    return this.transformSelectSource(transform, specializations);
+  }
+
+  private transformSelectSource(transform: (id: string) => any, options: {}): SelectSource {
     return (data: any, byKey: boolean): Observable<SelectItem[]> => {
       return Observable.create(s => {
         s.next(byKey
           ? (<string[]>data).map(transform)
-          : Object.keys(specializations).map(transform).filter(item => {
+          : Object.keys(options).map(transform).filter(item => {
             return item.text.toLowerCase().indexOf(data) > -1;
           }));
       });
@@ -169,10 +182,6 @@ export class CharacterComponent implements OnInit {
           return { id: u.payload.key, text: u.payload.val().name };
         })));
     };
-  }
-
-  public createDisciplineControl(): AbstractControl {
-    return this.formBuilder.control(1);
   }
 
   public submit(character: Character): void {

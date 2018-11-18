@@ -154,11 +154,6 @@
     <span>{{ 'backgroundsAndMerits' | translate }}</span>
     <input type="text" formControlName="backgroundsAndMerits" [readonly]="!isOpen(group)"/>
     <multi-select formControlName="specializations" [isDisabled]="!isOpen(group)" [source]="specializationsSource"></multi-select>
-    <dynamic-form-group [formGroup]="group.controls.disciplines" [source]="disciplines" [createControl]="createDisciplineControl" [isDisabled]="!isOpen(group)">
-      <ng-template let-item="item">
-        <circle-spinner [formControlName]="item.key" [min]="attributeMin" [max]="max" [isDisabled]="!isOpen(group)"></circle-spinner>
-      </ng-template>
-    </dynamic-form-group>
   </form>
 </div>
 <ng-template #none><p>{{ 'none' | translate }}</p></ng-template>

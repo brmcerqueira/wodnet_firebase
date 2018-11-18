@@ -111,7 +111,7 @@ export class ChronicleComponent {
         technology: 0
       },
       specializations: [],
-      disciplines: {}
+      disciplineLevels: []
     });
   }
 
